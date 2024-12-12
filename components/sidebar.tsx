@@ -169,19 +169,19 @@ export function Sidebar() {
     <aside
       className={cn(
         "h-screen bg-card border-r border-border fixed",
-        "transition-[width] duration-300 ease-in-out",
+        "transition-[width] duration-300 ease-in-out bg-custom-secondaryBackground text-custom-textDisabled",
         isExpanded ? "w-64" : "w-16"
       )}
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
     >
-      <div className="p-4">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="text-primary flex items-center justify-center w-8 h-8">
+      <div className="pl-6 pt-4 space-y-2">
+        <Link href="/" className="flex items-center h-10">
+          <div className="text-primary flex items-center justify-center">
             <Grid size={24} />
           </div>
           <span className={cn(
-            "font-semibold text-xl overflow-hidden transition-all duration-300",
+            "font-semibold text-xl overflow-hidden transition-all duration-300 ml-4",
             isExpanded ? "w-auto opacity-100" : "w-0 opacity-0"
           )}>
             Mercado
@@ -201,18 +201,18 @@ export function Sidebar() {
                 pathname === item.href 
                   ? "bg-accent text-accent-foreground" 
                   : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                isExpanded ? "px-4" : "px-0"
+                isExpanded ? "px-4" : "px-4"
               )}
             >
               <div className={cn(
                 "flex items-center justify-center",
                 "transition-all duration-300 ease-in-out",
-                isExpanded ? "w-8" : "w-16"
+                // isExpanded ? "w-8" : "w-16"
               )}>
                 <item.icon size={24} />
               </div>
               <span className={cn(
-                "whitespace-nowrap overflow-hidden transition-all duration-300",
+                "whitespace-nowrap overflow-hidden transition-all duration-300 ml-4",
                 isExpanded ? "w-auto opacity-100" : "w-0 opacity-0"
               )}>
                 {item.label}
@@ -231,19 +231,19 @@ export function Sidebar() {
                 "transition-all duration-300 ease-in-out",
                 pathname === item.href 
                   ? "bg-accent text-accent-foreground" 
-                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                isExpanded ? "px-4" : "px-0"
+                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground px-4",
+                // isExpanded ? "px-4" : "px-0"
               )}
             >
               <div className={cn(
                 "flex items-center justify-center",
                 "transition-all duration-300 ease-in-out",
-                isExpanded ? "w-8" : "w-16"
+                // isExpanded ? "w-8" : "w-16"
               )}>
                 <item.icon size={24} />
               </div>
               <span className={cn(
-                "whitespace-nowrap overflow-hidden transition-all duration-300",
+                "whitespace-nowrap overflow-hidden transition-all duration-300 ml-4",
                 isExpanded ? "w-auto opacity-100" : "w-0 opacity-0"
               )}>
                 {item.label}
@@ -255,19 +255,19 @@ export function Sidebar() {
             className={cn(
               "flex items-center h-10 rounded-lg relative w-full",
               "transition-all duration-300 ease-in-out",
-              "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-              isExpanded ? "px-4" : "px-0"
+              "text-muted-foreground hover:bg-accent hover:text-accent-foreground px-4",
+              // isExpanded ? "px-4" : "px-0"
             )}
           >
             <div className={cn(
               "flex items-center justify-center",
               "transition-all duration-300 ease-in-out",
-              isExpanded ? "w-8" : "w-16"
+              // isExpanded ? "w-8" : "w-16"
             )}>
               <LogOut size={24} />
             </div>
             <span className={cn(
-              "whitespace-nowrap overflow-hidden transition-all duration-300",
+              "whitespace-nowrap overflow-hidden transition-all duration-300 ml-4",
               isExpanded ? "w-auto opacity-100" : "w-0 opacity-0"
             )}>
               Logout
