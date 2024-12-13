@@ -32,17 +32,17 @@
 //   );
 // }
 
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Sidebar } from '@/components/sidebar';
-import ThemeProvider from '@/components/theme-provider';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Sidebar } from "@/components/sidebar";
+import ThemeProvider from "@/components/theme-provider";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Mercado NFT Marketplace',
-  description: 'Your gateway to digital collectibles',
+  title: "Mercado NFT Marketplace",
+  description: "Your gateway to digital collectibles",
 };
 
 export default function RootLayout({
@@ -56,9 +56,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark">
           <div className="flex min-h-screen bg-background">
             <Sidebar />
-            <main className="flex-1 ml-16">
-              {children}
-            </main>
+            <main className="flex-1 ml-16">{children}</main>
           </div>
         </ThemeProvider>
       </body>

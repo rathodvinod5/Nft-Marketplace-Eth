@@ -104,7 +104,7 @@
 //               </span>
 //             </Link>
 //           ))}
-          
+
 //           <button
 //             className={cn(
 //               "flex items-center gap-2 rounded-lg transition-colors w-full",
@@ -126,13 +126,12 @@
 //   );
 // }
 
-
 "use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
+import { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import {
   Home,
   ShoppingCart,
@@ -143,22 +142,22 @@ import {
   Palette,
   HelpCircle,
   LogOut,
-  Grid
-} from 'lucide-react';
+  Grid,
+} from "lucide-react";
 
 const menuItems = [
-  { icon: Home, label: 'Home', href: '/' },
-  { icon: ShoppingCart, label: 'Market', href: '/market' },
-  { icon: Grid, label: 'Portfolio', href: '/portfolio' },
-  { icon: BarChart2, label: 'Statistics', href: '/statistics' },
-  { icon: Wallet, label: 'Wallet', href: '/wallet' },
-  { icon: History, label: 'History', href: '/history' },
-  { icon: Settings, label: 'Setting', href: '/settings' },
+  { icon: Home, label: "Home", href: "/" },
+  { icon: ShoppingCart, label: "Market", href: "/market" },
+  { icon: Grid, label: "Portfolio", href: "/portfolio" },
+  { icon: BarChart2, label: "Statistics", href: "/statistics" },
+  { icon: Wallet, label: "Wallet", href: "/wallet" },
+  { icon: History, label: "History", href: "/history" },
+  { icon: Settings, label: "Setting", href: "/settings" },
 ];
 
 const bottomMenuItems = [
-  { icon: Palette, label: 'Themes', href: '/themes' },
-  { icon: HelpCircle, label: 'Support', href: '/support' },
+  { icon: Palette, label: "Themes", href: "/themes" },
+  { icon: HelpCircle, label: "Support", href: "/support" },
 ];
 
 export function Sidebar() {
@@ -170,7 +169,7 @@ export function Sidebar() {
       className={cn(
         "h-screen bg-card border-r border-border fixed",
         "transition-[width] duration-300 ease-in-out bg-custom-secondaryBackground text-custom-textDisabled",
-        isExpanded ? "w-64" : "w-16"
+        isExpanded ? "w-64" : "w-16",
       )}
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}
@@ -180,10 +179,12 @@ export function Sidebar() {
           <div className="text-primary flex items-center justify-center">
             <Grid size={24} />
           </div>
-          <span className={cn(
-            "font-semibold text-xl overflow-hidden transition-all duration-300 ml-4",
-            isExpanded ? "w-auto opacity-100" : "w-0 opacity-0"
-          )}>
+          <span
+            className={cn(
+              "font-semibold text-xl overflow-hidden transition-all duration-300 ml-4",
+              isExpanded ? "w-auto opacity-100" : "w-0 opacity-0",
+            )}
+          >
             Mercado
           </span>
         </Link>
@@ -198,23 +199,27 @@ export function Sidebar() {
               className={cn(
                 "flex items-center h-10 rounded-lg relative",
                 "transition-all duration-300 ease-in-out",
-                pathname === item.href 
-                  ? "bg-accent text-accent-foreground" 
+                pathname === item.href
+                  ? "bg-accent text-accent-foreground"
                   : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
-                isExpanded ? "px-4" : "px-4"
+                isExpanded ? "px-4" : "px-4",
               )}
             >
-              <div className={cn(
-                "flex items-center justify-center",
-                "transition-all duration-300 ease-in-out",
-                // isExpanded ? "w-8" : "w-16"
-              )}>
+              <div
+                className={cn(
+                  "flex items-center justify-center",
+                  "transition-all duration-300 ease-in-out",
+                  // isExpanded ? "w-8" : "w-16"
+                )}
+              >
                 <item.icon size={24} />
               </div>
-              <span className={cn(
-                "whitespace-nowrap overflow-hidden transition-all duration-300 ml-4",
-                isExpanded ? "w-auto opacity-100" : "w-0 opacity-0"
-              )}>
+              <span
+                className={cn(
+                  "whitespace-nowrap overflow-hidden transition-all duration-300 ml-4",
+                  isExpanded ? "w-auto opacity-100" : "w-0 opacity-0",
+                )}
+              >
                 {item.label}
               </span>
             </Link>
@@ -229,28 +234,32 @@ export function Sidebar() {
               className={cn(
                 "flex items-center h-10 rounded-lg relative",
                 "transition-all duration-300 ease-in-out",
-                pathname === item.href 
-                  ? "bg-accent text-accent-foreground" 
+                pathname === item.href
+                  ? "bg-accent text-accent-foreground"
                   : "text-muted-foreground hover:bg-accent hover:text-accent-foreground px-4",
                 // isExpanded ? "px-4" : "px-0"
               )}
             >
-              <div className={cn(
-                "flex items-center justify-center",
-                "transition-all duration-300 ease-in-out",
-                // isExpanded ? "w-8" : "w-16"
-              )}>
+              <div
+                className={cn(
+                  "flex items-center justify-center",
+                  "transition-all duration-300 ease-in-out",
+                  // isExpanded ? "w-8" : "w-16"
+                )}
+              >
                 <item.icon size={24} />
               </div>
-              <span className={cn(
-                "whitespace-nowrap overflow-hidden transition-all duration-300 ml-4",
-                isExpanded ? "w-auto opacity-100" : "w-0 opacity-0"
-              )}>
+              <span
+                className={cn(
+                  "whitespace-nowrap overflow-hidden transition-all duration-300 ml-4",
+                  isExpanded ? "w-auto opacity-100" : "w-0 opacity-0",
+                )}
+              >
                 {item.label}
               </span>
             </Link>
           ))}
-          
+
           <button
             className={cn(
               "flex items-center h-10 rounded-lg relative w-full",
@@ -259,17 +268,21 @@ export function Sidebar() {
               // isExpanded ? "px-4" : "px-0"
             )}
           >
-            <div className={cn(
-              "flex items-center justify-center",
-              "transition-all duration-300 ease-in-out",
-              // isExpanded ? "w-8" : "w-16"
-            )}>
+            <div
+              className={cn(
+                "flex items-center justify-center",
+                "transition-all duration-300 ease-in-out",
+                // isExpanded ? "w-8" : "w-16"
+              )}
+            >
               <LogOut size={24} />
             </div>
-            <span className={cn(
-              "whitespace-nowrap overflow-hidden transition-all duration-300 ml-4",
-              isExpanded ? "w-auto opacity-100" : "w-0 opacity-0"
-            )}>
+            <span
+              className={cn(
+                "whitespace-nowrap overflow-hidden transition-all duration-300 ml-4",
+                isExpanded ? "w-auto opacity-100" : "w-0 opacity-0",
+              )}
+            >
               Logout
             </span>
           </button>

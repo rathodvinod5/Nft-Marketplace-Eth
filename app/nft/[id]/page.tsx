@@ -1,8 +1,8 @@
 "use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { Star, MessageCircle } from 'lucide-react';
+import Image from "next/image";
+import Link from "next/link";
+import { Star, MessageCircle } from "lucide-react";
 
 export default function NFTDetail({ params }: { params: { id: string } }) {
   return (
@@ -30,7 +30,10 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
           {/* Preview Images */}
           <div className="grid grid-cols-3 gap-4">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="relative aspect-square rounded-xl overflow-hidden">
+              <div
+                key={i}
+                className="relative aspect-square rounded-xl overflow-hidden"
+              >
                 <Image
                   src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?w=800&auto=format&fit=crop&q=60"
                   alt={`Preview ${i}`}
@@ -46,7 +49,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
         <div className="space-y-6">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold">Axtronic Electronics VS-10</h1>
-            
+
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <div className="relative w-10 h-10 rounded-full overflow-hidden">
@@ -59,7 +62,10 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">By</p>
-                  <Link href="#" className="text-sm font-medium hover:text-primary">
+                  <Link
+                    href="#"
+                    className="text-sm font-medium hover:text-primary"
+                  >
                     Themesflat
                   </Link>
                 </div>
@@ -67,7 +73,10 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
 
               <div>
                 <p className="text-sm text-muted-foreground">In</p>
-                <Link href="#" className="text-sm font-medium hover:text-primary">
+                <Link
+                  href="#"
+                  className="text-sm font-medium hover:text-primary"
+                >
                   @ 3d Models
                 </Link>
               </div>
@@ -78,17 +87,23 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
               <div className="flex items-center gap-1 text-sm text-muted-foreground">
                 <span>[05 Reviews]</span>
                 <div className="flex">
-                  {Array(5).fill(null).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  ))}
+                  {Array(5)
+                    .fill(null)
+                    .map((_, i) => (
+                      <Star
+                        key={i}
+                        className="w-4 h-4 fill-yellow-400 text-yellow-400"
+                      />
+                    ))}
                 </div>
               </div>
             </div>
 
             <p className="text-muted-foreground">
-              Proin massa dui, maximus vitae massa in, ullamcorper euismod justo. Ut condimentum
-              ipsum id nibh suscipit, eget iaculis mi mollis. Proin quis turpis odio. Suspendisse non ex
-              a leo lobortis tincidunt condimentum quis sem. Sed ornare nunc vel mi eleifend, a
+              Proin massa dui, maximus vitae massa in, ullamcorper euismod
+              justo. Ut condimentum ipsum id nibh suscipit, eget iaculis mi
+              mollis. Proin quis turpis odio. Suspendisse non ex a leo lobortis
+              tincidunt condimentum quis sem. Sed ornare nunc vel mi eleifend, a
               posuere mauris efficitur. Duis sed velit est.
             </p>
 
@@ -117,14 +132,16 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
               <p className="text-sm text-muted-foreground mb-2">Ending Time</p>
               <div className="grid grid-cols-4 gap-4 text-center">
                 {[
-                  { value: '861', label: 'Days' },
-                  { value: '15', label: 'Hours' },
-                  { value: '44', label: 'Minutes' },
-                  { value: '49', label: 'Seconds' },
+                  { value: "861", label: "Days" },
+                  { value: "15", label: "Hours" },
+                  { value: "44", label: "Minutes" },
+                  { value: "49", label: "Seconds" },
                 ].map((item) => (
                   <div key={item.label}>
                     <div className="text-xl font-bold">{item.value}</div>
-                    <div className="text-sm text-muted-foreground">{item.label}</div>
+                    <div className="text-sm text-muted-foreground">
+                      {item.label}
+                    </div>
                   </div>
                 ))}
               </div>
