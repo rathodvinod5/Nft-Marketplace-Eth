@@ -2,48 +2,22 @@
 
 import { useState } from "react";
 import { Bell, Settings } from "lucide-react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import NFTCard from "@/components/ui/nft-card";
-import { NFTCardType } from "./(dashboard)/Types";
+import { nftCategory, recentActivity, trendingNFTs } from "./(dashboard)/Data";
+import Chip from "@/components/ui/Chip";
+import useDashboardController from "./(dashboard)/DashboardController";
+import ShortList from "@/components/ui/ShortList";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
 
-  const trendingNFTs: NFTCardType[] = [
-    {
-      id: 1,
-      title: "Woxwing Bird Ethereal",
-      category: "Art",
-      creator: "@chestertron",
-      highestBid: "3.89",
-      image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
-    },
-    {
-      id: 2,
-      title: "Football Sport Flyer",
-      category: "Sports",
-      creator: "@dorothea",
-      highestBid: "2.61",
-      image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
-    },
-    {
-      id: 3,
-      title: "Defocused Purple Musical",
-      category: "Music",
-      creator: "@likesbea",
-      highestBid: "4.57",
-      image:
-        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=60",
-    }
-  ];
-
   const handleSeeDetail = (nftId: number) => {
     router.push(`/nft/${nftId}`);
   };
+
+  const { currentCategory, handleOnClickChip } = useDashboardController();
 
   return (
     <div className="h-full p-8 bg-black">
@@ -68,22 +42,22 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-row items-center">
+      <div className="flex flex-row items-end">
         <div className="w-full">
           <div className="mb-8 text-white">
-            <h1 className="font-bold mb-2 text-page-title">Welcome back, Niven 👋</h1>
-            <p>
+            <h1 className="mb-2 text-page-title">Welcome back, Niven 👋</h1>
+            <p className="text-gray-400">
               Unlocking the Digital Renaissance, Navigating the NFT Marketplace.
             </p>
           </div>
 
           <div 
-            className="mb-8 bg-custom-secondaryBackground overflow-hidden p-6"
+            className="mb-4 bg-custom-secondaryBackground overflow-hidden p-6"
             style={{ borderRadius: '10px' }}
-            >
+          >
             <div className="flex justify-between items-center mb-4 text-white">
-              <h2 className="text-section-title font-semibold">Trending For You 🔥</h2>
-              <button className="text-sm text-primary hover:underline">
+              <h2 className="text-section-title">Trending For You 🔥</h2>
+              <button className="text-card-sub-title text-primary hover:underline">
                 See all
               </button>
             </div>
@@ -101,18 +75,61 @@ export default function Home() {
         </div>
 
         <div className="w-5/12 h-fit p-4 flex flex-col gap-4">
-          <div className="h-1/2 bg-custom-secondaryBackground text-white p-4">
+          <div 
+            className="h-1/2 bg-custom-secondaryBackground text-white p-4"
+            style={{ borderRadius: "12px" }}
+          >
             <p>Your Total Balance</p>
-            <p>Your Total Balance</p>
+            <div className="h-[200px]" />
             <button
               onClick={() => {}}
-              className="mt-2 px-4 py-2 w-full bg-custom-purple rounded-bl-xl rounded-tr-xl text-card-title"
+              className="mt-2 px-4 py-2 w-full bg-custom-purple rounded-bl-xl rounded-tr-xl text-card-sub-title"
             >
               Top up Balance
             </button>
           </div>
-          <div className="h-1/2 bg-custom-secondaryBackground text-white p-4">
-            <p>Recent activity</p>
+          <div 
+            className="h-1/2 bg-custom-secondaryBackground text-white p-4"
+            style={{ borderRadius: "12px" }}
+          >
+            <div className="flex justify-between items-center mb-4 text-white">
+              <h2 className="text-card-title">Recent activity 🔥</h2>
+              <button className="text-card-sub-title text-primary hover:underline">
+                See all
+              </button>
+            </div>
+            {recentActivity.map(item => <ShortList item={item} key={"short-list"+item.id} />)}
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6 flex flex-row items-center gap-4">
+        <div className="w-full">
+          <div className="flex flex-row gap-2">
+            {nftCategory.map((item) => (
+              <Chip 
+                key={"chip-"+item.id}
+                currentItem={currentCategory}
+                item={item} 
+                onClickChip={() => handleOnClickChip(item.tag)} 
+                />
+            ))}
+          </div>
+          <div 
+            className="bg-custom-secondaryBackground p-4 mt-4"
+            style={{ borderRadius: '12px' }}
+          >
+          </div>
+        </div>
+        <div 
+          className="w-7/12 h-fit bg-custom-secondaryBackground p-4"
+          style={{ borderRadius: '12px' }}
+        >
+          <div className="flex justify-between items-center mb-4 text-white">
+            <h2 className="text-card-title font-semibold">Best creator 🔥</h2>
+            <button className="text-card-sub-title text-primary hover:underline">
+              See all
+            </button>
           </div>
         </div>
       </div>

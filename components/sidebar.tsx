@@ -168,7 +168,7 @@ export function Sidebar() {
     <aside
       className={cn(
         "h-screen bg-card border-r border-border fixed",
-        "transition-[width] duration-300 ease-in-out bg-custom-secondaryBackground text-custom-textDisabled",
+        "transition-[width] duration-300 ease-in-out bg-custom-secondaryBackground text-gray-400",
         isExpanded ? "w-64" : "w-16",
       )}
       onMouseEnter={() => setIsExpanded(true)}
@@ -200,8 +200,8 @@ export function Sidebar() {
                 "flex items-center h-10 rounded-lg relative",
                 "transition-all duration-300 ease-in-out",
                 pathname === item.href
-                  ? "bg-accent text-accent-foreground"
-                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
+                  ? "bg-accent text-white border-r-2 border-purple-500"
+                  : "text-muted-foreground hover:bg-accent hover:text-gray-400",
                 isExpanded ? "px-4" : "px-4",
               )}
             >
