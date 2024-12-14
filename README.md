@@ -2,7 +2,8 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 =======
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
->>>>>>> 209ff6f (Initial commit from Create Next App)
+
+> > > > > > > 209ff6f (Initial commit from Create Next App)
 
 ## Getting Started
 
@@ -23,12 +24,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 <<<<<<< HEAD
 You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-=======
+# This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
->>>>>>> 209ff6f (Initial commit from Create Next App)
+
+> > > > > > > 209ff6f (Initial commit from Create Next App)
 
 ## Learn More
 
@@ -41,7 +43,8 @@ To learn more about Next.js, take a look at the following resources:
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 =======
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
->>>>>>> 209ff6f (Initial commit from Create Next App)
+
+> > > > > > > 209ff6f (Initial commit from Create Next App)
 
 ## Deploy on Vercel
 
@@ -51,4 +54,5 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 =======
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
->>>>>>> 209ff6f (Initial commit from Create Next App)
+
+> > > > > > > 209ff6f (Initial commit from Create Next App)
