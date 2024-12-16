@@ -6,17 +6,17 @@ import { Star, MessageCircle } from "lucide-react";
 
 export default function NFTDetail({ params }: { params: { id: string } }) {
   return (
-    <div className="p-8 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div className="text-gray-50 bg-black">
+      <div className="py-[100px] px-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Column - Image */}
         <div className="space-y-4">
           <div className="relative aspect-square rounded-2xl overflow-hidden bg-card">
-            <div className="absolute top-4 left-4 px-3 py-1 bg-purple-600 text-white rounded-full text-sm">
+            <div className="absolute top-4 left-4 px-3 py-1 bg-purple-600 rounded-full text-sm">
               6 In Stock
             </div>
             <div className="absolute top-4 right-4">
               <button className="p-2 bg-white/10 backdrop-blur-sm rounded-full">
-                <MessageCircle className="w-6 h-6 text-white" />
+                <MessageCircle className="w-6 h-6" />
               </button>
             </div>
             <Image
@@ -61,7 +61,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
                   />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">By</p>
+                  <p className="text-sm ">By</p>
                   <Link
                     href="#"
                     className="text-sm font-medium hover:text-primary"
@@ -72,7 +72,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
               </div>
 
               <div>
-                <p className="text-sm text-muted-foreground">In</p>
+                <p className="text-sm ">In</p>
                 <Link
                   href="#"
                   className="text-sm font-medium hover:text-primary"
@@ -84,7 +84,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
 
             <div className="flex items-center gap-2">
               <div className="text-2xl font-bold">2.39 ETH</div>
-              <div className="flex items-center gap-1 text-sm text-muted-foreground">
+              <div className="flex items-center gap-1 text-sm ">
                 <span>[05 Reviews]</span>
                 <div className="flex">
                   {Array(5)
@@ -99,7 +99,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
               </div>
             </div>
 
-            <p className="text-muted-foreground">
+            <p className="">
               Proin massa dui, maximus vitae massa in, ullamcorper euismod
               justo. Ut condimentum ipsum id nibh suscipit, eget iaculis mi
               mollis. Proin quis turpis odio. Suspendisse non ex a leo lobortis
@@ -109,19 +109,19 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-muted-foreground">Artist</p>
+                <p className="text-sm ">Artist</p>
                 <p className="font-medium">Jons Bond</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Create</p>
+                <p className="text-sm ">Create</p>
                 <p className="font-medium">03/12/2022</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Size</p>
+                <p className="text-sm ">Size</p>
                 <p className="font-medium">390×390</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Collection</p>
+                <p className="text-sm ">Collection</p>
                 <p className="font-medium">Art Design</p>
               </div>
             </div>
@@ -129,7 +129,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
 
           <div className="space-y-4">
             <div className="p-4 bg-card rounded-xl">
-              <p className="text-sm text-muted-foreground mb-2">Ending Time</p>
+              <p className="text-sm  mb-2">Ending Time</p>
               <div className="grid grid-cols-4 gap-4 text-center">
                 {[
                   { value: "861", label: "Days" },
@@ -139,7 +139,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
                 ].map((item) => (
                   <div key={item.label}>
                     <div className="text-xl font-bold">{item.value}</div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-sm ">
                       {item.label}
                     </div>
                   </div>
