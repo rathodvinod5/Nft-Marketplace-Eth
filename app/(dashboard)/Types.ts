@@ -21,3 +21,10 @@ export type MiscType = {
   title: string;
   desc: string;
 }
+
+export type CreatorsType = {
+  id: number;
+  title: string;
+  isFollowing: boolean;
+  totalItems: number;
+}

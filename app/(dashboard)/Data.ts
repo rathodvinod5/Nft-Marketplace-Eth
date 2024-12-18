@@ -1,4 +1,4 @@
-import { MiscType, NFTCardType, NFTCategoryType } from "./Types";
+import { MiscType, NFTCardType, NFTCategoryType, CreatorsType } from "./Types";
 
 export const trendingNFTs: NFTCardType[] = [
     {
@@ -89,4 +89,11 @@ export const recentActivity: MiscType[] = [
     title: "Karan",
     desc: "Offered some good deal for NFT" 
   }
+]
+
+export const bestCreators: CreatorsType[] = [
+  { id: 0, title: 'John', isFollowing: false, totalItems: 110 },
+  { id: 1, title: 'Christie', isFollowing: false, totalItems: 2110 },
+  { id: 2, title: 'Jagger', isFollowing: false, totalItems: 120 },
+  { id: 3, title: 'Karan', isFollowing: false, totalItems: 120 },
 ]
