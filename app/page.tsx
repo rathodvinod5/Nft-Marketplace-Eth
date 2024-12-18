@@ -4,10 +4,11 @@ import { useState } from "react";
 import { Bell, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import NFTCard from "@/components/ui/nft-card";
-import { nftCategory, recentActivity, trendingNFTs } from "./(dashboard)/Data";
+import { bestCreators, nftCategory, recentActivity, trendingNFTs } from "./(dashboard)/Data";
 import Chip from "@/components/ui/Chip";
 import useDashboardController from "./(dashboard)/DashboardController";
 import ShortList from "@/components/ui/ShortList";
+import CreatorItems from "@/components/ui/creator-item";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,7 +21,7 @@ export default function Home() {
   const { currentCategory, handleOnClickChip } = useDashboardController();
 
   return (
-    <div className="h-full p-8 bg-black">
+    <div className="h-full p-8 bg-custom-primaryBackground">
       <div className="flex justify-between items-center mb-8">
         <div className="flex-1 max-w-xl">
           <input
@@ -42,7 +43,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-row items-end">
+      <div className="flex flex-row items-end gap-2">
         <div className="w-full">
           <div className="mb-8 text-white">
             <h1 className="mb-2 text-page-title">Welcome back, Niven 👋</h1>
@@ -74,7 +75,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="w-5/12 h-fit p-4 flex flex-col gap-4">
+        <div className="w-6/12 h-fit p-4 flex flex-col gap-6">
           <div 
             className="h-1/2 bg-custom-secondaryBackground text-white p-4"
             style={{ borderRadius: "12px" }}
@@ -103,7 +104,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-6 flex flex-row items-center gap-4">
+      <div className="mt-6 flex flex-row items-start gap-4">
         <div className="w-full">
           <div className="flex flex-row gap-2">
             {nftCategory.map((item) => (
@@ -130,6 +131,9 @@ export default function Home() {
             <button className="text-card-sub-title text-primary hover:underline">
               See all
             </button>
+          </div>
+          <div className="flex flex-col gap-2">
+            {bestCreators.map(item => <CreatorItems key={`creator-item-${item.id}`} item={item} />)}
           </div>
         </div>
       </div>

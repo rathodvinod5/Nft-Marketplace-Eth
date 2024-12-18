@@ -48,7 +48,10 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
         {/* Right Column - Details */}
         <div className="space-y-6">
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold">Axtronic Electronics VS-10</h1>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-500 to-blue-600 
+              inline-block text-transparent bg-clip-text">
+                Axtronic Electronics VS-10
+            </h1>
 
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">

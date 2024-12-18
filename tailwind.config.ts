@@ -20,7 +20,7 @@ export default {
       },
       colors: {
         custom: {
-          primaryBackground: "tomato", //'#0E0C16',
+          primaryBackground: "#0e0618", //'#0E0C16',
           secondaryBackground: "#1a1821",
           cardBackground: "#282A35",
           purple: "#6344aa",
