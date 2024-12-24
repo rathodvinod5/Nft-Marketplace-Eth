@@ -19,7 +19,7 @@ import {
 
 const menuItems = [
   { icon: Home, label: "Home", href: "/" },
-  { icon: ShoppingCart, label: "Market", href: "/market" },
+  { icon: ShoppingCart, label: "Create", href: "/create" },
   { icon: Grid, label: "Portfolio", href: "/portfolio" },
   { icon: BarChart2, label: "Statistics", href: "/statistics" },
   { icon: Wallet, label: "Wallet", href: "/wallet" },
