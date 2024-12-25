@@ -34,20 +34,21 @@ const SingleSelect = () => {
             } transition-all duration-300 text-[30px]`}
         />
       </button>
-      <div className={`${ isActive ? " opacity-100 scale-[1]" : " opacity-0 scale-[0.8]"
+      <div className={`${ isActive ? "block opacity-100 scale-[1]" : "hidden opacity-0 scale-[0.8]"
         } w-full absolute top-14 left-0 right-0 z-40 bg-custom-secondaryBackground rounded-xl flex flex-col 
         overflow-hidden transition-all duration-300 ease-in-out border border-gray-600`}
         style={{ boxShadow: "0 15px 60px -15px rgba(0, 0, 0, 0.3)", }}
       >
         {optionArray?.map((option, index) => (
-        <p
-          className="py-2 px-4 text-gray-400 hover:bg-[#ececec] hover:text-custom-text transition-all duration-200 "
-          key={index}
-          onClick={(e) => setContent((e.target as HTMLElement).textContent || '')}
-        >
-          {option}
-        </p>
-        ))}
+          <p
+            className="py-2 px-4 text-gray-400 hover:bg-[#ececec] hover:text-custom-text transition-all duration-200 "
+            key={index}
+            onClick={(e) => setContent((e.target as HTMLElement).textContent || '')}
+          >
+            {option}
+          </p>
+          ))
+        }
     </div>
   </div>
   );
