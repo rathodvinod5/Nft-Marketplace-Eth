@@ -13,7 +13,8 @@ const SearchSelect = () => {
 
     const [search, setSearch] = useState("");
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOptions, setSelectedOptions] = useState<ItemType[]>([]);
+    // const [selectedOptions, setSelectedOptions] = useState<ItemType[]>([]);
+    const [selectedOptions, setSelectedOptions] = useState<ItemType | null>(null);
 
     const items: ItemType[] = [
         { id: 1, name: "Option 1" },
@@ -28,15 +29,17 @@ const SearchSelect = () => {
     );
 
     const isSelected = (item: ItemType) => {
-        return selectedOptions.some(selectedItem => selectedItem.id === item.id);
+        // return selectedOptions.some(selectedItem => selectedItem.id === item.id);
+        return selectedOptions && selectedOptions.id === item.id;
     };
 
     const toggleSelection = (item: ItemType) => {
-        if (isSelected(item)) {
-            setSelectedOptions(selectedOptions.filter(selectedItem => selectedItem.id !== item.id));
-        } else {
-            setSelectedOptions([...selectedOptions, item]);
-        }
+        // if (isSelected(item)) {
+        //     setSelectedOptions(selectedOptions.filter(selectedItem => selectedItem.id !== item.id));
+        // } else {
+        //     setSelectedOptions([...selectedOptions, item]);
+        // }
+        setSelectedOptions(item);
     };
 
     const handleBlur = () => {
@@ -61,18 +64,24 @@ const SearchSelect = () => {
             <input
                 type="text"
                 placeholder="Search.."
-                value={search}
+                value={selectedOptions ? selectedOptions.name : search}
                 onChange={(e) => setSearch(e.target.value)}
                 onFocus={() => setIsOpen(true)}
-                className={`w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none`}
+                className={`w-full border bg-transparent border-gray-600 rounded-md px-3 py-2 focus:outline-none`}
+                style={{ borderRadius: '12px' }}
             />
 
             <ArrowDown
-                className={`${isOpen ? "rotate-[180deg]" : "rotate-0"} transition-all duration-300 text-[1.3rem] absolute top-[50%] transform translate-y-[-50%] right-3 text-gray-500`}/>
+              className={`${isOpen ? "rotate-[180deg]" : "rotate-0"} transition-all duration-300 text-[1.3rem] 
+                absolute top-[50%] transform translate-y-[-50%] right-3 text-gray-500`}
+            />
 
             {/* Dropdown menu */}
             {isOpen && (
-                <div className="absolute left-0 w-full mt-1 border border-gray-200 rounded-md bg-white shadow-lg z-20">
+                <div className="absolute left-0 w-full mt-1 border border-gray-600 bg-custom-secondaryBackground 
+                  rounded-md shadow-lg z-20"
+                  style={{ borderRadius: '12px' }}
+                >
                     <div className="w-full overflow-auto">
                         {filteredItems.map(item => (
                             <p
@@ -81,9 +90,10 @@ const SearchSelect = () => {
                                 className="cursor-pointer px-3 py-2 flex items-center hover:bg-gray-200"
                             >
                                 <img
-                                    src="https://besnik-space.fra1.cdn.digitaloceanspaces.com/doplac/dYj3EG2tlN8jM29cWxiA1711341238.svg"
-                                    alt="checkicon"
-                                    className={`${isSelected(item) ? "scale-[1] opacity-100" : "scale-[0.5] opacity-0"} mr-2 transition-all duration-300 w-6 h-6`}
+                                  src="https://besnik-space.fra1.cdn.digitaloceanspaces.com/doplac/dYj3EG2tlN8jM29cWxiA1711341238.svg"
+                                  alt="checkicon"
+                                  className={`${isSelected(item) ? "scale-[1] opacity-100" : "scale-[0.5] opacity-0"} 
+                                    mr-2 transition-all duration-300 w-6 h-6`}
                                 />
                                 {item.name}
                             </p>

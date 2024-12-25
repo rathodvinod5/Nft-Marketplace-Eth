@@ -21,20 +21,22 @@ const BottomBorderTab = ({
         className={`${
           isActive === 1 && '!border-[#3B9DF8] !text-[#3B9DF8]'
         } px-6 py-2 border-b  text-[#424242] transition duration-300 border-transparent cursor-pointer`}
-        onClick={() => setIsActive(1)}> Home
+        onClick={() => setIsActive(1)}> 
+        New NFT
       </li>
       <li
         className={`${
           isActive === 2 && '!border-[#3B9DF8] !text-[#3B9DF8]'
         } px-6 py-2 border-b  text-[#424242] transition duration-300 border-transparent cursor-pointer`}
-        onClick={() => setIsActive(2)}> About
+        onClick={() => setIsActive(2)}> 
+        New Collection
       </li>
-      <li
+      {/* <li
         className={`${
           isActive === 3 && '!border-[#3B9DF8] !text-[#3B9DF8]'
         } px-6 py-2 border-b  text-[#424242] transition duration-300 border-transparent cursor-pointer`}
         onClick={() => setIsActive(3)}> Support
-      </li>
+      </li> */}
     </ul>
   );
 };
