@@ -9,6 +9,8 @@ import Chip from "@/components/ui/Chip";
 import useDashboardController from "./(dashboard)/DashboardController";
 import ShortList from "@/components/ui/ShortList";
 import CreatorItems from "@/components/ui/creator-item";
+import CollectionsSection from "./(dashboard)/view/CollectionsSection";
+import Link from "next/link";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -58,7 +60,18 @@ export default function Home() {
           >
             <div className="flex justify-between items-center mb-4 text-white">
               <h2 className="text-section-title">Trending For You 🔥</h2>
-              <button className="text-card-sub-title text-primary hover:underline">
+              {/* <Link href="/nft" className="text-card-sub-title text-primary hover:underline">
+                <button 
+                  className="text-card-sub-title text-primary hover:underline"
+                  // onClick={() => router.push('/nft')}
+                >
+                  See all
+                </button>
+              </Link> */}
+              <button 
+                className="text-card-sub-title text-primary hover:underline"
+                onClick={() => router.push('/nft')}
+              >
                 See all
               </button>
             </div>
@@ -104,7 +117,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mt-6 flex flex-row items-start gap-4">
+      <div className="mt-16 flex flex-row items-start gap-4">
         <div className="w-full">
           <div className="flex flex-row gap-2">
             {nftCategory.map((item) => (
@@ -137,6 +150,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <CollectionsSection />
     </div>
   );
 }
