@@ -1,6 +1,15 @@
 import SingleSelect from "@/components/ui/Select/SingleSelect";
+import useCreateNFTController from "./controllers/useCreateNFTController";
 
 const CreateNewCollection = () => {
+
+    const {  
+        newNFTCollection,
+        onChangeNFTCollection,
+        newNFTCollectionSymbol,
+        onChangeNFTCollectionSymbol,
+    } = useCreateNFTController();
+
     return (
         <div className="flex flex-row gap-5 p-5">
             <div className="w-1/3 h-[220px]">
@@ -12,8 +21,9 @@ const CreateNewCollection = () => {
             <div className="flex flex-col gap-4 w-2/3">
                 <div className="w-full flex flex-col gap-4">
                     <div>
-                        <label htmlFor="nftName" className="block mb-2">Collection Name:</label>
-                        <input 
+                        <label htmlFor="nftName" className="block mb-2">Collection Name</label>
+                        <input
+                            value={newNFTCollection} 
                             type="text" 
                             id="nftName" 
                             name="nftName" 
@@ -21,8 +31,9 @@ const CreateNewCollection = () => {
                         />
                     </div>
                     <div>
-                        <label htmlFor="nftName" className="block mb-2">Token Symbol:</label>
+                        <label htmlFor="nftName" className="block mb-2">Token Symbol</label>
                         <input 
+                            value={newNFTCollectionSymbol}
                             type="text" 
                             id="nftName" 
                             name="nftName" 

@@ -28,3 +28,14 @@ export type CreatorsType = {
   isFollowing: boolean;
   totalItems: number;
 }
+
+export type CollectionsObjectType = {
+  id: string;
+  title: string;
+  baseImage: string;
+  images: string[];
+  numberOfItems: number;
+  creator: string;
+  isAddedToFavorite: boolean;
+  basePrice: string;
+};
