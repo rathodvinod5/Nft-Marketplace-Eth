@@ -29,13 +29,20 @@ export type CreatorsType = {
   totalItems: number;
 }
 
+export type CollectionsDemogsType = {
+  title: string;
+  value: string;
+}
+
 export type CollectionsObjectType = {
   id: string;
   title: string;
+  address: string;
   baseImage: string;
   images: string[];
   numberOfItems: number;
   creator: string;
   isAddedToFavorite: boolean;
   basePrice: string;
+  demogs: CollectionsDemogsType[];
 };

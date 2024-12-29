@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import NFTCard from "@/components/ui/nft-card";
 import { allNFTs } from "../(dashboard)/Data";
-import router from "next/router";
+import SearchAndFilterHeader from "@/components/ui/Header/SearchAndFilterHeader";
 
 const AllNftPage = () => {
   const router = useRouter();
@@ -16,10 +16,14 @@ const AllNftPage = () => {
     <div className="w-full h-full px-8 py-6 bg-custom-primaryBackground">
       <h1 className="mb-2 text-page-title text-white">All NFT</h1>
 
+      <div className="mt-12 mb-10">
+        <SearchAndFilterHeader />
+      </div>
+
       <div className="grid grid-cols-4 gap-8">
         {allNFTs.map((nft) => (
           <NFTCard
-            key={nft.id}
+            key={`all-nft-${nft.id}`}
             nft={nft}
             handleSeeDetail={handleSeeDetail}
           />

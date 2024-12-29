@@ -188,6 +188,7 @@ export const collectionsList: CollectionsObjectType[] = [
   {
     id: nextId("test-id-"),
     title: 'MoonBird',
+    address: '0x7ffdb03888bd6e3bd8b5ec2706f36a9122328590',
     baseImage: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
     images: [
       'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
@@ -197,11 +198,18 @@ export const collectionsList: CollectionsObjectType[] = [
     numberOfItems: 120,
     creator: 'John',
     isAddedToFavorite: false,
-    basePrice: '3.89'
+    basePrice: '3.89',
+    demogs: [
+      { title: 'Floor', value: '120 ETH' },
+      { title: 'Volumes', value: '120 ETH' },
+      { title: 'Items', value: '120' },
+      { title: 'Owners', value: '120' },
+    ]
   },
   {
     id: nextId("test-id-"),
     title: 'Cassandra',
+    address: '0x7ffdb03888bd6e3bd8b5ec2706f36a9122328590',
     baseImage: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
     images: [
       'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
@@ -211,11 +219,18 @@ export const collectionsList: CollectionsObjectType[] = [
     numberOfItems: 320,
     creator: 'John',
     isAddedToFavorite: false,
-    basePrice: '3.89'
+    basePrice: '3.89',
+    demogs: [
+      { title: 'Floor', value: '120 ETH' },
+      { title: 'Volumes', value: '120 ETH' },
+      { title: 'Items', value: '120' },
+      { title: 'Owners', value: '120' },
+    ]
   },
   {
     id: nextId("test-id-"),
     title: 'Quinn Hariera',
+    address: '0x7ffdb03888bd6e3bd8b5ec2706f36a9122328590',
     baseImage: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
     images: [
       'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
@@ -225,7 +240,13 @@ export const collectionsList: CollectionsObjectType[] = [
     numberOfItems: 40,
     creator: 'John',
     isAddedToFavorite: false,
-    basePrice: '3.89'
+    basePrice: '3.89',
+    demogs: [
+      { title: 'Floor', value: '120 ETH' },
+      { title: 'Volumes', value: '120 ETH' },
+      { title: 'Items', value: '120' },
+      { title: 'Owners', value: '120' },
+    ]
   },
   // {
   //   id: nextId("test-id-"),
