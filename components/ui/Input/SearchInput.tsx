@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Search, CircleX } from "lucide-react";
 
 
-const SearchInput = () => {
+const SearchInput = ({
+  onChangeText,
+  delay = 500
+}: {
+  onChangeText?: (text: string) => void;
+  delay?: number;
+}) => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,6 +18,19 @@ const SearchInput = () => {
   const handleClearText = () => {  
     setSearchQuery("");
   };
+
+  useEffect(() => {
+    let timer;
+    if(timer) clearTimeout(timer);
+    timer = setTimeout(() => {
+      console.log('Data Fetched');
+      if(onChangeText) {
+        onChangeText(searchQuery);
+      }
+    }, delay);
+    
+    return () => clearTimeout(timer);
+  }, [searchQuery, delay]);
   
   return(
     <div className='w-full relative'>
