@@ -5,13 +5,13 @@ import { useState } from "react";
 
 const SingleSelect = () => {
   // close the dropdown is clicked outside
-  document.addEventListener("click", function (event) {
-    let target = event.target as Element;
+  // document.addEventListener("click", function (event) {
+  //   let target = event.target as Element;
 
-    if (target && !target.closest(".dropdown")) {
-      setIsActive(false);
-    }
-  });
+  //   if (target && !target.closest(".dropdown")) {
+  //     setIsActive(false);
+  //   }
+  // });
 
   // actions
   const [isActive, setIsActive] = useState(false);
