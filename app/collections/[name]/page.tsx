@@ -6,6 +6,7 @@ import NFTCard from "@/components/ui/nft-card";
 import { allNFTs, collectionsList } from "@/app/(dashboard)/Data";
 import { CollectionsObjectType } from "@/app/(dashboard)/Types";
 import SearchAndFilterHeader from "@/components/ui/Header/SearchAndFilterHeader";
+import useCollectionsController from "../useCollectionsController";
 
 
 const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
@@ -17,6 +18,9 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
   };
 
   const collection: CollectionsObjectType | undefined = collectionsList.find((collection) => collection.title === name);
+
+  const { allNfts, filteredNfts, onChangeText, onFilterCategory } = useCollectionsController();
+  const items = !filteredNfts?.length ? allNfts : filteredNfts ;
 
   return ( 
     <div className="w-full h-full px-8 py-6 bg-custom-primaryBackground">
@@ -53,21 +57,25 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
 
           <div className="mt-10 flex flex-row justify-start items-center gap-12">
             {collection?.demogs.map((demog) => (
-                <div key={demog.title} className="flex flex-col gap-1">
-                  <p className="text-gray-400">{demog.title}</p>
-                  <p className="text-gray-300 font-semibold">{demog.value}</p>
-                </div>
+              <div key={demog.title} className="flex flex-col gap-1">
+                <p className="text-gray-400">{demog.title}</p>
+                <p className="text-gray-300 font-semibold">{demog.value}</p>
+              </div>
             ))}
           </div>
         </div>
       </div>
 
       <div className="mt-20">
-        <SearchAndFilterHeader />
+        <SearchAndFilterHeader 
+          onChangeText={onChangeText} 
+          itemLen={items.length}
+          onFilterCategory={onFilterCategory} 
+        />
       </div>
 
       <div className="mt-14 grid grid-cols-4 gap-8">
-        {allNFTs.map((nft) => (
+        {items.map((nft) => (
           <NFTCard
             key={`all-nft-${nft.id}`}
             nft={nft}

@@ -4,10 +4,12 @@ import LayoutFilters from "./LayoutFilters";
 
 const SearchAndFilterHeader = ({
   onChangeText,
-  itemLen
+  itemLen,
+  onFilterCategory,
 }: {
   onChangeText?: (text: string) => void;
   itemLen?: number;
+  onFilterCategory?: (category: string) => void;
 }) => {
   return(
     <div className='w-full flex flex-row justify-start items-center gap-4'>
@@ -18,7 +20,9 @@ const SearchAndFilterHeader = ({
         <p className="text-gray-400 text-base w-[240px]">{itemLen}</p>
       
         <div className="w-full flex flex-row justify-end gap-2">
-          <div className="w-1/2"><SingleSelect /></div>
+          <div className="w-1/2">
+            <SingleSelect onChangeOption={onFilterCategory} />
+          </div>
           <LayoutFilters />
         </div>
       </div>

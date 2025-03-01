@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { NFTCardType } from "../(dashboard)/Types";
 import { allNFTs } from "../(dashboard)/Data";
+import { NFTCardType } from "../(dashboard)/Types";
 
-const useNftController = () => {
+const useCollectionsController = () => {
   const [allNfts, setAllNfts] = useState<NFTCardType[]>(allNFTs);
   const [filteredNfts, setFilteredNfts] = useState<NFTCardType[] | null>(null);
 
@@ -35,8 +35,8 @@ const useNftController = () => {
     allNfts: allNfts,
     filteredNfts: filteredNfts,
     onChangeText: onChageText,
-    onFilterCategory: onFilterCategory,
+    onFilterCategory: onFilterCategory
   };
 }
 
-export default useNftController;
+export default useCollectionsController;
