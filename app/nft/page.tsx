@@ -12,7 +12,7 @@ const AllNftPage = () => {
     router.push(`/nft/${nftId}`);
   };
 
-  const { allNfts, filteredNfts, onChangeText } = useNftController();
+  const { allNfts, filteredNfts, onChangeText, onFilterCategory } = useNftController();
   const items = !filteredNfts?.length ? allNfts : filteredNfts ;
 
   return ( 
@@ -20,7 +20,11 @@ const AllNftPage = () => {
       <h1 className="mb-2 text-page-title text-white">All NFT</h1>
 
       <div className="mt-12 mb-10">
-        <SearchAndFilterHeader onChangeText={onChangeText} itemLen={items.length} />
+        <SearchAndFilterHeader 
+          onChangeText={onChangeText} 
+          itemLen={items.length} 
+          onFilterCategory={onFilterCategory}
+        />
       </div>
 
       <div className="grid grid-cols-4 gap-8">

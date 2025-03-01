@@ -1,23 +1,40 @@
 
 // icons
 import { ArrowDown } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const SingleSelect = () => {
-  // close the dropdown is clicked outside
-  // document.addEventListener("click", function (event) {
-  //   let target = event.target as Element;
-
-  //   if (target && !target.closest(".dropdown")) {
-  //     setIsActive(false);
-  //   }
-  // });
-
-  // actions
+const SingleSelect = ({ 
+  onChangeOption 
+}: {
+  onChangeOption?: (option: string) => void;
+}) => {
   const [isActive, setIsActive] = useState(false);
   const [content, setContent] = useState("Select Option");
 
-  const optionArray = ["Football", "Cricket", "Tennis", "Badminton"];
+   // Function to handle clicks outside the dropdown
+  const handleClickOutside = (event: MouseEvent) => {
+    // Check if the click was outside the dropdown
+    if (event.target instanceof Element && !event.target.closest('.dropdown')) {
+      setIsActive(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add event listener for clicks on the document
+    document.addEventListener('click', handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    if (onChangeOption) {
+      onChangeOption(content);
+    }
+  }, [content]);
+
+
+  const optionArray = ["Football", "Cricket", "Tennis", "Badminton", "Sports", "Music", "Arts", "Others"];
 
   return (
     <div className="relative w-full">

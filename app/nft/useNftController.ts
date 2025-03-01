@@ -22,10 +22,20 @@ const useNftController = () => {
     setFilteredNfts(filtered);
   }
 
+  const onFilterCategory = (category: string) => {
+    const filtered = allNfts.filter((nft) => nft.category.toLowerCase().includes(category.toLowerCase()));
+    if(!filtered.length) {
+      setFilteredNfts(null);
+    }
+  
+    setFilteredNfts(filtered);
+  };
+
   return {
     allNfts: allNfts,
     filteredNfts: filteredNfts,
-    onChangeText: onChageText
+    onChangeText: onChageText,
+    onFilterCategory: onFilterCategory,
   };
 }
 

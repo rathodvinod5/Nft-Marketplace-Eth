@@ -19,7 +19,7 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
 
   const collection: CollectionsObjectType | undefined = collectionsList.find((collection) => collection.title === name);
 
-  const { allNfts, filteredNfts, onChangeText } = useCollectionsController();
+  const { allNfts, filteredNfts, onChangeText, onFilterCategory } = useCollectionsController();
   const items = !filteredNfts?.length ? allNfts : filteredNfts ;
 
   return ( 
@@ -67,7 +67,11 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
       </div>
 
       <div className="mt-20">
-        <SearchAndFilterHeader onChangeText={onChangeText} itemLen={items.length} />
+        <SearchAndFilterHeader 
+          onChangeText={onChangeText} 
+          itemLen={items.length}
+          onFilterCategory={onFilterCategory} 
+        />
       </div>
 
       <div className="mt-14 grid grid-cols-4 gap-8">
