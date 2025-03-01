@@ -20,10 +20,11 @@ const SearchInput = ({
   };
 
   useEffect(() => {
-    let timer;
+    let timer = null;
+
     if(timer) clearTimeout(timer);
     timer = setTimeout(() => {
-      console.log('Data Fetched');
+      // console.log('Data Fetched');
       if(onChangeText) {
         onChangeText(searchQuery);
       }

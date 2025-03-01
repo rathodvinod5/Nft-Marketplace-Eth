@@ -14,7 +14,6 @@ const AllNftPage = () => {
 
   const { allNfts, filteredNfts, onChangeText } = useNftController();
   const items = !filteredNfts?.length ? allNfts : filteredNfts ;
-  console.log('items: ', filteredNfts?.length, items.length);
 
   return ( 
     <div className="w-full h-full px-8 py-6 bg-custom-primaryBackground">
