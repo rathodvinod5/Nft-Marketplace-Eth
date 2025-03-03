@@ -41,7 +41,7 @@ export function Sidebar() {
       className={cn(
         "z-50 h-screen bg-card border-r border-border border-gray-500 border-opacity-60 fixed",
         "transition-[width] duration-300 ease-in-out bg-custom-secondaryBackground text-gray-400",
-        isExpanded ? "w-64" : "w-16",
+        isExpanded ? "w-64" : "w-20",
       )}
       onMouseEnter={() => setIsExpanded(true)}
       onMouseLeave={() => setIsExpanded(false)}

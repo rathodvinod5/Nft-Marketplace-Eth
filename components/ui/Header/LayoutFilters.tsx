@@ -1,13 +1,24 @@
+import { ListDisplayTypeEnum } from "@/app/collections/constants";
 import { Grid3X3, LayoutGrid, LayoutList } from "lucide-react";
 import { useState } from "react";
 
-type LayoutType = "grid" | "list" | "grid-small";
+// type LayoutType = "grid" | "list" | "grid-small";
 
-const LayoutFilters = () => {
-  const [currentLayout, setCurrentLayout] = useState<LayoutType>("grid");
+const LayoutFilters = ({
+  currentLayout,
+  onChangeLayout,
+}: {
+  currentLayout?: ListDisplayTypeEnum;
+  onChangeLayout?: (layout: ListDisplayTypeEnum) => void;
+}) => {
+  // const [currentLayout, setCurrentLayout] = useState<LayoutType>("grid");
 
-  const onChangeLayout = (layout: LayoutType) => {
-    setCurrentLayout(layout);
+  // const onChangeLayout = (layout: LayoutType) => {
+  //   setCurrentLayout(layout);
+  // }
+
+  const handleChangeLayout = (layout: ListDisplayTypeEnum) => {
+    if(onChangeLayout)  onChangeLayout(layout);
   }
 
   return (
@@ -16,22 +27,22 @@ const LayoutFilters = () => {
       style={{ borderRadius: '12px' }}
     >
         <IconButton 
-          onClick={() => onChangeLayout("grid")}
-          isActive={currentLayout === "grid"}
+          onClick={() => handleChangeLayout(ListDisplayTypeEnum.TILE)}
+          isActive={currentLayout === ListDisplayTypeEnum.TILE}
         >
           <LayoutGrid className="" />
         </IconButton>
       
         <IconButton 
-          onClick={() => onChangeLayout("list")}
-          isActive={currentLayout === "list"}
+          onClick={() => handleChangeLayout(ListDisplayTypeEnum.LIST)}
+          isActive={currentLayout === ListDisplayTypeEnum.LIST}
         >
           <LayoutList className="" />   
         </IconButton>
 
         <IconButton 
-          onClick={() => onChangeLayout("grid-small")}
-          isActive={currentLayout === "grid-small"}
+          onClick={() => handleChangeLayout(ListDisplayTypeEnum.GRID)}
+          isActive={currentLayout === ListDisplayTypeEnum.GRID}
         >
           <Grid3X3 className="" />
         </IconButton>

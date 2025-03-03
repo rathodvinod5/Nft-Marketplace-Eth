@@ -7,6 +7,7 @@ import { allNFTs, collectionsList } from "@/app/(dashboard)/Data";
 import { CollectionsObjectType } from "@/app/(dashboard)/Types";
 import SearchAndFilterHeader from "@/components/ui/Header/SearchAndFilterHeader";
 import useCollectionsController from "../useCollectionsController";
+import { ListDisplayTypeEnum } from "../constants";
 
 
 const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
@@ -19,7 +20,14 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
 
   const collection: CollectionsObjectType | undefined = collectionsList.find((collection) => collection.title === name);
 
-  const { allNfts, filteredNfts, onChangeText, onFilterCategory } = useCollectionsController();
+  const { 
+    allNfts, 
+    filteredNfts, 
+    onChangeText, 
+    onFilterCategory, 
+    listType, 
+    onFilterListDisplayType 
+  } = useCollectionsController();
   const items = !filteredNfts?.length ? allNfts : filteredNfts ;
 
   return ( 
@@ -71,18 +79,32 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
           onChangeText={onChangeText} 
           itemLen={items.length}
           onFilterCategory={onFilterCategory} 
+          listType={listType}
+          onFilterListDisplayType={onFilterListDisplayType}
         />
       </div>
 
-      <div className="mt-14 grid grid-cols-4 gap-8">
-        {items.map((nft) => (
-          <NFTCard
-            key={`all-nft-${nft.id}`}
-            nft={nft}
-            handleSeeDetail={handleSeeDetail}
-          />
-        ))}
-      </div>
+      {listType === ListDisplayTypeEnum.LIST ? (
+        <div className="mt-14 flex flex-col gap-8">
+          {items.map((nft) => (
+            <NFTCard
+              key={`all-nft-${nft.id}`}
+              nft={nft}
+              handleSeeDetail={handleSeeDetail}
+            />
+          ))}
+        </div>
+      ) : listType !== ListDisplayTypeEnum.ALL ? (
+        <div className={`mt-14 grid ${ListDisplayTypeEnum.TILE ? "grid-cols-4" : "grid-cols-6"}  gap-8`}>
+          {items.map((nft) => (
+            <NFTCard
+              key={`all-nft-${nft.id}`}
+              nft={nft}
+              handleSeeDetail={handleSeeDetail}
+            />
+          ))}
+        </div>
+      ) : null}
 
       <div className="w-full flex flex-row justify-center">
         <button style={{ borderRadius: '8px' }}

@@ -1,3 +1,4 @@
+import { ListDisplayTypeEnum } from "@/app/collections/constants";
 import SearchInput from "../Input/SearchInput";
 import SingleSelect from "../Select/SingleSelect";
 import LayoutFilters from "./LayoutFilters";
@@ -6,10 +7,14 @@ const SearchAndFilterHeader = ({
   onChangeText,
   itemLen,
   onFilterCategory,
+  listType = ListDisplayTypeEnum.TILE, 
+  onFilterListDisplayType 
 }: {
   onChangeText?: (text: string) => void;
   itemLen?: number;
   onFilterCategory?: (category: string) => void;
+  listType?: ListDisplayTypeEnum;
+  onFilterListDisplayType?: (type: ListDisplayTypeEnum) => void,
 }) => {
   return(
     <div className='w-full flex flex-row justify-start items-center gap-4'>
@@ -23,7 +28,10 @@ const SearchAndFilterHeader = ({
           <div className="w-1/2">
             <SingleSelect onChangeOption={onFilterCategory} />
           </div>
-          <LayoutFilters />
+          <LayoutFilters 
+            currentLayout={listType}
+            onChangeLayout={onFilterListDisplayType}
+          />
         </div>
       </div>
     </div>
