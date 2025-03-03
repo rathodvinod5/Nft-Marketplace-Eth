@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import NFTCard from "@/components/ui/nft-card";
 import SearchAndFilterHeader from "@/components/ui/Header/SearchAndFilterHeader";
 import useNftController from "./useNftController";
+import { ListDisplayTypeEnum } from "../collections/constants";
 
 const AllNftPage = () => {
   const router = useRouter();
@@ -12,7 +13,14 @@ const AllNftPage = () => {
     router.push(`/nft/${nftId}`);
   };
 
-  const { allNfts, filteredNfts, onChangeText, onFilterCategory } = useNftController();
+  const { 
+    allNfts, 
+    filteredNfts, 
+    onChangeText, 
+    onFilterCategory, 
+    listType, 
+    onFilterListDisplayType 
+  } = useNftController();
   const items = !filteredNfts?.length ? allNfts : filteredNfts ;
 
   return ( 
@@ -24,18 +32,32 @@ const AllNftPage = () => {
           onChangeText={onChangeText} 
           itemLen={items.length} 
           onFilterCategory={onFilterCategory}
+          listType={listType}
+          onFilterListDisplayType={onFilterListDisplayType}
         />
       </div>
 
-      <div className="grid grid-cols-4 gap-8">
-        {items.map((nft) => (
-          <NFTCard
-            key={`all-nft-${nft.id}`}
-            nft={nft}
-            handleSeeDetail={handleSeeDetail}
-          />
-        ))}
-      </div>
+      {listType === ListDisplayTypeEnum.LIST ? (
+        <div className="mt-14 flex flex-col gap-8">
+          {items.map((nft) => (
+            <NFTCard
+              key={`all-nft-${nft.id}`}
+              nft={nft}
+              handleSeeDetail={handleSeeDetail}
+            />
+          ))}
+        </div>
+      ) : listType !== ListDisplayTypeEnum.ALL ? (
+        <div className={`mt-14 grid ${listType === ListDisplayTypeEnum.TILE ? "grid-cols-3" : "grid-cols-4"}  gap-8`}>
+          {items.map((nft) => (
+            <NFTCard
+              key={`all-nft-${nft.id}`}
+              nft={nft}
+              handleSeeDetail={handleSeeDetail}
+            />
+          ))}
+        </div>
+      ) : null}
 
      {!items.length && (
         <div className="w-full flex flex-row justify-center">
