@@ -9,14 +9,11 @@ const useCollectionsController = () => {
   const [listType, setListType] = useState<ListDisplayTypeEnum>(ListDisplayTypeEnum.TILE);
 
   const onChageText = (text: string) => {
-    // console.log("text", text);
     if(!text) {
-      // console.log("No text");
       setFilteredNfts(null);
       return;
     }
     const filtered = allNfts.filter((nft) => nft.title.toLowerCase().includes(text.toLowerCase()));
-    // console.log("filtered", filtered);
     if(!filtered.length) {
       setFilteredNfts(null);
     }

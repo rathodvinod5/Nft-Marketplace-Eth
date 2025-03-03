@@ -32,7 +32,6 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
 
   return ( 
     <div className="w-full h-full px-8 py-6 bg-custom-primaryBackground">
-      {/* <h1 className="mb-2 text-page-title text-white">All NFT</h1> */}
 
       <div className="flex flex-row gap-2 w-full">
         <div className="w-1/3">
@@ -95,7 +94,7 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
           ))}
         </div>
       ) : listType !== ListDisplayTypeEnum.ALL ? (
-        <div className={`mt-14 grid ${ListDisplayTypeEnum.TILE ? "grid-cols-4" : "grid-cols-6"}  gap-8`}>
+        <div className={`mt-14 grid ${listType === ListDisplayTypeEnum.TILE ? "grid-cols-3" : "grid-cols-4"}  gap-8`}>
           {items.map((nft) => (
             <NFTCard
               key={`all-nft-${nft.id}`}
