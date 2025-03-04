@@ -4,9 +4,11 @@ import { ArrowDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const SingleSelect = ({ 
-  onChangeOption 
+  onChangeOption ,
+  optionArray,
 }: {
   onChangeOption?: (option: string) => void;
+  optionArray?: string[];
 }) => {
   const [isActive, setIsActive] = useState(false);
   const [content, setContent] = useState("Select Option");
@@ -34,7 +36,7 @@ const SingleSelect = ({
   }, [content]);
 
 
-  const optionArray = ["Football", "Cricket", "Tennis", "Badminton", "Sports", "Music", "Arts", "Others"];
+  
 
   return (
     <div className="relative w-full">

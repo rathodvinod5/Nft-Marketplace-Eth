@@ -1,5 +1,6 @@
 import SingleSelect from "@/components/ui/Select/SingleSelect";
 import useCreateNFTController from "./controllers/useCreateNFTController";
+import { AllChains } from "./Utility";
 
 const CreateNewCollection = () => {
 
@@ -43,7 +44,7 @@ const CreateNewCollection = () => {
                 </div>
                 <div className="w-2/3">
                     <label htmlFor="tokenSymbol" className="block mb-2">Select Chain</label>
-                    <SingleSelect />
+                    <SingleSelect optionArray={AllChains} />
                 </div>
             </div>
         </div>

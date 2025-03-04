@@ -1,7 +1,7 @@
 import SingleSelect from "@/components/ui/Select/SingleSelect";
 import { Plus } from "lucide-react";
 import useCreateNFTController from "./controllers/useCreateNFTController";
-
+import { AllCollections } from "./Utility";
 
 const CreateNewNFT = ({
     onClickAddCollection
@@ -35,7 +35,7 @@ const CreateNewNFT = ({
                 <div className="w-2/3">
                     <label htmlFor="tokenSymbol" className="block mb-2">Select a Collection *</label>
                     <div className="flex flex-row gap-2 w-full">
-                        <SingleSelect />
+                        <SingleSelect optionArray={AllCollections} />
                         <div className="flex flex-row justify-center items-center cursor-pointer border 
                             border-solid border-gray-600 px-2" 
                             style={{ borderRadius: '12px' }}
