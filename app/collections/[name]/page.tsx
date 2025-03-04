@@ -80,6 +80,7 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
           onFilterCategory={onFilterCategory} 
           listType={listType}
           onFilterListDisplayType={onFilterListDisplayType}
+          optionArray={["Football", "Cricket", "Tennis", "Badminton", "Sports", "Music", "Arts", "Others"]}
         />
       </div>
 

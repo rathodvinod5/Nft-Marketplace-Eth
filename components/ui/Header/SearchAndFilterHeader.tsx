@@ -8,13 +8,15 @@ const SearchAndFilterHeader = ({
   itemLen,
   onFilterCategory,
   listType = ListDisplayTypeEnum.TILE, 
-  onFilterListDisplayType 
+  onFilterListDisplayType,
+  optionArray,
 }: {
   onChangeText?: (text: string) => void;
   itemLen?: number;
   onFilterCategory?: (category: string) => void;
   listType?: ListDisplayTypeEnum;
   onFilterListDisplayType?: (type: ListDisplayTypeEnum) => void,
+  optionArray?: string[];
 }) => {
   return(
     <div className='w-full flex flex-row justify-start items-center gap-4'>
@@ -26,7 +28,7 @@ const SearchAndFilterHeader = ({
       
         <div className="w-full flex flex-row justify-end gap-2">
           <div className="w-1/2">
-            <SingleSelect onChangeOption={onFilterCategory} />
+            <SingleSelect optionArray={optionArray} onChangeOption={onFilterCategory} />
           </div>
           <LayoutFilters 
             currentLayout={listType}
