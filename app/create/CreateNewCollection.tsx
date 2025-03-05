@@ -25,20 +25,22 @@ const CreateNewCollection = () => {
                         <label htmlFor="nftName" className="block mb-2">Collection Name</label>
                         <input
                             value={newNFTCollection} 
+                            onChange={onChangeNFTCollection}
                             type="text" 
                             id="nftName" 
                             name="nftName" 
-                            className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl" 
+                            className="w-2/3 px-4 block h-12 bg-transparent border border-gray-600 rounded-xl" 
                         />
                     </div>
                     <div>
                         <label htmlFor="nftName" className="block mb-2">Token Symbol</label>
                         <input 
                             value={newNFTCollectionSymbol}
+                            onChange={onChangeNFTCollectionSymbol}
                             type="text" 
                             id="nftName" 
                             name="nftName" 
-                            className="block h-12 bg-transparent border border-gray-600 rounded-xl" 
+                            className="block px-4 h-12 bg-transparent border border-gray-600 rounded-xl" 
                         />
                     </div>
                 </div>

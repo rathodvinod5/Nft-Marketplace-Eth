@@ -20,7 +20,9 @@ const CreateNewNFT = ({
         onChangeNFTPrice, 
         nftURILink,
         onChangeNFTURILink,
+        nftTraits,
         addNewTrait,
+        onEditTraitValue
     } = useCreateNFTController();
 
     return (
@@ -110,6 +112,32 @@ const CreateNewNFT = ({
                         <Plus className="text-[24px] " />
                         <p>Add Trait</p>
                     </div>
+                    {nftTraits.map((item, index) => {
+                      return (
+                        <div className="flex flex-row items-center">
+                            <input 
+                                value={item.trait}
+                                // type="text" 
+                                id="nftName" 
+                                name="nftName" 
+                                placeholder="Enter the name of the token"
+                                className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
+                                onChange={onChangeNFTName}
+                                required
+                            />
+                            <input 
+                                value={nftName}
+                                // type="text" 
+                                id="nftName" 
+                                name="nftName" 
+                                placeholder="Enter the name of the token"
+                                className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
+                                onChange={onChangeNFTName}
+                                required
+                            />
+                        </div>
+                      );
+                    })}
                 </div>
 
                 <div className="w-2/3 mt-8">
