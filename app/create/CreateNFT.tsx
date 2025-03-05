@@ -1,5 +1,5 @@
 import SingleSelect from "@/components/ui/Select/SingleSelect";
-import { Plus } from "lucide-react";
+import { Plus, CircleX } from "lucide-react";
 import useCreateNFTController from "./controllers/useCreateNFTController";
 import { AllCollections } from "./Utility";
 
@@ -22,7 +22,8 @@ const CreateNewNFT = ({
         onChangeNFTURILink,
         nftTraits,
         addNewTrait,
-        onEditTraitValue
+        onEditTraitValue,
+        onRemoveTraitItem
     } = useCreateNFTController();
 
     return (
@@ -104,6 +105,39 @@ const CreateNewNFT = ({
                         inside your collection page and are also listed out inside your item page.
                     </p>
 
+                    <div className="pt-4 flex flex-col gap-3">
+                      {nftTraits.map((item, index) => {
+                        return (
+                            <div key={"trait-item-"+index} className="flex flex-row items-center gap-4">
+                                <input 
+                                    value={item.trait}
+                                    // type="text" 
+                                    id="nftName" 
+                                    name="nftName" 
+                                    placeholder="Enter trait key"
+                                    className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
+                                    onChange={(event) => onEditTraitValue(event.target.value, "trait", index)}
+                                    required
+                                />
+                                <input 
+                                    value={nftName}
+                                    // type="text" 
+                                    id="nftName" 
+                                    name="nftName" 
+                                    placeholder="Enter trait value"
+                                    className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
+                                    onChange={(event) => onEditTraitValue(event.target.value, "value", index)}
+                                    required
+                                />
+                                 <CircleX
+                                    className={"text-[30px] cursor-pointer text-gray-600 w-8 h-8"}
+                                    onClick={() => onRemoveTraitItem(index)}
+                                />
+                            </div>
+                        );
+                      })}
+                    </div>
+
                     <div className="flex flex-row justify-center items-center cursor-pointer border 
                         border-solid border-gray-600 mt-4 pl-3 pr-4 py-2 w-fit text-gray-400 font-semibold" 
                         style={{ borderRadius: '12px' }}
@@ -112,32 +146,6 @@ const CreateNewNFT = ({
                         <Plus className="text-[24px] " />
                         <p>Add Trait</p>
                     </div>
-                    {nftTraits.map((item, index) => {
-                      return (
-                        <div className="flex flex-row items-center">
-                            <input 
-                                value={item.trait}
-                                // type="text" 
-                                id="nftName" 
-                                name="nftName" 
-                                placeholder="Enter the name of the token"
-                                className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
-                                onChange={onChangeNFTName}
-                                required
-                            />
-                            <input 
-                                value={nftName}
-                                // type="text" 
-                                id="nftName" 
-                                name="nftName" 
-                                placeholder="Enter the name of the token"
-                                className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
-                                onChange={onChangeNFTName}
-                                required
-                            />
-                        </div>
-                      );
-                    })}
                 </div>
 
                 <div className="w-2/3 mt-8">
