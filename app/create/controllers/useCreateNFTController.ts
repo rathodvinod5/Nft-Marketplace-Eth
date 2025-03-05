@@ -22,7 +22,7 @@ const useCreateNFTController = () => {
   }
 
   const onChangeNFTCollectionSymbol = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewNFTCollectionSymbol(e.target.value);
+    setNewNFTCollectionSymbol(e.target.value.toUpperCase());
   }
 
   const onChangeNFTName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,10 +47,21 @@ const useCreateNFTController = () => {
     setNFTURILink(e.target.value);
   }
 
-  const addNewTrait = () => { 
-    if(trait && traitValue) { 
-      const newFTtrait = { trait: trait, value: traitValue };
-      setNFTtraits([...nftTraits, newFTtrait]);
+  const addNewTrait = () => {
+    setNFTtraits([...nftTraits, { trait: "", value: "" }]);
+  }
+
+  const onEditTraitValue = (newValue: string, type: "trait" | "value", index: number) => { 
+    if(newValue && type && index) { 
+      const existingTraits = nftTraits;
+      const traitItem = existingTraits[index];
+      if(type === 'trait') {
+        traitItem.trait = trait;
+      } else {
+        traitItem.value = traitValue;
+      }
+      existingTraits[index] = traitItem;
+      setNFTtraits(nftTraits);
     }
   }
 
@@ -77,6 +88,7 @@ const useCreateNFTController = () => {
     traitValue,
     nftTraits,
     addNewTrait,
+    onEditTraitValue,
   }
 }
 
