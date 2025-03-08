@@ -26,7 +26,7 @@ const CreateNewNFT = ({
         onEditTraitValue,
         onRemoveTraitItem
     } = useCreateNFTController();
-
+    console.log('nftTraits: ', nftTraits);
     return (
         <div className="flex flex-row gap-5 p-5">
             <div className="w-1/3 h-[220px]">
@@ -109,7 +109,7 @@ const CreateNewNFT = ({
                     <div className="pt-4 flex flex-col gap-3">
                       {nftTraits.map((item, index) => {
                         return (
-                            <div key={"trait-item-"+index} className="flex flex-row items-center gap-4">
+                            <div key={"trait-item-"+item} className="flex flex-row items-center gap-4">
                                 <InputWithDebounce
                                     customStyles="w-full block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
                                     onChangeText={(newValue: string) => onEditTraitValue(newValue, "trait", index)}
