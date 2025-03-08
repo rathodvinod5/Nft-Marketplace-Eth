@@ -2,6 +2,7 @@ import SingleSelect from "@/components/ui/Select/SingleSelect";
 import { Plus, CircleX } from "lucide-react";
 import useCreateNFTController from "./controllers/useCreateNFTController";
 import { AllCollections } from "./Utility";
+import InputWithDebounce from "@/components/ui/Input/InputWithDebounce";
 
 const CreateNewNFT = ({
     onClickAddCollection
@@ -25,7 +26,7 @@ const CreateNewNFT = ({
         onEditTraitValue,
         onRemoveTraitItem
     } = useCreateNFTController();
-
+    console.log('nftTraits: ', nftTraits);
     return (
         <div className="flex flex-row gap-5 p-5">
             <div className="w-1/3 h-[220px]">
@@ -108,29 +109,29 @@ const CreateNewNFT = ({
                     <div className="pt-4 flex flex-col gap-3">
                       {nftTraits.map((item, index) => {
                         return (
-                            <div key={"trait-item-"+index} className="flex flex-row items-center gap-4">
-                                <input 
-                                    value={item.trait}
-                                    // type="text" 
-                                    id="nftName" 
-                                    name="nftName" 
-                                    placeholder="Enter trait key"
-                                    className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
-                                    onChange={(event) => onEditTraitValue(event.target.value, "trait", index)}
-                                    required
+                            <div key={"trait-item-"+item} className="flex flex-row items-center gap-4">
+                                <InputWithDebounce
+                                    customStyles="w-full block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
+                                    onChangeText={(newValue: string) => onEditTraitValue(newValue, "trait", index)}
+                                    inputProps={{
+                                        id: "nftNameId",
+                                        name: "nftName",
+                                        placeholder: "Enter trait key",
+                                        required: true,
+                                    }}
                                 />
-                                <input 
-                                    value={nftName}
-                                    // type="text" 
-                                    id="nftName" 
-                                    name="nftName" 
-                                    placeholder="Enter trait value"
-                                    className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
-                                    onChange={(event) => onEditTraitValue(event.target.value, "value", index)}
-                                    required
+                                <InputWithDebounce
+                                    customStyles="w-full block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
+                                    onChangeText={(newValue: string) => onEditTraitValue(newValue, "value", index)}
+                                    inputProps={{
+                                        id: "nftValueId",
+                                        name: "nftValue",
+                                        placeholder: "Enter trait value",
+                                        required: true,
+                                    }}
                                 />
                                  <CircleX
-                                    className={"text-[30px] cursor-pointer text-gray-600 w-8 h-8"}
+                                    className={"text-[30px] cursor-pointer text-gray-600 w-[40px] h-[40px]"}
                                     onClick={() => onRemoveTraitItem(index)}
                                 />
                             </div>
