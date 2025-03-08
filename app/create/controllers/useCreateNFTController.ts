@@ -54,7 +54,7 @@ const useCreateNFTController = () => {
   }
 
   const onEditTraitValue = (newValue: string, type: "trait" | "value", index: number) => { 
-    console.log('onEditTraitValue')
+    console.log('onEditTraitValue: ', index, type, newValue);
     if(newValue && type && index) { 
       const existingTraits = nftTraits;
       const traitItem = existingTraits[index];
@@ -69,7 +69,9 @@ const useCreateNFTController = () => {
   }
 
   const onRemoveTraitItem = (index: number) => {
-    const newNFTTraits = nftTraits.filter((item, idx) => idx !== index);
+    // const newNFTTraits = nftTraits.filter((item, idx) => idx !== index);
+    const newNFTTraits = [...nftTraits];
+    newNFTTraits.splice(index, 1);
     setNFTtraits(newNFTTraits);
   }
 
