@@ -17,34 +17,57 @@ const useCreateNFTController = () => {
   const [traitValue, setTraitValue] = useState('');
   const [nftTraits, setNFTtraits] = useState<TraitType[]>([]);
 
-  const onChangeNFTCollection = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewNFTCollection(e.target.value);
+  // const onChangeNFTCollection = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setNewNFTCollection(e.target.value);
+  // }
+
+  const onChangeNFTCollection = (newValue: string) => {
+    console.log(newValue);
+    setNewNFTCollection(newValue);
   }
 
-  const onChangeNFTCollectionSymbol = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewNFTCollectionSymbol(e.target.value.toUpperCase());
+  // const onChangeNFTCollectionSymbol = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setNewNFTCollectionSymbol(e.target.value.toUpperCase());
+  // }
+
+  const onChangeNFTCollectionSymbol = (newValue: string) => {
+    console.log(newValue);
+    setNewNFTCollectionSymbol(newValue);
   }
 
-  const onChangeNFTName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setNFTName(e.target.value);
+  // const onChangeNFTName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   console.log(e.target.value);
+  //   setNFTName(e.target.value);
+  // }
+
+  const onChangeNFTName = (newValue: string) => {
+    console.log('onChangeNFTName: ', newValue);
+    setNFTName(newValue);
   }
 
   const onChangeNFTDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNFTDescription(e.target.value);
   };
 
-  const onChangeNFTSupply = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNFTSupply(e.target.value);
+  // const onChangeNFTSupply = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setNFTSupply(e.target.value);
+  // }
+
+  const onChangeNFTSupply = (newValue: string) => {
+    setNFTSupply(newValue);
   }
 
   const onChangeNFTPrice = (e: React.ChangeEvent<HTMLInputElement>) => {  
     setNFTPrice(e.target.value);
   }
 
-  const onChangeNFTURILink = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setNFTURILink(e.target.value);
+  // const onChangeNFTURILink = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   console.log(e.target.value);
+  //   setNFTURILink(e.target.value);
+  // }
+
+  const onChangeNFTURILink = (newValue: string) => {
+    setNFTURILink(newValue);
   }
 
   const addNewTrait = () => {

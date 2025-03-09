@@ -31,8 +31,8 @@ const CreateNewNFT = ({
         <div className="flex flex-row gap-5 p-5">
             <div className="w-1/3 h-[220px]">
                 <label htmlFor="imageUpload" className="block mb-2">Upload Image:</label>
-                <div className="w-full h-full flex flex-row justify-center items-center border border-gray-600 rounded-xl">
-                    <input type="file" id="imageUpload" name="imageUpload"  />
+                <div className="w-full h-full flex flex-col justify-center items-center border border-gray-600 rounded-xl">
+                    <input type="file" id="imageUpload" name="imageUpload" />
                 </div>
             </div>
             <div className="flex flex-col gap-4 w-2/3">
@@ -51,7 +51,17 @@ const CreateNewNFT = ({
                 </div>
                 <div>
                     <label htmlFor="nftName" className="block mb-2">NFT Name *</label>
-                    <input 
+                    <InputWithDebounce
+                        customStyles="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
+                        onChangeText={(newValue: string) => onChangeNFTName(newValue)}
+                        inputProps={{
+                            id: "nftNameID",
+                            name: "nftName",
+                            placeholder: "Enter the of the token",
+                            required: true,
+                        }}
+                    />
+                    {/* <input 
                         value={nftName}
                         // type="text" 
                         id="nftName" 
@@ -60,11 +70,21 @@ const CreateNewNFT = ({
                         className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
                         onChange={onChangeNFTName}
                         required
-                    />
+                    /> */}
                 </div>
                 <div>
                     <label htmlFor="nftName" className="block mb-2">Number of supply *</label>
-                    <input 
+                    <InputWithDebounce
+                        customStyles="w-2/3 h-12 bg-transparent border border-gray-600 rounded-xl px-2"
+                        onChangeText={(newValue: string) => onChangeNFTSupply(newValue)}
+                        inputProps={{
+                            id: "nftSupplyID",
+                            name: "nftSupply",
+                            placeholder: "Number of supply",
+                            required: true,
+                        }}
+                    />
+                    {/* <input 
                         value={nftSupply}
                         type="number" 
                         id="nftName" 
@@ -73,7 +93,7 @@ const CreateNewNFT = ({
                         className="w-2/3 h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
                         onChange={onChangeNFTSupply}
                         required
-                    />
+                    /> */}
                 </div>
                 <div>
                     <label htmlFor="nftName" className="block mb-2">Description</label>
@@ -89,7 +109,18 @@ const CreateNewNFT = ({
                 </div>
                 <div>
                     <label htmlFor="nftName" className="block mb-2">URI link *</label>
-                    <input 
+                    <InputWithDebounce
+                        customStyles="w-2/3 h-12 bg-transparent border border-gray-600 rounded-xl px-2"
+                        onChangeText={(newValue: string) => onChangeNFTURILink(newValue)}
+                        inputProps={{
+                            type: "link",
+                            id: "nftURIlinkID",
+                            name: "nftURIlink",
+                            placeholder: "https://demo.com/item/123",
+                            required: true,
+                        }}
+                    />
+                    {/* <input 
                         value={nftURILink}
                         type="link" 
                         id="nftName" 
@@ -98,7 +129,7 @@ const CreateNewNFT = ({
                         onChange={onChangeNFTURILink}
                         className="w-2/3 h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
                         required
-                    />
+                    /> */}
                 </div>
                 <div className="w-2/3 mt-4">
                     <label className="block mb-2 text-[20px]">Traits</label>
