@@ -24,7 +24,7 @@ const CollectionsSection = () => {
           See all
         </button>
       </div>
-      <div className="w-full flex flex-row gap-6 overflow-x-scroll">
+      <div className="w-full flex flex-row gap-10 overflow-x-scroll">
         {collectionsList.map((collection) => {
           return <NFTCollectionCard collection={collection} />;
         })}

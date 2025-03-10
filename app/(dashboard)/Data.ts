@@ -248,32 +248,25 @@ export const collectionsList: CollectionsObjectType[] = [
       { title: 'Owners', value: '120' },
     ]
   },
-  // {
-  //   id: nextId("test-id-"),
-  //   title: 'Hambert Watts',
-  //   baseImage: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
-  //   images: [
-  //     'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
-  //     'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
-  //     'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
-  //   ],
-  //   numberOfItems: 1233,
-  //   creator: 'John',
-  //   isAddedToFavorite: false,
-  //   basePrice: '3.89'
-  // },
-  // {
-  //   id: nextId("test-id-"),
-  //   title: 'Wallace',
-  //   baseImage: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
-  //   images: [
-  //     'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
-  //     'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
-  //     'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
-  //   ],
-  //   numberOfItems: 948,
-  //   creator: 'John',
-  //   isAddedToFavorite: false,
-  //   basePrice: '3.89'
-  // },
+  {
+    id: nextId("test-id-"),
+    title: 'Quinn Hariera',
+    address: '0x7ffdb03888bd6e3bd8b5ec2706f36a9122328590',
+    baseImage: 'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
+    images: [
+      'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
+      'https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60',
+    ],
+    numberOfItems: 40,
+    creator: 'John',
+    isAddedToFavorite: false,
+    basePrice: '3.89',
+    demogs: [
+      { title: 'Floor', value: '120 ETH' },
+      { title: 'Volumes', value: '120 ETH' },
+      { title: 'Items', value: '120' },
+      { title: 'Owners', value: '120' },
+    ]
+  },
 ]
