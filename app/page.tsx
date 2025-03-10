@@ -22,7 +22,7 @@ export default function Home() {
   };
 
   const { allNfts, filteredNfts, onFilterCategory, currentCategory, handleOnClickChip } = useDashboardController();
-  const items = !filteredNfts?.length ? allNfts : filteredNfts ;
+  const items = !filteredNfts?.length ? allNfts.slice(0, 8) : filteredNfts.slice(0, 8) ;
 
   return (
     <div className="h-full p-8 bg-custom-primaryBackground">
@@ -132,9 +132,18 @@ export default function Home() {
             ))}
           </div>
           <div 
-            className="bg-custom-secondaryBackground p-4 mt-4"
+            className="bg-custom-secondaryBackground p-8 mt-4"
             style={{ borderRadius: '12px' }}
           >
+            <div className="flex flex-row flex-wrap gap-8 justify-around">
+              {items.map((nft) => (
+                <NFTCardAlt
+                  key={`all-nft-${nft.id}`}
+                  nft={nft}
+                  handleSeeDetail={handleSeeDetail}
+                />
+              ))}
+            </div>
           </div>
         </div>
         {/* <div 
@@ -152,16 +161,6 @@ export default function Home() {
           </div>
         </div> */}
       </div>
-
-      <div className="mt-14 flex flex-row flex-wrap justify-around">
-          {items.map((nft) => (
-            <NFTCardAlt
-              key={`all-nft-${nft.id}`}
-              nft={nft}
-              handleSeeDetail={handleSeeDetail}
-            />
-          ))}
-        </div>
 
       <CollectionsSection />
     </div>

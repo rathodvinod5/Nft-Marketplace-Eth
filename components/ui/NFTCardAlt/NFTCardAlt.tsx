@@ -30,7 +30,7 @@ const NFTCardAlt = ({
             objectFit="contain" // Options: "cover", "contain", "fill", "none", "scale-down"
           />  
         </div>
-        <div className="pl-4 pt-2 absolute bottom-0 left-0 right-0 hover:bg-custom-textDisabled">
+        <div className="pl-4 pt-2 absolute bottom-0 left-0 right-0 hover:bg-custom-purple hover:bg-opacity-65">
           <h3 className="mb-2 text-card-title">{nft.title}</h3>
           <p className="text-sm text-muted-foreground mb-2 text-gray-400">{nft.creator}</p>
           {/* <div className="flex justify-between items-center">
