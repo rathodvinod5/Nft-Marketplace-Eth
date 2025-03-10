@@ -11,6 +11,7 @@ import ShortList from "@/components/ui/ShortList";
 import CreatorItems from "@/components/ui/creator-item";
 import CollectionsSection from "./(dashboard)/view/CollectionsSection";
 import Link from "next/link";
+import NFTCardAlt from "@/components/ui/NFTCardAlt/NFTCardAlt";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -20,7 +21,8 @@ export default function Home() {
     router.push(`/nft/${nftId}`);
   };
 
-  const { currentCategory, handleOnClickChip } = useDashboardController();
+  const { allNfts, filteredNfts, onFilterCategory, currentCategory, handleOnClickChip } = useDashboardController();
+  const items = !filteredNfts?.length ? allNfts : filteredNfts ;
 
   return (
     <div className="h-full p-8 bg-custom-primaryBackground">
@@ -135,7 +137,7 @@ export default function Home() {
           >
           </div>
         </div>
-        <div 
+        {/* <div 
           className="w-7/12 h-fit bg-custom-secondaryBackground p-4"
           style={{ borderRadius: '12px' }}
         >
@@ -148,8 +150,18 @@ export default function Home() {
           <div className="flex flex-col gap-2">
             {bestCreators.map(item => <CreatorItems key={`creator-item-${item.id}`} item={item} />)}
           </div>
-        </div>
+        </div> */}
       </div>
+
+      <div className="mt-14 flex flex-row flex-wrap justify-around">
+          {items.map((nft) => (
+            <NFTCardAlt
+              key={`all-nft-${nft.id}`}
+              nft={nft}
+              handleSeeDetail={handleSeeDetail}
+            />
+          ))}
+        </div>
 
       <CollectionsSection />
     </div>
