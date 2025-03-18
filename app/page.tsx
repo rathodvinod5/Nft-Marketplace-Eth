@@ -37,6 +37,12 @@ export default function Home() {
           />
         </div>
         <div className="flex items-center gap-4">
+          <button
+            className="px-6 py-2 border border-[#fffff] hover:border-[#3B9DF8] hover:bg-[#3B9DF8] 
+            text-primary text-[#fff] transition duration-300 rounded"
+          >
+            Connect Wallet
+          </button>
           <button className="p-2 rounded-lg hover:bg-accent">
             <Bell className="w-5 h-5" color="white" />
           </button>
@@ -121,15 +127,24 @@ export default function Home() {
 
       <div className="mt-16 flex flex-row items-start gap-4">
         <div className="w-full">
-          <div className="flex flex-row gap-2">
-            {nftCategory.map((item) => (
-              <Chip 
-                key={"chip-"+item.id}
-                currentItem={currentCategory}
-                item={item} 
-                onClickChip={() => handleOnClickChip(item.tag)} 
-                />
-            ))}
+          <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-row gap-2">
+              {nftCategory.map((item) => (
+                <Chip 
+                  key={"chip-"+item.id}
+                  currentItem={currentCategory}
+                  item={item} 
+                  onClickChip={() => handleOnClickChip(item.tag)} 
+                  />
+              ))}
+            </div>
+
+            <button 
+              className="text-card-sub-title text-primary hover:underline text-white mr-3"
+              onClick={() => router.push('/nft')}
+            >
+                See all
+              </button>
           </div>
           <div 
             className="bg-custom-secondaryBackground p-8 mt-4"
