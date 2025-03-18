@@ -20,10 +20,10 @@ import {
 const menuItems = [
   { icon: Home, label: "Home", href: "/" },
   { icon: ShoppingCart, label: "Create", href: "/create" },
-  { icon: Grid, label: "Portfolio", href: "/portfolio" },
-  { icon: BarChart2, label: "Statistics", href: "/statistics" },
+  { icon: Grid, label: "Collections", href: "/collections" },
+  { icon: BarChart2, label: "NFT's", href: "/nft" },
   { icon: Wallet, label: "Wallet", href: "/wallet" },
-  { icon: History, label: "History", href: "/history" },
+  // { icon: History, label: "History", href: "/history" },
   { icon: Settings, label: "Setting", href: "/settings" },
 ];
 

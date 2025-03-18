@@ -10,27 +10,22 @@ const NFTCard = ({
   handleSeeDetail: (id: number) => void;
 }) => {
   return (
-    <GradientBorderContainer>
+    <GradientBorderContainer customCss="transition duration-200 hover:-translate-y-3">
       <div className="bg-card rounded-xl overflow-hidden bg-custom-secondaryBackground 
-      text-white"> {/* border-2 border-solid border-custom-purple */}
-        <div className="w-20 px-3 py-2 rounded-br-xl bg-custom-purple text-white 
-          text-center text-card-sub-title bg-opacity-65">
-          {nft.category}
-        </div>
-        <div className="h-48">
-          {/* <Image
+      text-white relative"> {/* border-2 border-solid border-custom-purple */}
+        <div className="h-[360px]">
+          <Image
             src={nft.image}
             alt={nft.title}
-            // width={100}
-            // height={undefined}
-            // className="w-full h-full object-cover"
-            // fill
-            // className="object-cover"
+            // width={300}
+            // height={360}
+            fill
+            className="object-cover h-48"
             // layout="fill"
-            objectFit="contain" // Options: "cover", "contain", "fill", "none", "scale-down"
-          />   */}
+            // objectFit="fill" // Options: "cover", "contain", "fill", "none", "scale-down"
+          />  
         </div>
-        <div className="p-4">
+        <div className="p-4 absolute bottom-0 left-0 right-0">
           <h3 className="mb-2 text-card-title">{nft.title}</h3>
           <p className="text-sm text-muted-foreground mb-2 text-gray-400">{nft.creator}</p>
           <div className="flex justify-between items-center">
@@ -45,6 +40,10 @@ const NFTCard = ({
               See Detail
             </button>
           </div>
+        </div>
+        <div className="w-20 px-3 py-2 rounded-br-xl bg-custom-purple text-white 
+          text-center text-card-sub-title bg-opacity-65 absolute top-0 left-0">
+          {nft.category}
         </div>
       </div>
     </GradientBorderContainer>
