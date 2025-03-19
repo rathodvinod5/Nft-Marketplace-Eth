@@ -6,9 +6,9 @@ import NFTCollectionCard from "@/components/ui/NFTCollectionCard/NFTCollectionCa
 const AllCollectionsPage = () => {
   return ( 
     <div className="w-full h-full px-8 py-6 bg-custom-primaryBackground">
-      <h1 className="mb-2 text-page-title text-white">All Collections</h1>
+      <h1 className="text-page-title text-white">All Collections</h1>
 
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-4 gap-8 mt-12">
         {collectionsList.map((collection) => {
           return <NFTCollectionCard collection={collection} />
         })}

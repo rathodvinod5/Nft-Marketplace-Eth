@@ -5,6 +5,7 @@ import NFTCard from "@/components/ui/nft-card";
 import SearchAndFilterHeader from "@/components/ui/Header/SearchAndFilterHeader";
 import useNftController from "./useNftController";
 import { ListDisplayTypeEnum } from "../collections/constants";
+import NFTCardAsList from "@/components/ui/nft-card-as-list";
 
 const AllNftPage = () => {
   const router = useRouter();
@@ -41,7 +42,7 @@ const AllNftPage = () => {
       {listType === ListDisplayTypeEnum.LIST ? (
         <div className="mt-14 flex flex-col gap-8">
           {items.map((nft) => (
-            <NFTCard
+            <NFTCardAsList
               key={`all-nft-${nft.id}`}
               nft={nft}
               handleSeeDetail={handleSeeDetail}
