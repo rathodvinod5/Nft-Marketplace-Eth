@@ -9,6 +9,7 @@ const useDashboardController = () => {
 
   const handleOnClickChip = (currItem: CategoryType) => {
     setCurrentCategory(currItem);
+    onFilterCategory(currItem as string);
   }
 
   const onFilterCategory = (category: string) => {

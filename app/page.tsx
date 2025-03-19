@@ -21,11 +21,17 @@ export default function Home() {
     router.push(`/nft/${nftId}`);
   };
 
-  const { allNfts, filteredNfts, onFilterCategory, currentCategory, handleOnClickChip } = useDashboardController();
+  const { 
+    allNfts, 
+    filteredNfts, 
+    onFilterCategory, 
+    currentCategory, 
+    handleOnClickChip 
+  } = useDashboardController();
   const items = !filteredNfts?.length ? allNfts.slice(0, 8) : filteredNfts.slice(0, 8) ;
 
   return (
-    <div className="h-full p-8 bg-custom-primaryBackground">
+    <div className="p-8 bg-custom-primaryBackground pb-32">
       <div className="flex justify-between items-center mb-8">
         <div className="flex-1 max-w-xl">
           <input
@@ -39,7 +45,7 @@ export default function Home() {
         <div className="flex items-center gap-4">
           <button
             className="px-6 py-2 border border-[#fffff] hover:border-[#3B9DF8] hover:bg-[#3B9DF8] 
-            text-primary text-[#fff] transition duration-300 rounded"
+            transition duration-300 rounded text-white"
           >
             Connect Wallet
           </button>
@@ -150,7 +156,7 @@ export default function Home() {
             className="bg-custom-secondaryBackground p-8 mt-4"
             style={{ borderRadius: '12px' }}
           >
-            <div className="flex flex-row flex-wrap gap-8 justify-around">
+            <div className={`flex flex-row flex-wrap gap-8 {filteredNfts ? 'flex-start' : 'justify-around'}`}>
               {items.map((nft) => (
                 <NFTCardAlt
                   key={`all-nft-${nft.id}`}
