@@ -2,33 +2,36 @@ import nextId from "react-id-generator";
 import { MiscType, NFTCardType, NFTCategoryType, CreatorsType, CollectionsObjectType } from "./Types";
 
 export const trendingNFTs: NFTCardType[] = [
-    {
-      id: 1,
-      title: "Woxwing Bird Ethereal",
-      category: "Art",
-      creator: "@chestertron",
-      highestBid: "3.89",
-      image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
-    },
-    {
-      id: 2,
-      title: "Football Sport Flyer",
-      category: "Sports",
-      creator: "@dorothea",
-      highestBid: "2.61",
-      image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
-    },
-    {
-      id: 3,
-      title: "Defocused Purple Musical",
-      category: "Music",
-      creator: "@likesbea",
-      highestBid: "4.57",
-      image:
-        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=60",
-    }
+  {
+    id: 1,
+    title: "Woxwing Bird Ethereal",
+    category: "Art",
+    creator: "@chestertron",
+    highestBid: "3.89",
+    image:
+    "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
+    collectionName: "MoonBird"
+  },
+  {
+    id: 2,
+    title: "Football Sport Flyer",
+    category: "Sports",
+    creator: "@dorothea",
+    highestBid: "2.61",
+    image:
+    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop&q=60",
+    collectionName: "Cassandra"
+  },
+  {
+    id: 3,
+    title: "Defocused Purple Musical",
+    category: "Music",
+    creator: "@likesbea",
+    highestBid: "4.57",
+    image:
+    "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=60",
+    collectionName: "Quinn Hariera"
+  }
   ];
 
 
@@ -39,8 +42,8 @@ export const trendingNFTs: NFTCardType[] = [
       category: "Art",
       creator: "@chestertron",
       highestBid: "3.89",
-      image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
+      image: "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
+      collectionName: "MoonBird"
     },
     {
       id: 2,
@@ -49,7 +52,8 @@ export const trendingNFTs: NFTCardType[] = [
       creator: "@dorothea",
       highestBid: "2.61",
       image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=800&auto=format&fit=crop&q=60",
+      collectionName: "Cassandra"
     },
     {
       id: 3,
@@ -58,7 +62,8 @@ export const trendingNFTs: NFTCardType[] = [
       creator: "@likesbea",
       highestBid: "4.57",
       image:
-        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1497032205916-ac775f0649ae?w=800&auto=format&fit=crop&q=60",
+      collectionName: "Quinn Hariera"
     },
     {
       id: 11,
@@ -67,7 +72,8 @@ export const trendingNFTs: NFTCardType[] = [
       creator: "@chestertron",
       highestBid: "3.89",
       image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&auto=format&fit=crop&q=60",
+      collectionName: "MoonBird"
     },
     {
       id: 12,
@@ -76,7 +82,8 @@ export const trendingNFTs: NFTCardType[] = [
       creator: "@dorothea",
       highestBid: "2.61",
       image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&auto=format&fit=crop&q=60",
+      collectionName: "Cassandra"
     },
     {
       id: 13,
@@ -85,7 +92,8 @@ export const trendingNFTs: NFTCardType[] = [
       creator: "@likesbea",
       highestBid: "4.57",
       image:
-        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&auto=format&fit=crop&q=60",
+      collectionName: "Quinn Hariera"
     },
     {
       id: 21,
@@ -94,7 +102,8 @@ export const trendingNFTs: NFTCardType[] = [
       creator: "@chestertron",
       highestBid: "3.89",
       image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
+      "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=800&auto=format&fit=crop&q=60",
+      collectionName: "MoonBird"
     },
     {
       id: 22,
@@ -103,7 +112,8 @@ export const trendingNFTs: NFTCardType[] = [
       creator: "@dorothea",
       highestBid: "2.61",
       image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=60",
+      collectionName: "Cassandra"
     },
     {
       id: 23,
@@ -112,7 +122,8 @@ export const trendingNFTs: NFTCardType[] = [
       creator: "@likesbea",
       highestBid: "4.57",
       image:
-        "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?w=800&auto=format&fit=crop&q=60",
+      collectionName: "Quinn Hariera"
     }
   ];
 
