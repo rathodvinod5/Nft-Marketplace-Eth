@@ -12,7 +12,9 @@ const NFTCardAlt = ({
   return (
     <GradientBorderContainer>
       <div className={`group bg-card rounded-xl overflow-hidden bg-custom-secondaryBackground 
-      text-white relative ransform transition duration-300 hover:scale-110`}>
+      text-white relative ransform transition duration-300 hover:scale-110 cursor-pointer`}
+      onClick={() => handleSeeDetail(nft.id)}
+    >
         <div className="w-20 px-3 py-2 rounded-br-xl bg-custom-purple text-white 
           text-center text-card-sub-title bg-opacity-65 absolute top-0 left-0">
           {nft.category}

@@ -5,6 +5,7 @@ export type NFTCardType = {
   creator: string;
   highestBid: string;
   image: string;
+  collectionName: string;
 };
 
 export type CategoryType = "all" | "art" | "gaming" | "sports" | "music" | "others";

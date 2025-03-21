@@ -56,12 +56,11 @@ const NFTCollectionCard = ({
               />
           </div>
         </div>
-        <div className="flex flex-row gap-3 justify-center items-center">
+        <div className="flex flex-row gap-3 items-center">
           <div 
-            className="h-12 w-16 border border-solid border-gray-600" 
-            style={{ borderRadius: '50%'}} 
+            className="border border-solid border-gray-600" 
+            style={{ height: '40px', width: '40px', borderRadius: '50%' }} 
           />
-          {/* <div className="w-11 h-11 border border-solid border-gray-500 rounded-full" /> */}
           <p className="w-full text-card-title text-left text-custom-white-alt">{collection.title}</p>
           <p className="text-card-sub-title text-green-700 font-semibold">{collection.numberOfItems}</p>
         </div>

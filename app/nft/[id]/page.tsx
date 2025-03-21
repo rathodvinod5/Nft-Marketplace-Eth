@@ -3,8 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Star, MessageCircle } from "lucide-react";
+import { allNFTs } from "@/app/(dashboard)/Data";
 
 export default function NFTDetail({ params }: { params: { id: string } }) {
+  const item = allNFTs.find((nft) => nft.id === Number(params.id));
+  if(!item) return null;
+
   return (
     <div className="text-gray-50 bg-black">
       <div className="py-[100px] px-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -20,7 +24,8 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
               </button>
             </div>
             <Image
-              src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?w=800&auto=format&fit=crop&q=60"
+              // src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?w=800&auto=format&fit=crop&q=60"
+              src={item.image}
               alt="NFT Image"
               fill
               className="object-cover"
@@ -35,7 +40,8 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
                 className="relative aspect-square rounded-xl overflow-hidden"
               >
                 <Image
-                  src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?w=800&auto=format&fit=crop&q=60"
+                  // src="https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?w=800&auto=format&fit=crop&q=60"
+                  src={item.image}
                   alt={`Preview ${i}`}
                   fill
                   className="object-cover"
@@ -49,8 +55,9 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
         <div className="space-y-6">
           <div className="space-y-4">
             <h1 className="text-4xl font-bold bg-gradient-to-r from-green-500 to-blue-600 
-              inline-block text-transparent bg-clip-text">
-                Axtronic Electronics VS-10
+              inline-block text-transparent bg-clip-text"
+            >
+                {item.title}
             </h1>
 
             <div className="flex items-center gap-4">
@@ -69,7 +76,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
                     href="#"
                     className="text-sm font-medium hover:text-primary"
                   >
-                    Themesflat
+                    {item.creator}
                   </Link>
                 </div>
               </div>
@@ -80,7 +87,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
                   href="#"
                   className="text-sm font-medium hover:text-primary"
                 >
-                  @ 3d Models
+                  {item.category}
                 </Link>
               </div>
             </div>
@@ -125,7 +132,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
               </div>
               <div>
                 <p className="text-sm ">Collection</p>
-                <p className="font-medium">Art Design</p>
+                <p className="font-medium">{item.collectionName}</p>
               </div>
             </div>
           </div>
