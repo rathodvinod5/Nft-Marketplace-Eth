@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useDisconnect } from 'wagmi';
 import { cn } from "@/lib/utils";
 import {
   Home,
@@ -35,6 +36,12 @@ const bottomMenuItems = [
 export function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
   const pathname = usePathname();
+
+  const { disconnect } = useDisconnect();
+
+  const handleDisconnect = async () => {
+    await disconnect();
+  };
 
   return (
     <aside
@@ -139,6 +146,7 @@ export function Sidebar() {
               "text-muted-foreground hover:bg-accent hover:text-accent-foreground px-4",
               // isExpanded ? "px-4" : "px-0"
             )}
+            onClick={handleDisconnect}
           >
             <div
               className={cn(

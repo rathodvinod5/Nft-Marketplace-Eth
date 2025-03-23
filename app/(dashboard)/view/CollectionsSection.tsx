@@ -25,8 +25,13 @@ const CollectionsSection = () => {
         </button>
       </div>
       <div className="w-full flex flex-row gap-10 overflow-x-scroll">
-        {collectionsList.map((collection) => {
-          return <NFTCollectionCard collection={collection} />;
+        {collectionsList.map((collection, index) => {
+          return (
+            <NFTCollectionCard 
+              key={"collection-card-item"+index}
+              collection={collection} 
+            />
+          );
         })}
       </div>
     </div>
