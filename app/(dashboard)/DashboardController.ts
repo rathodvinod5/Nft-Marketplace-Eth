@@ -28,18 +28,9 @@ const useDashboardController = () => {
     setFilteredNfts(filtered);
   };
 
-  const onClickConnectWallet = () => {
-    console.log("connectors: ", connectors);
-    if(connectors.length) {
-      // connect({ connector: connectors[0] as Connector });
-      connect({ connector: injected() });
-      return;
-    }
-
-    // if (address) {
-    //   // connectors[0].disconnect?.();
-    //   useDisconnect();
-    // }
+  const onClickConnectWallet = async () => {
+    // console.log("connectors: ", connectors);
+    await connect({ connector: injected() });
   }
 
   return {

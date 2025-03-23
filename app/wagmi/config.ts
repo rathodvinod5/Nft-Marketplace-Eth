@@ -6,12 +6,12 @@ import { injected, metaMask, safe, walletConnect } from 'wagmi/connectors'
 
 export const config = createConfig({
   chains: [mainnet, sepolia],
-  connectors: [
-    injected(),
-    // walletConnect({ projectId }),
-    // metaMask(),
-    // safe(),
-  ],
+  // connectors: [
+  //   injected(),
+  //   walletConnect({ projectId }),
+  //   metaMask(),
+  //   safe(),
+  // ],
   transports: {
     [mainnet.id]: http(),
     [sepolia.id]: http(),
