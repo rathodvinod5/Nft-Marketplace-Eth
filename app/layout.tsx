@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Sidebar } from "@/components/sidebar";
 import ThemeProvider from "@/components/theme-provider";
 import Footer from "@/components/ui/Footer/Footer";
+import WalletProviderContext from "./wagmi/walletcontext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,13 +22,15 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <div className="flex min-h-screen bg-background">
-            <Sidebar />
-            <main className="flex-1 pl-[80px] bg-background">
-              {children}
-              <Footer />
-            </main>
-          </div>
+          <WalletProviderContext>
+            <div className="flex min-h-screen bg-background">
+              <Sidebar />
+              <main className="flex-1 pl-[80px] bg-background">
+                {children}
+                <Footer />
+              </main>
+            </div>
+          </WalletProviderContext>
         </ThemeProvider>
       </body>
     </html>

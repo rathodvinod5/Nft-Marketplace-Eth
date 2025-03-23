@@ -12,6 +12,7 @@ import CreatorItems from "@/components/ui/creator-item";
 import CollectionsSection from "./(dashboard)/view/CollectionsSection";
 import Link from "next/link";
 import NFTCardAlt from "@/components/ui/NFTCardAlt/NFTCardAlt";
+import { useAccount } from "wagmi";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,9 +28,12 @@ export default function Home() {
     filteredNfts, 
     onFilterCategory, 
     currentCategory, 
-    handleOnClickChip 
+    handleOnClickChip,
+    onClickConnectWallet
   } = useDashboardController();
-  const items = !filteredNfts?.length ? allNfts.slice(0, 8) : filteredNfts.slice(0, 8) ;
+  const items = !filteredNfts?.length ? allNfts.slice(0, 8) : filteredNfts.slice(0, 8);
+
+  const { address } = useAccount();
 
   return (
     <div className="p-8 bg-custom-primaryBackground pb-32">
@@ -47,8 +51,9 @@ export default function Home() {
           <button
             className="px-6 py-2 border border-[#fffff] hover:border-[#3B9DF8] hover:bg-[#3B9DF8] 
             transition duration-300 rounded text-white"
+            onClick={onClickConnectWallet}
           >
-            Connect Wallet
+            {address ? `...${address.slice(-6).toUpperCase()}` : "Connect Wallet"}
           </button>
           <button className="p-2 rounded-lg hover:bg-accent">
             <Bell className="w-5 h-5" color="white" />
@@ -138,7 +143,7 @@ export default function Home() {
             <div className="flex flex-row gap-2">
               {nftCategory.map((item) => (
                 <Chip 
-                  key={"chip-"+item.id}
+                  key={"chip-item-"+item.id}
                   currentItem={currentCategory}
                   item={item} 
                   onClickChip={() => handleOnClickChip(item.tag)} 

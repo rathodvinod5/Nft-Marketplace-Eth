@@ -9,8 +9,8 @@ const AllCollectionsPage = () => {
       <h1 className="text-page-title text-white">All Collections</h1>
 
       <div className="grid grid-cols-4 gap-8 mt-12">
-        {collectionsList.map((collection) => {
-          return <NFTCollectionCard collection={collection} />
+        {collectionsList.map((collection, index) => {
+          return <NFTCollectionCard key={'collection-item-'+index} collection={collection} />
         })}
       </div>
 
