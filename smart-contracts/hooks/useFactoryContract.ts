@@ -1,7 +1,5 @@
-import React, { createContext, useContext, ReactNode } from 'react';
 import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { Abi } from 'viem';
-import FACTORY_CONTRACT_FUNCTIONS from "../configs/factory-contract-config";
 import CONTRACT_ADDRESS from '../contract-address';
 import FACTORY_ABI from "../abi/factory-contract-abi.json"
 
@@ -77,7 +75,7 @@ const useFactoryContract = () => {
 
   return {
     allCollections: collections as any[],
-    collectionsError: collectionsError as string,
+    // collectionsError: collectionsError as string,
     isPending: collectionsPending as boolean,
     createNewCollection: createNewCollection,
     mintNewNFT: mintNewNFT,
