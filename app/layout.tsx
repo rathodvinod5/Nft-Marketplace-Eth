@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/sidebar";
 import ThemeProvider from "@/components/theme-provider";
 import Footer from "@/components/ui/Footer/Footer";
 import WalletProviderContext from "./wagmi/walletcontext";
+import { NFTProvider } from "@/context/factorycontext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +24,15 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <WalletProviderContext>
-            <div className="flex min-h-screen bg-background">
-              <Sidebar />
-              <main className="flex-1 pl-[80px] bg-background">
-                {children}
-                <Footer />
-              </main>
-            </div>
+            <NFTProvider>
+              <div className="flex min-h-screen bg-background">
+                <Sidebar />
+                <main className="flex-1 pl-[80px] bg-background">
+                  {children}
+                  <Footer />
+                </main>
+              </div>
+            </NFTProvider>
           </WalletProviderContext>
         </ThemeProvider>
       </body>
