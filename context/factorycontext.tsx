@@ -2,17 +2,18 @@ import React, { createContext, useContext, ReactNode } from 'react';
 import { useAccount, useReadContract, useWriteContract } from 'wagmi';
 import { Abi } from 'viem';
 import CONTRACT_ADDRESS from '@/smart-contracts/contract-address';
+import useFactoryContract from '@/smart-contracts/hooks/useFactoryContract';
 
-type Collection = {
-  id: number;
-  name: string;
-  symbol: string;
-  owner: string;
-};
 
 type NFTContextType = {
-  collections: Collection[] | undefined;
-  createCollection: ReturnType<typeof useWriteContract>;
+  wallet: `0x${string}` | undefined,
+  allCollections: any[],
+  collectionsError: string,
+  isPending: boolean,
+  createNewCollection: (arg0: string, arg1: string) => void,
+  mintNewNFT: (arg0: string, arg1: number) => void,
+  getUserCollections: (userAddress: number) => void,
+  getCollectionTokens: (collectionAddress: number) => void,
 };
 
 const yourContractAbi: any[] = [];
@@ -24,24 +25,12 @@ type NFTProviderProps = {
 };
 
 export const NFTProvider = ({ children }: NFTProviderProps) => {
-  const { address } = useAccount();
+  const { address: wallet } = useAccount();
 
-  const { data: collections } = useReadContract({
-    address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
-    abi: [] as Abi,
-    functionName: 'userCollections',
-    args: []
-  });
-
-  const createCollection = useWriteContract();
+  const dataObject = useFactoryContract();
 
   return (
-    <NFTContext.Provider 
-      value={{ 
-        collections: collections as Collection[], 
-        createCollection 
-      }}
-    >
+    <NFTContext.Provider value={{ wallet: wallet, ...dataObject }}>
       {children}
     </NFTContext.Provider>
   );
