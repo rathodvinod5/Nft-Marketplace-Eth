@@ -12,8 +12,8 @@ type NFTContextType = {
   isPending: boolean,
   createNewCollection: (arg0: string, arg1: string) => void,
   mintNewNFT: (arg0: string, arg1: number) => void,
-  getUserCollections: (userAddress: number) => void,
-  getCollectionTokens: (collectionAddress: number) => void,
+  getUserCollections: (userAddress: string) => void,
+  getCollectionTokens: (collectionAddress: string) => void,
 };
 
 const yourContractAbi: any[] = [];
