@@ -33,6 +33,7 @@ const useFactoryContract = () => {
   }
 
   const mintNewNFT = (collectionAddress: string, tokenId: number) => {
+    // create new NFT's
     const {
       data: mintData, 
       error: mintError,
@@ -46,6 +47,7 @@ const useFactoryContract = () => {
   }
 
   const getUserCollections = (userAddress: string, ) => {
+    // get all the collections of the usr
     const {
       data: mintData, 
       error: mintError,
@@ -59,6 +61,7 @@ const useFactoryContract = () => {
   }
 
   const getCollectionTokens = (collectinAddress: string, ) => {
+    // get all the tokens belonging to a particular collction
     const {
       data: mintData, 
       error: mintError,
