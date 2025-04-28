@@ -1,22 +1,18 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import { useAccount, useReadContract, useWriteContract } from 'wagmi';
-import { Abi } from 'viem';
-import CONTRACT_ADDRESS from '@/smart-contracts/contract-address';
+import { useAccount } from 'wagmi';
 import useFactoryContract from '@/smart-contracts/hooks/useFactoryContract';
 
 
 type NFTContextType = {
   wallet: `0x${string}` | undefined,
   allCollections: any[],
-  collectionsError: string,
+  // collectionsError: string,
   isPending: boolean,
   createNewCollection: (arg0: string, arg1: string) => void,
   mintNewNFT: (arg0: string, arg1: number) => void,
   getUserCollections: (userAddress: string) => void,
   getCollectionTokens: (collectionAddress: string) => void,
 };
-
-const yourContractAbi: any[] = [];
 
 const NFTContext = createContext<NFTContextType | undefined>(undefined);
 

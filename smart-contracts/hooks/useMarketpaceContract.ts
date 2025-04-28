@@ -17,6 +17,7 @@ const useMarketplaceContract = () => {
   });
 
   const listNewNFT = (collectionAddress: string, tokenId: number, price: string) => {
+    // list new NFT to the market
     const { data: hash, writeContract } = useWriteContract();
 
     writeContract({
@@ -33,6 +34,7 @@ const useMarketplaceContract = () => {
   }
 
   const buyNFT = (collectionAddress: string, tokenId: number) => {
+    // buy NFT which are listed
     const { data: hash, writeContract } = useWriteContract();
 
     writeContract({
@@ -49,6 +51,7 @@ const useMarketplaceContract = () => {
   }
 
   const removeListing = (collectionAddress: string, tokenId: number) => {
+    // remove the nft from listings
     const { data: hash, writeContract } = useWriteContract();
 
     writeContract({
@@ -63,6 +66,7 @@ const useMarketplaceContract = () => {
   }
 
   const updateListingPrice = (collectionAddress: string, tokenId: number, newPrice: string) => {
+    // update the listing price
     const { data: hash, writeContract } = useWriteContract();
 
     writeContract({
