@@ -39,36 +39,38 @@ const useFactoryContract = () => {
 
   const mintNewNFT = (collectionAddress: string, tokenURI: string) => {
     // create new NFT's
-    const {
-      data: mintData,
-      error: mintError,
-      isPending: mintPending,
-    } = useReadContract({
-      address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
-      abi: FACTORY_ABI.abi as Abi,
-      functionName: "mintNFT",
-      args: [collectionAddress, tokenURI],
-    });
+    // const {
+    //   data: mintData,
+    //   error: mintError,
+    //   isPending: mintPending,
+    // } = useReadContract({
+    //   address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
+    //   abi: FACTORY_ABI.abi as Abi,
+    //   functionName: "mintNFT",
+    //   args: [collectionAddress, tokenURI],
+    // });
   };
 
   const getUserCollections = (userAddress: string) => {
     // get all the collections of the usr
-    const {
-      data: mintData,
-      error: mintError,
-      isPending: mintPending,
-    } = useReadContract({
-      address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
-      abi: FACTORY_ABI.abi as Abi,
-      functionName: "getUserCollections",
-      args: [userAddress],
-    });
+    // const {
+    //   data: mintData,
+    //   error: mintError,
+    //   isPending: mintPending,
+    // } = useReadContract({
+    //   address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
+    //   abi: FACTORY_ABI.abi as Abi,
+    //   functionName: "getUserCollections",
+    //   args: [userAddress],
+    // });
 
-    return {
-      mintData,
-      mintError,
-      mintPending,
-    };
+    // return {
+    //   mintData,
+    //   mintError,
+    //   mintPending,
+    // };
+
+    return null;
   };
 
   const getCollectionTokens = (collectinAddress: string) => {
