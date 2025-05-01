@@ -37,7 +37,7 @@ const useFactoryContract = () => {
       });
   };
 
-  const mintNewNFT = (collectionAddress: string, tokenId: number) => {
+  const mintNewNFT = (collectionAddress: string, tokenURI: string) => {
     // create new NFT's
     const {
       data: mintData,
@@ -47,7 +47,7 @@ const useFactoryContract = () => {
       address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
       abi: FACTORY_ABI.abi as Abi,
       functionName: "mintNFT",
-      args: [collectionAddress, tokenId],
+      args: [collectionAddress, tokenURI],
     });
   };
 
@@ -63,6 +63,12 @@ const useFactoryContract = () => {
       functionName: "getUserCollections",
       args: [userAddress],
     });
+
+    return {
+      mintData,
+      mintError,
+      mintPending,
+    };
   };
 
   const getCollectionTokens = (collectinAddress: string) => {

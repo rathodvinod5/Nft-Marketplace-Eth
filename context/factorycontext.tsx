@@ -12,7 +12,7 @@ type NFTContextType = {
     collectionName: string,
     collectionSymbol: string,
   ) => void;
-  mintNewNFT: (collectionAddress: string, tokenId: number) => void;
+  mintNewNFT: (collectionAddress: string, tokenURI: string) => void;
   getUserCollections: (userAddress: string) => void;
   getCollectionTokens: (collectionAddress: string) => void;
 };

@@ -1,11 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TraitType } from "../view/NFTInfoTypes";
 import { useNFTContext } from "@/context/factorycontext";
+
+export type ErrorTypeObject = {
+  [key: string]: string | null;
+};
+
+const ErrorObjectMain: ErrorTypeObject = {
+  collection: null,
+  nftName: null,
+  nftDesc: null,
+  nftSupply: null,
+  nftPrice: null,
+  nftImage: null,
+  uriLink: null,
+  empty: null,
+};
+
+export type ErrorType = {
+  errorFor: keyof typeof ErrorObjectMain;
+};
 
 const useCreateNFTController = () => {
   const [newNFTCollection, setNewNFTCollection] = useState("");
   const [newNFTCollectionSymbol, setNewNFTCollectionSymbol] = useState("");
-  const [chainSelected, setChainSelected] = useState("");
+  const [collectionSelected, setCollectionSelected] = useState<string | null>(
+    null,
+  );
   const [nftName, setNFTName] = useState("");
   const [nftDescription, setNFTDescription] = useState("");
   const [nftSupply, setNFTSupply] = useState("");
@@ -17,31 +38,30 @@ const useCreateNFTController = () => {
   const [trait, setTrait] = useState("");
   const [traitValue, setTraitValue] = useState("");
   const [nftTraits, setNFTtraits] = useState<TraitType[]>([]);
+  const [userCollections, setUserCollections] = useState<any | null>(null);
+  const [errorObject, setErrorObject] = useState<ErrorTypeObject>(
+    structuredClone(ErrorObjectMain),
+  );
 
-  const { createNewCollection, mintNewNFT } = useNFTContext();
+  const { createNewCollection, mintNewNFT, getUserCollections, wallet } =
+    useNFTContext();
 
-  // const onChangeNFTCollection = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setNewNFTCollection(e.target.value);
-  // }
+  // should run only one time to get the list collection user has created
+  useEffect(() => {
+    const collections = getUserCollections(`0x${wallet}`);
+    console.log("user collections: ", collections);
+    setUserCollections(userCollections);
+  }, []);
 
   const onChangeNFTCollection = (newValue: string) => {
     console.log(newValue);
     setNewNFTCollection(newValue);
   };
 
-  // const onChangeNFTCollectionSymbol = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setNewNFTCollectionSymbol(e.target.value.toUpperCase());
-  // }
-
   const onChangeNFTCollectionSymbol = (newValue: string) => {
     console.log(newValue);
     setNewNFTCollectionSymbol(newValue);
   };
-
-  // const onChangeNFTName = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   console.log(e.target.value);
-  //   setNFTName(e.target.value);
-  // }
 
   const onChangeNFTName = (newValue: string) => {
     console.log("onChangeNFTName: ", newValue);
@@ -54,10 +74,6 @@ const useCreateNFTController = () => {
     setNFTDescription(e.target.value);
   };
 
-  // const onChangeNFTSupply = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setNFTSupply(e.target.value);
-  // }
-
   const onChangeNFTSupply = (newValue: string) => {
     setNFTSupply(newValue);
   };
@@ -65,11 +81,6 @@ const useCreateNFTController = () => {
   const onChangeNFTPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNFTPrice(e.target.value);
   };
-
-  // const onChangeNFTURILink = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   console.log(e.target.value);
-  //   setNFTURILink(e.target.value);
-  // }
 
   const onChangeNFTURILink = (newValue: string) => {
     setNFTURILink(newValue);
@@ -107,17 +118,43 @@ const useCreateNFTController = () => {
     setNFTtraits(newNFTTraits);
   };
 
-  const validateAllData = () => {};
+  const resetErrors = () => {
+    setErrorObject(structuredClone(ErrorObjectMain));
+  };
 
-  const createNewNft = (collectionAddress: string, tokenId: number) => {
-    mintNewNFT(collectionAddress, tokenId);
+  const validateAndGetAllDataForMintingNewNFT = () => {
+    const isAllFine = true;
+    if (!collectionSelected) {
+      errorObject.collection = "Please select a collection from list!";
+    }
+    if (!nftName) {
+      errorObject.nftName = "Please enter a name for NFT!";
+    }
+    return isAllFine;
+  };
+
+  const createAndGetURILinkFromIPFS = () => {
+    return "https://pinata/123";
+  };
+
+  const createNewNft = (collectionAddress: string, tokenURI: string) => {
+    resetErrors();
+    if (validateAndGetAllDataForMintingNewNFT()) {
+      mintNewNFT(collectionAddress, tokenURI);
+    }
   };
 
   const createCollection = () => {
+    resetErrors();
     createNewCollection(newNFTCollection, newNFTCollectionSymbol);
   };
 
+  const onChangeCollectionSelected = (currentCollectionSelected: string) => {
+    setCollectionSelected(currentCollectionSelected);
+  };
+
   return {
+    userCollections,
     newNFTCollection,
     onChangeNFTCollection,
     newNFTCollectionSymbol,
@@ -140,6 +177,8 @@ const useCreateNFTController = () => {
     onRemoveTraitItem,
     createNewNft,
     createCollection,
+    onChangeCollectionSelected,
+    errorObject,
   };
 };
 
