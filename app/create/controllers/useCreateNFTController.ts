@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { TraitType } from "../view/NFTInfoTypes";
+import { useNFTContext } from "@/context/factorycontext";
 
 const useCreateNFTController = () => {
   const [newNFTCollection, setNewNFTCollection] = useState("");
@@ -16,6 +17,8 @@ const useCreateNFTController = () => {
   const [trait, setTrait] = useState("");
   const [traitValue, setTraitValue] = useState("");
   const [nftTraits, setNFTtraits] = useState<TraitType[]>([]);
+
+  const { createNewCollection, mintNewNFT } = useNFTContext();
 
   // const onChangeNFTCollection = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setNewNFTCollection(e.target.value);
@@ -104,6 +107,16 @@ const useCreateNFTController = () => {
     setNFTtraits(newNFTTraits);
   };
 
+  const validateAllData = () => {};
+
+  const createNewNft = (collectionAddress: string, tokenId: number) => {
+    mintNewNFT(collectionAddress, tokenId);
+  };
+
+  const createCollection = () => {
+    createNewCollection(newNFTCollection, newNFTCollectionSymbol);
+  };
+
   return {
     newNFTCollection,
     onChangeNFTCollection,
@@ -119,16 +132,14 @@ const useCreateNFTController = () => {
     onChangeNFTPrice,
     nftURILink,
     onChangeNFTURILink,
-    // nftCollection,
-    // setNFTCollection,
-    // nftCategory,
-    // setNFTCategory,
     trait,
     traitValue,
     nftTraits,
     addNewTrait,
     onEditTraitValue,
     onRemoveTraitItem,
+    createNewNft,
+    createCollection,
   };
 };
 

@@ -8,8 +8,11 @@ type NFTContextType = {
   allCollections: any[];
   // collectionsError: string,
   isPending: boolean;
-  createNewCollection: (arg0: string, arg1: string) => void;
-  mintNewNFT: (arg0: string, arg1: number) => void;
+  createNewCollection: (
+    collectionName: string,
+    collectionSymbol: string,
+  ) => void;
+  mintNewNFT: (collectionAddress: string, tokenId: number) => void;
   getUserCollections: (userAddress: string) => void;
   getCollectionTokens: (collectionAddress: string) => void;
 };
