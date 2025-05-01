@@ -1,19 +1,24 @@
-import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import { Abi } from 'viem';
-import CONTRACT_ADDRESS from '../contract-address';
-import FACTORY_ABI from "../abi/factory-contract-abi.json"
+import {
+  useReadContract,
+  useWriteContract,
+  useWaitForTransactionReceipt,
+} from "wagmi";
+import { Abi } from "viem";
+import CONTRACT_ADDRESS from "../contract-address";
+import FACTORY_ABI from "../abi/factory-contract-abi.json";
 
 const useFactoryContract = () => {
-  const factoryContractAddress = CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`;
+  const factoryContractAddress =
+    CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`;
 
-  const { 
-    data: collections, 
+  const {
+    data: collections,
     error: collectionsError,
-    isPending: collectionsPending
+    isPending: collectionsPending,
   } = useReadContract({
     address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
     abi: FACTORY_ABI.abi as Abi,
-    functionName: 'getAllCollections'
+    functionName: "getAllCollections",
   });
 
   const createNewCollection = (name: string, symbol: string) => {
@@ -22,58 +27,58 @@ const useFactoryContract = () => {
     writeContract({
       address: factoryContractAddress,
       abi: FACTORY_ABI.abi as Abi,
-      functionName: 'createNewCollection',
-      args:  [name, symbol]
+      functionName: "createNewCollection",
+      args: [name, symbol],
     });
 
     const { isLoading: isConfirming, isSuccess: isConfirmed } =
-    useWaitForTransactionReceipt({
-      hash,
-    })
-  }
+      useWaitForTransactionReceipt({
+        hash,
+      });
+  };
 
   const mintNewNFT = (collectionAddress: string, tokenId: number) => {
     // create new NFT's
     const {
-      data: mintData, 
+      data: mintData,
       error: mintError,
-      isPending: mintPending
+      isPending: mintPending,
     } = useReadContract({
       address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
       abi: FACTORY_ABI.abi as Abi,
-      functionName: 'mintNFT',
-      args: [collectionAddress, tokenId]
+      functionName: "mintNFT",
+      args: [collectionAddress, tokenId],
     });
-  }
+  };
 
-  const getUserCollections = (userAddress: string, ) => {
+  const getUserCollections = (userAddress: string) => {
     // get all the collections of the usr
     const {
-      data: mintData, 
+      data: mintData,
       error: mintError,
-      isPending: mintPending
+      isPending: mintPending,
     } = useReadContract({
       address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
       abi: FACTORY_ABI.abi as Abi,
-      functionName: 'getUserCollections',
-      args: [userAddress]
+      functionName: "getUserCollections",
+      args: [userAddress],
     });
-  }
+  };
 
-  const getCollectionTokens = (collectinAddress: string, ) => {
+  const getCollectionTokens = (collectinAddress: string) => {
     // get all the tokens belonging to a particular collction
     const {
-      data: mintData, 
+      data: mintData,
       error: mintError,
-      isPending: mintPending
+      isPending: mintPending,
     } = useReadContract({
       address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
       abi: FACTORY_ABI.abi as Abi,
-      functionName: 'getCollectionTokens',
-      args: [collectinAddress]
+      functionName: "getCollectionTokens",
+      args: [collectinAddress],
     });
-  }
-  
+  };
+
   const createCollection = useWriteContract();
 
   return {
@@ -84,7 +89,7 @@ const useFactoryContract = () => {
     mintNewNFT: mintNewNFT,
     getUserCollections: getUserCollections,
     getCollectionTokens: getCollectionTokens,
-  }
-}
+  };
+};
 
 export default useFactoryContract;

@@ -7,27 +7,33 @@ import { list } from "postcss";
 const useNftController = () => {
   const [allNfts, setAllNfts] = useState<NFTCardType[]>(allNFTs);
   const [filteredNfts, setFilteredNfts] = useState<NFTCardType[] | null>(null);
-  const [listType, setListType] = useState<ListDisplayTypeEnum>(ListDisplayTypeEnum.TILE);
+  const [listType, setListType] = useState<ListDisplayTypeEnum>(
+    ListDisplayTypeEnum.TILE,
+  );
 
   const onChageText = (text: string) => {
-    if(!text) {
+    if (!text) {
       setFilteredNfts(null);
       return;
     }
-    const filtered = allNfts.filter((nft) => nft.title.toLowerCase().includes(text.toLowerCase()));
-    if(!filtered.length) {
+    const filtered = allNfts.filter((nft) =>
+      nft.title.toLowerCase().includes(text.toLowerCase()),
+    );
+    if (!filtered.length) {
       setFilteredNfts(null);
     }
 
     setFilteredNfts(filtered);
-  }
+  };
 
   const onFilterCategory = (category: string) => {
-    const filtered = allNfts.filter((nft) => nft.category.toLowerCase().includes(category.toLowerCase()));
-    if(!filtered.length) {
+    const filtered = allNfts.filter((nft) =>
+      nft.category.toLowerCase().includes(category.toLowerCase()),
+    );
+    if (!filtered.length) {
       setFilteredNfts(null);
     }
-  
+
     setFilteredNfts(filtered);
   };
 
@@ -41,8 +47,8 @@ const useNftController = () => {
     listType: listType,
     onChangeText: onChageText,
     onFilterCategory: onFilterCategory,
-    onFilterListDisplayType: onFilterListDisplayType
+    onFilterListDisplayType: onFilterListDisplayType,
   };
-}
+};
 
 export default useNftController;

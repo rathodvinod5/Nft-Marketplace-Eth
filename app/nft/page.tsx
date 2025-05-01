@@ -9,33 +9,42 @@ import NFTCardAsList from "@/components/ui/nft-card-as-list";
 
 const AllNftPage = () => {
   const router = useRouter();
-  
+
   const handleSeeDetail = (nftId: number) => {
     router.push(`/nft/${nftId}`);
   };
 
-  const { 
-    allNfts, 
-    filteredNfts, 
-    onChangeText, 
-    onFilterCategory, 
-    listType, 
-    onFilterListDisplayType 
+  const {
+    allNfts,
+    filteredNfts,
+    onChangeText,
+    onFilterCategory,
+    listType,
+    onFilterListDisplayType,
   } = useNftController();
-  const items = !filteredNfts?.length ? allNfts : filteredNfts ;
+  const items = !filteredNfts?.length ? allNfts : filteredNfts;
 
-  return ( 
+  return (
     <div className="w-full h-full px-8 py-6 bg-custom-primaryBackground">
       <h1 className="mb-2 text-page-title text-white">All NFT</h1>
 
       <div className="mt-12 mb-10">
-        <SearchAndFilterHeader 
-          onChangeText={onChangeText} 
-          itemLen={items.length} 
+        <SearchAndFilterHeader
+          onChangeText={onChangeText}
+          itemLen={items.length}
           onFilterCategory={onFilterCategory}
           listType={listType}
           onFilterListDisplayType={onFilterListDisplayType}
-          optionArray={["Football", "Cricket", "Tennis", "Badminton", "Sports", "Music", "Arts", "Others"]}
+          optionArray={[
+            "Football",
+            "Cricket",
+            "Tennis",
+            "Badminton",
+            "Sports",
+            "Music",
+            "Arts",
+            "Others",
+          ]}
         />
       </div>
 
@@ -50,7 +59,9 @@ const AllNftPage = () => {
           ))}
         </div>
       ) : listType !== ListDisplayTypeEnum.ALL ? (
-        <div className={`mt-14 grid ${listType === ListDisplayTypeEnum.TILE ? "grid-cols-3" : "grid-cols-4"}  gap-8`}>
+        <div
+          className={`mt-14 grid ${listType === ListDisplayTypeEnum.TILE ? "grid-cols-3" : "grid-cols-4"}  gap-8`}
+        >
           {items.map((nft) => (
             <NFTCard
               key={`all-nft-${nft.id}`}
@@ -61,16 +72,18 @@ const AllNftPage = () => {
         </div>
       ) : null}
 
-     {!items.length && (
+      {!items.length && (
         <div className="w-full flex flex-row justify-center">
-          <button style={{ borderRadius: '8px' }}
-            className="px-6 py-2 my-14 bg-custom-purple text-white w-fit self-center">
+          <button
+            style={{ borderRadius: "8px" }}
+            className="px-6 py-2 my-14 bg-custom-purple text-white w-fit self-center"
+          >
             Load More
           </button>
         </div>
-     )}
+      )}
     </div>
   );
-}
+};
 
 export default AllNftPage;

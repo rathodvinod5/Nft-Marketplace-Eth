@@ -8,21 +8,28 @@ import CreateNewNFT from "./CreateNFT";
 
 const CreatePage = () => {
   const [currentTab, setCurrentTab] = useState(1);
-//   const { currentTab, selectTab } = useCreatePageController();
+  //   const { currentTab, selectTab } = useCreatePageController();
 
   const onClickAddCollection = () => {
+    console.log("onClickAddCollection");
     setCurrentTab(2);
-  }
+  };
 
-  return(
+  return (
     <div className="h-full p-8 bg-custom-primaryBackground">
-      <p className="text-page-title text-gray-200 mb-4">Let's create some Tokens</p>
+      <p className="text-page-title text-gray-200 mb-4">
+        Let's create some Tokens
+      </p>
       <GradientBorderContainer>
-        <div className="h-full bg-card rounded-xl bg-custom-secondaryBackground 
-        text-white">
-          <BottomBorderTab onChangeIndex={(newIndex) => setCurrentTab(newIndex)} />
+        <div
+          className="h-full bg-card rounded-xl bg-custom-secondaryBackground 
+        text-white"
+        >
+          <BottomBorderTab
+            onChangeIndex={(newIndex) => setCurrentTab(newIndex)}
+          />
           {currentTab === 1 ? (
-            <CreateNewNFT onClickAddCollection={onClickAddCollection}  />
+            <CreateNewNFT onClickAddCollection={onClickAddCollection} />
           ) : (
             <CreateNewCollection />
           )}
@@ -30,6 +37,6 @@ const CreatePage = () => {
       </GradientBorderContainer>
     </div>
   );
-}
+};
 
 export default CreatePage;

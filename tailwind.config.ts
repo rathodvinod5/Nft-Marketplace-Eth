@@ -26,7 +26,7 @@ export default {
           purple: "#6344aa",
           text: "#191919",
           textDisabled: "#bba7af",
-          'white-alt': '#FAF9F6'
+          "white-alt": "#FAF9F6",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -70,26 +70,38 @@ export default {
         },
       },
       fontSize: {
-        "page-title": ['22px', {
-          // lineHeight: '20px',
-          // letterSpacing: '-0.01em',
-          // fontWeight: '400',
-        }],
-        "section-title": ['18px', {
-          lineHeight: '24px',
-          // letterSpacing: '-0.01em',
-          // fontWeight: '400',
-        }],
-        "card-title": ['14px', {
-          lineHeight: '20px',
-          // letterSpacing: '-0.01em',
-          // fontWeight: '400',
-        }],
-        "card-sub-title": ['12px', {
-          lineHeight: '16px',
-          // letterSpacing: '-0.01em',
-          // fontWeight: '400',
-        }],
+        "page-title": [
+          "22px",
+          {
+            // lineHeight: '20px',
+            // letterSpacing: '-0.01em',
+            // fontWeight: '400',
+          },
+        ],
+        "section-title": [
+          "18px",
+          {
+            lineHeight: "24px",
+            // letterSpacing: '-0.01em',
+            // fontWeight: '400',
+          },
+        ],
+        "card-title": [
+          "14px",
+          {
+            lineHeight: "20px",
+            // letterSpacing: '-0.01em',
+            // fontWeight: '400',
+          },
+        ],
+        "card-sub-title": [
+          "12px",
+          {
+            lineHeight: "16px",
+            // letterSpacing: '-0.01em',
+            // fontWeight: '400',
+          },
+        ],
       },
       keyframes: {
         "accordion-down": {
