@@ -24,8 +24,10 @@ const CreateNewNFT = ({
     addNewTrait,
     onEditTraitValue,
     onRemoveTraitItem,
+    createNewNft,
   } = useCreateNFTController();
   console.log("nftTraits: ", nftTraits);
+
   return (
     <div className="flex flex-row gap-5 p-5">
       <div className="w-1/3 h-[220px]">
@@ -67,16 +69,6 @@ const CreateNewNFT = ({
               required: true,
             }}
           />
-          {/* <input 
-                        value={nftName}
-                        // type="text" 
-                        id="nftName" 
-                        name="nftName" 
-                        placeholder="Enter the name of the token"
-                        className="w-2/3 block h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
-                        onChange={onChangeNFTName}
-                        required
-                    /> */}
         </div>
         <div>
           <label htmlFor="nftName" className="block mb-2">
@@ -92,16 +84,6 @@ const CreateNewNFT = ({
               required: true,
             }}
           />
-          {/* <input 
-                        value={nftSupply}
-                        type="number" 
-                        id="nftName" 
-                        name="nftName" 
-                        placeholder="Number of supply"
-                        className="w-2/3 h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
-                        onChange={onChangeNFTSupply}
-                        required
-                    /> */}
         </div>
         <div>
           <label htmlFor="nftName" className="block mb-2">
@@ -132,16 +114,6 @@ const CreateNewNFT = ({
               required: true,
             }}
           />
-          {/* <input 
-                        value={nftURILink}
-                        type="link" 
-                        id="nftName" 
-                        placeholder="https://demo.com/item/123"
-                        name="nftName" 
-                        onChange={onChangeNFTURILink}
-                        className="w-2/3 h-12 bg-transparent border border-gray-600 rounded-xl px-2" 
-                        required
-                    /> */}
         </div>
         <div className="w-2/3 mt-4">
           <label className="block mb-2 text-[20px]">Traits</label>
@@ -207,8 +179,9 @@ const CreateNewNFT = ({
         <div className="w-2/3 mt-8">
           <button
             className="w-full relative inline-flex items-center px-8 py-2.5 overflow-hidden text-lg font-medium 
-                            text-primary border border-solid border-gray-600 rounded-full hover:text-white group
-                            hover:bg-custom-purple"
+              text-primary border border-solid border-gray-600 rounded-full hover:text-white group
+            hover:bg-custom-purple"
+            //onClick={createNewNft}
           >
             <span
               className="absolute left-0 block w-full h-0 transition-all bg-primary opacity-100 
@@ -216,7 +189,7 @@ const CreateNewNFT = ({
             ></span>
             <span
               className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 
-                                    transform translate-x-full group-hover:translate-x-0 ease"
+                transform translate-x-full group-hover:translate-x-0 ease"
             >
               <svg
                 className="w-5 h-5"
@@ -234,7 +207,7 @@ const CreateNewNFT = ({
               </svg>
             </span>
             <span className="w-full relative text-[1rem] group-hover:pr-4 transition-all duration-400 text-center">
-              Create NFT
+              Mint NFT
             </span>
           </button>
         </div>
