@@ -9,56 +9,58 @@ import SearchAndFilterHeader from "@/components/ui/Header/SearchAndFilterHeader"
 import useCollectionsController from "../useCollectionsController";
 import { ListDisplayTypeEnum } from "../constants";
 
-
 const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
   const router = useRouter();
   const { name } = params;
-  
+
   const handleSeeDetail = (nftId: number) => {
     router.push(`/nft/${nftId}`);
   };
 
-  const collection: CollectionsObjectType | undefined = collectionsList.find((collection) => collection.title === name);
+  const collection: CollectionsObjectType | undefined = collectionsList.find(
+    (collection) => collection.title === name,
+  );
 
-  const { 
-    allNfts, 
-    filteredNfts, 
-    onChangeText, 
-    onFilterCategory, 
-    listType, 
-    onFilterListDisplayType 
+  const {
+    allNfts,
+    filteredNfts,
+    onChangeText,
+    onFilterCategory,
+    listType,
+    onFilterListDisplayType,
   } = useCollectionsController();
-  const items = !filteredNfts?.length ? allNfts : filteredNfts ;
+  const items = !filteredNfts?.length ? allNfts : filteredNfts;
 
-  return ( 
+  return (
     <div className="w-full h-full px-8 py-6 bg-custom-primaryBackground">
-
       <div className="flex flex-row gap-2 w-full">
         <div className="w-1/3">
           {collection && (
-            <Image 
-              src={collection?.baseImage} 
-              alt={collection?.title+"-image"}
-              width={420} 
-              height={280} 
-            //   apsectRatio={3/2}
+            <Image
+              src={collection?.baseImage}
+              alt={collection?.title + "-image"}
+              width={420}
+              height={280}
+              //   apsectRatio={3/2}
               className="aspect-auto"
-              style={{ borderRadius: '12px' }} 
+              style={{ borderRadius: "12px" }}
             />
           )}
         </div>
         <div className="w-2/3 text-gray-400 flex flex-col justify-between">
           <div className="pt-4">
             <p className="mb-2 text-page-title text-white">{name}</p>
-            <p>Created by 
-                <span className="font-semibold text-gray-300 ml-2">
+            <p>
+              Created by
+              <span className="font-semibold text-gray-300 ml-2">
                 {collection?.creator}
-                </span>
+              </span>
             </p>
-            <p>Address 
-                <span className="font-semibold text-gray-300 ml-2">
+            <p>
+              Address
+              <span className="font-semibold text-gray-300 ml-2">
                 {collection?.address}
-                </span>
+              </span>
             </p>
           </div>
 
@@ -74,13 +76,22 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
       </div>
 
       <div className="mt-20">
-        <SearchAndFilterHeader 
-          onChangeText={onChangeText} 
+        <SearchAndFilterHeader
+          onChangeText={onChangeText}
           itemLen={items.length}
-          onFilterCategory={onFilterCategory} 
+          onFilterCategory={onFilterCategory}
           listType={listType}
           onFilterListDisplayType={onFilterListDisplayType}
-          optionArray={["Football", "Cricket", "Tennis", "Badminton", "Sports", "Music", "Arts", "Others"]}
+          optionArray={[
+            "Football",
+            "Cricket",
+            "Tennis",
+            "Badminton",
+            "Sports",
+            "Music",
+            "Arts",
+            "Others",
+          ]}
         />
       </div>
 
@@ -95,7 +106,9 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
           ))}
         </div>
       ) : listType !== ListDisplayTypeEnum.ALL ? (
-        <div className={`mt-14 grid ${listType === ListDisplayTypeEnum.TILE ? "grid-cols-3" : "grid-cols-4"}  gap-8`}>
+        <div
+          className={`mt-14 grid ${listType === ListDisplayTypeEnum.TILE ? "grid-cols-3" : "grid-cols-4"}  gap-8`}
+        >
           {items.map((nft) => (
             <NFTCard
               key={`all-nft-${nft.id}`}
@@ -107,13 +120,15 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
       ) : null}
 
       <div className="w-full flex flex-row justify-center">
-        <button style={{ borderRadius: '8px' }}
-            className="px-6 py-2 my-14 bg-custom-purple text-white w-fit self-center">
-            Load More
+        <button
+          style={{ borderRadius: "8px" }}
+          className="px-6 py-2 my-14 bg-custom-purple text-white w-fit self-center"
+        >
+          Load More
         </button>
       </div>
     </div>
   );
-}
+};
 
 export default AllNftFromCollectionPage;

@@ -1,6 +1,6 @@
 export enum ListDisplayTypeEnum {
-    TILE = "tile",
-    LIST = "list",
-    GRID = "grid",
-    ALL = "all"
+  TILE = "tile",
+  LIST = "list",
+  GRID = "grid",
+  ALL = "all",
 }

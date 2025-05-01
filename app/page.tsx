@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Bell, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
-import dynamic from 'next/dynamic';
+import dynamic from "next/dynamic";
 import NFTCard from "@/components/ui/nft-card";
 import { nftCategory, recentActivity, trendingNFTs } from "./(dashboard)/Data";
 import Chip from "@/components/ui/Chip";
@@ -13,8 +13,10 @@ import CollectionsSection from "./(dashboard)/view/CollectionsSection";
 import NFTCardAlt from "@/components/ui/NFTCardAlt/NFTCardAlt";
 // import { ConnectButton } from "./(dashboard)/UtitlityComponent";
 
-const ConnectButtonNoSSR = dynamic(() => import('./(dashboard)/UtitlityComponent'), { ssr: false })
-
+const ConnectButtonNoSSR = dynamic(
+  () => import("./(dashboard)/UtitlityComponent"),
+  { ssr: false },
+);
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -25,16 +27,17 @@ export default function Home() {
     router.push(`/nft/${nftId}`);
   };
 
-  const { 
-    allNfts, 
-    filteredNfts, 
-    onFilterCategory, 
-    currentCategory, 
+  const {
+    allNfts,
+    filteredNfts,
+    onFilterCategory,
+    currentCategory,
     handleOnClickChip,
-    onClickConnectWallet
+    onClickConnectWallet,
   } = useDashboardController();
-  const items = !filteredNfts?.length ? allNfts.slice(0, 8) : filteredNfts.slice(0, 8);
-
+  const items = !filteredNfts?.length
+    ? allNfts.slice(0, 8)
+    : filteredNfts.slice(0, 8);
 
   return (
     <div className="p-8 bg-custom-primaryBackground pb-32">
@@ -49,13 +52,6 @@ export default function Home() {
           />
         </div>
         <div className="flex items-center gap-4">
-          {/* <button
-            className="px-6 py-2 border border-[#fffff] hover:border-[#3B9DF8] hover:bg-[#3B9DF8] 
-            transition duration-300 rounded text-white"
-            // onClick={onClickConnectWallet}
-          >
-            {address && address.length ? address : "Connect Wallet"}
-          </button> */}
           <ConnectButtonNoSSR onClickConnectWallet={onClickConnectWallet} />
           <button className="p-2 rounded-lg hover:bg-accent">
             <Bell className="w-5 h-5" color="white" />
@@ -76,9 +72,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div 
+          <div
             className="mb-4 bg-custom-secondaryBackground overflow-hidden p-6"
-            style={{ borderRadius: '10px' }}
+            style={{ borderRadius: "10px" }}
           >
             <div className="flex justify-between items-center mb-4 text-white">
               <h2 className="text-section-title">Trending For You 🔥</h2>
@@ -90,9 +86,9 @@ export default function Home() {
                   See all
                 </button>
               </Link> */}
-              <button 
+              <button
                 className="text-card-sub-title text-primary hover:underline"
-                onClick={() => router.push('/nft')}
+                onClick={() => router.push("/nft")}
               >
                 See all
               </button>
@@ -111,7 +107,7 @@ export default function Home() {
         </div>
 
         <div className="w-6/12 h-fit p-4 flex flex-col gap-6">
-          <div 
+          <div
             className="h-1/2 bg-custom-secondaryBackground text-white p-4"
             style={{ borderRadius: "12px" }}
           >
@@ -124,7 +120,7 @@ export default function Home() {
               Top up Balance
             </button>
           </div>
-          <div 
+          <div
             className="h-1/2 bg-custom-secondaryBackground text-white p-4"
             style={{ borderRadius: "12px" }}
           >
@@ -134,7 +130,9 @@ export default function Home() {
                 See all
               </button>
             </div>
-            {recentActivity.map(item => <ShortList item={item} key={"short-list"+item.id} />)}
+            {recentActivity.map((item) => (
+              <ShortList item={item} key={"short-list" + item.id} />
+            ))}
           </div>
         </div>
       </div>
@@ -144,27 +142,29 @@ export default function Home() {
           <div className="flex flex-row justify-between items-center">
             <div className="flex flex-row gap-2">
               {nftCategory.map((item, index) => (
-                <Chip 
-                  key={"chip-item-"+index}
+                <Chip
+                  key={"chip-item-" + index}
                   currentItem={currentCategory}
-                  item={item} 
-                  onClickChip={() => handleOnClickChip(item.tag)} 
-                  />
+                  item={item}
+                  onClickChip={() => handleOnClickChip(item.tag)}
+                />
               ))}
             </div>
 
-            <button 
+            <button
               className="text-card-sub-title text-primary hover:underline text-white mr-3"
-              onClick={() => router.push('/nft')}
+              onClick={() => router.push("/nft")}
             >
-                See all
-              </button>
+              See all
+            </button>
           </div>
-          <div 
+          <div
             className="bg-custom-secondaryBackground p-8 mt-4"
-            style={{ borderRadius: '12px' }}
+            style={{ borderRadius: "12px" }}
           >
-            <div className={`flex flex-row flex-wrap gap-8 {filteredNfts ? 'flex-start' : 'justify-around'}`}>
+            <div
+              className={`flex flex-row flex-wrap gap-8 {filteredNfts ? 'flex-start' : 'justify-around'}`}
+            >
               {items.map((nft) => (
                 <NFTCardAlt
                   key={`all-nft-${nft.id}`}

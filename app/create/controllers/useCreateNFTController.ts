@@ -2,19 +2,19 @@ import { useState } from "react";
 import { TraitType } from "../view/NFTInfoTypes";
 
 const useCreateNFTController = () => {
-  const [newNFTCollection, setNewNFTCollection] = useState('');
-  const [newNFTCollectionSymbol, setNewNFTCollectionSymbol] = useState('');
-  const [chainSelected, setChainSelected] = useState('');
-  const [nftName, setNFTName] = useState('');
-  const [nftDescription, setNFTDescription] = useState('');
-  const [nftSupply, setNFTSupply] = useState('');
-  const [nftPrice, setNFTPrice] = useState('');
-  const [nftImage, setNFTImage] = useState('');
-  const [nftURILink, setNFTURILink] = useState('');
-  const [currentNFTCollection, setCurrentNFTCollection] = useState('');
-  const [nftCategory, setNFTCategory] = useState('');
-  const [trait, setTrait] = useState('');
-  const [traitValue, setTraitValue] = useState('');
+  const [newNFTCollection, setNewNFTCollection] = useState("");
+  const [newNFTCollectionSymbol, setNewNFTCollectionSymbol] = useState("");
+  const [chainSelected, setChainSelected] = useState("");
+  const [nftName, setNFTName] = useState("");
+  const [nftDescription, setNFTDescription] = useState("");
+  const [nftSupply, setNFTSupply] = useState("");
+  const [nftPrice, setNFTPrice] = useState("");
+  const [nftImage, setNFTImage] = useState("");
+  const [nftURILink, setNFTURILink] = useState("");
+  const [currentNFTCollection, setCurrentNFTCollection] = useState("");
+  const [nftCategory, setNFTCategory] = useState("");
+  const [trait, setTrait] = useState("");
+  const [traitValue, setTraitValue] = useState("");
   const [nftTraits, setNFTtraits] = useState<TraitType[]>([]);
 
   // const onChangeNFTCollection = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,7 +24,7 @@ const useCreateNFTController = () => {
   const onChangeNFTCollection = (newValue: string) => {
     console.log(newValue);
     setNewNFTCollection(newValue);
-  }
+  };
 
   // const onChangeNFTCollectionSymbol = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setNewNFTCollectionSymbol(e.target.value.toUpperCase());
@@ -33,7 +33,7 @@ const useCreateNFTController = () => {
   const onChangeNFTCollectionSymbol = (newValue: string) => {
     console.log(newValue);
     setNewNFTCollectionSymbol(newValue);
-  }
+  };
 
   // const onChangeNFTName = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   console.log(e.target.value);
@@ -41,11 +41,13 @@ const useCreateNFTController = () => {
   // }
 
   const onChangeNFTName = (newValue: string) => {
-    console.log('onChangeNFTName: ', newValue);
+    console.log("onChangeNFTName: ", newValue);
     setNFTName(newValue);
-  }
+  };
 
-  const onChangeNFTDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeNFTDescription = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
     setNFTDescription(e.target.value);
   };
 
@@ -55,11 +57,11 @@ const useCreateNFTController = () => {
 
   const onChangeNFTSupply = (newValue: string) => {
     setNFTSupply(newValue);
-  }
+  };
 
-  const onChangeNFTPrice = (e: React.ChangeEvent<HTMLInputElement>) => {  
+  const onChangeNFTPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNFTPrice(e.target.value);
-  }
+  };
 
   // const onChangeNFTURILink = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   console.log(e.target.value);
@@ -68,35 +70,39 @@ const useCreateNFTController = () => {
 
   const onChangeNFTURILink = (newValue: string) => {
     setNFTURILink(newValue);
-  }
+  };
 
   const addNewTrait = () => {
     setTrait("");
     setTraitValue("");
     setNFTtraits([...nftTraits, { trait: "", value: "" }]);
-  }
+  };
 
-  const onEditTraitValue = (newValue: string, type: "trait" | "value", index: number) => { 
-    console.log('onEditTraitValue: ', index, type, newValue);
-    if(newValue && type) { 
-      console.log('inside')
+  const onEditTraitValue = (
+    newValue: string,
+    type: "trait" | "value",
+    index: number,
+  ) => {
+    console.log("onEditTraitValue: ", index, type, newValue);
+    if (newValue && type) {
+      console.log("inside");
       const existingTraits = [...nftTraits];
       const traitItem = existingTraits[index];
-      if(type === 'trait') {
-        existingTraits[index] = {...existingTraits[index], trait: newValue };
+      if (type === "trait") {
+        existingTraits[index] = { ...existingTraits[index], trait: newValue };
       } else {
-        existingTraits[index] = {...existingTraits[index], value: newValue }
+        existingTraits[index] = { ...existingTraits[index], value: newValue };
       }
       setNFTtraits(existingTraits);
     }
-  }
+  };
 
   const onRemoveTraitItem = (index: number) => {
     const newNFTTraits = nftTraits.filter((item, idx) => idx !== index);
     console.log("index: ", index, nftTraits.length, newNFTTraits.length);
     // const newNFTTraits = nftTraits.splice(index, 1);
     setNFTtraits(newNFTTraits);
-  }
+  };
 
   return {
     newNFTCollection,
@@ -123,7 +129,7 @@ const useCreateNFTController = () => {
     addNewTrait,
     onEditTraitValue,
     onRemoveTraitItem,
-  }
-}
+  };
+};
 
 export default useCreateNFTController;

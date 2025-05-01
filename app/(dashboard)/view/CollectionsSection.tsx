@@ -8,7 +8,7 @@ const CollectionsSection = () => {
   const router = useRouter();
 
   const handleSeeDetail = () => {
-    router.push('/collections');
+    router.push("/collections");
   };
 
   return (
@@ -17,7 +17,7 @@ const CollectionsSection = () => {
         <p className="text-section-title font-semibold text-white my-4">
           Popular Collections
         </p>
-        <button 
+        <button
           className="text-card-sub-title text-primary hover:underline"
           onClick={handleSeeDetail}
         >
@@ -27,15 +27,15 @@ const CollectionsSection = () => {
       <div className="w-full flex flex-row gap-10 overflow-x-scroll">
         {collectionsList.map((collection, index) => {
           return (
-            <NFTCollectionCard 
-              key={"collection-card-item"+index}
-              collection={collection} 
+            <NFTCollectionCard
+              key={"collection-card-item" + index}
+              collection={collection}
             />
           );
         })}
       </div>
     </div>
   );
-}
+};
 
 export default CollectionsSection;

@@ -1,36 +1,35 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const BottomBorderTab = ({
-    onChangeIndex
+  onChangeIndex,
 }: {
-    onChangeIndex?: (newIndex: number) => void,
+  onChangeIndex?: (newIndex: number) => void;
 }) => {
-
   const [isActive, setIsActive] = useState(1);
 
   useEffect(() => {
-    if(onChangeIndex) {
-        onChangeIndex(isActive);
+    if (onChangeIndex) {
+      onChangeIndex(isActive);
     }
   }, [isActive]);
 
   return (
-    <ul className='flex items-center gap-5'>
+    <ul className="flex items-center gap-5">
       <li
         className={`${
-          isActive === 1 && '!border-custom-purple !text-custom-white-alt'
+          isActive === 1 && "!border-custom-purple !text-custom-white-alt"
         } px-6 py-2 border-b  text-custom-white-alt transition duration-300 border-transparent cursor-pointer`}
         onClick={() => setIsActive(1)}
-      > 
+      >
         New NFT
       </li>
       <li
         className={`${
-          isActive === 2 && '!border-custom-purple !text-custom-white-alt'
+          isActive === 2 && "!border-custom-purple !text-custom-white-alt"
         } px-6 py-2 border-b  text-custom-white-alt transition duration-300 border-transparent cursor-pointer`}
         onClick={() => setIsActive(2)}
-      > 
+      >
         New Collection
       </li>
       {/* <li
@@ -43,4 +42,4 @@ const BottomBorderTab = ({
   );
 };
 
-export default BottomBorderTab; 
+export default BottomBorderTab;

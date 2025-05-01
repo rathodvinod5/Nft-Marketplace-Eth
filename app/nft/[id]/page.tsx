@@ -7,7 +7,7 @@ import { allNFTs } from "@/app/(dashboard)/Data";
 
 export default function NFTDetail({ params }: { params: { id: string } }) {
   const item = allNFTs.find((nft) => nft.id === Number(params.id));
-  if(!item) return null;
+  if (!item) return null;
 
   return (
     <div className="text-gray-50 bg-black">
@@ -54,10 +54,11 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
         {/* Right Column - Details */}
         <div className="space-y-6">
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-green-500 to-blue-600 
+            <h1
+              className="text-4xl font-bold bg-gradient-to-r from-green-500 to-blue-600 
               inline-block text-transparent bg-clip-text"
             >
-                {item.title}
+              {item.title}
             </h1>
 
             <div className="flex items-center gap-4">
@@ -149,9 +150,7 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
                 ].map((item) => (
                   <div key={item.label}>
                     <div className="text-xl font-bold">{item.value}</div>
-                    <div className="text-sm ">
-                      {item.label}
-                    </div>
+                    <div className="text-sm ">{item.label}</div>
                   </div>
                 ))}
               </div>
