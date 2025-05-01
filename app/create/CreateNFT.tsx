@@ -25,6 +25,8 @@ const CreateNewNFT = ({
     onEditTraitValue,
     onRemoveTraitItem,
     createNewNft,
+    userCollections,
+    onChangeCollectionSelected,
   } = useCreateNFTController();
   console.log("nftTraits: ", nftTraits);
 
@@ -44,7 +46,10 @@ const CreateNewNFT = ({
             Select a Collection *
           </label>
           <div className="flex flex-row gap-2 w-full">
-            <SingleSelect optionArray={AllCollections} />
+            <SingleSelect
+              optionArray={AllCollections}
+              onChangeOption={onChangeCollectionSelected}
+            />
             <div
               className="flex flex-row justify-center items-center cursor-pointer border 
                             border-solid border-gray-600 px-2"
@@ -110,7 +115,7 @@ const CreateNewNFT = ({
               type: "link",
               id: "nftURIlinkID",
               name: "nftURIlink",
-              placeholder: "https://demo.com/item/123",
+              placeholder: "https://abc",
               required: true,
             }}
           />
@@ -181,7 +186,7 @@ const CreateNewNFT = ({
             className="w-full relative inline-flex items-center px-8 py-2.5 overflow-hidden text-lg font-medium 
               text-primary border border-solid border-gray-600 rounded-full hover:text-white group
             hover:bg-custom-purple"
-            //onClick={createNewNft}
+            onClick={createNewNft}
           >
             <span
               className="absolute left-0 block w-full h-0 transition-all bg-primary opacity-100 
