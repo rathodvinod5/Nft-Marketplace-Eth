@@ -1,25 +1,7 @@
 import { useEffect, useState } from "react";
 import { TraitType } from "../view/NFTInfoTypes";
 import { useNFTContext } from "@/context/factorycontext";
-
-export type ErrorTypeObject = {
-  [key: string]: string | null;
-};
-
-const ErrorObjectMain: ErrorTypeObject = {
-  collection: null,
-  nftName: null,
-  nftDesc: null,
-  nftSupply: null,
-  nftPrice: null,
-  nftImage: null,
-  uriLink: null,
-  empty: null,
-};
-
-export type ErrorType = {
-  errorFor: keyof typeof ErrorObjectMain;
-};
+import { ErrorObjectMain, ErrorTypeObject } from "../types/Types";
 
 const useCreateNFTController = () => {
   const [newNFTCollection, setNewNFTCollection] = useState("");
@@ -39,9 +21,7 @@ const useCreateNFTController = () => {
   const [traitValue, setTraitValue] = useState("");
   const [nftTraits, setNFTtraits] = useState<TraitType[]>([]);
   const [userCollections, setUserCollections] = useState<any | null>(null);
-  const [errorObject, setErrorObject] = useState<ErrorTypeObject>(
-    structuredClone(ErrorObjectMain),
-  );
+  const [errorObject, setErrorObject] = useState<ErrorTypeObject | null>(null);
 
   const { createNewCollection, mintNewNFT, getUserCollections, wallet } =
     useNFTContext();
@@ -54,12 +34,12 @@ const useCreateNFTController = () => {
   }, []);
 
   const onChangeNFTCollection = (newValue: string) => {
-    console.log(newValue);
+    console.log("onChangeNFTCollection: ", newValue);
     setNewNFTCollection(newValue);
   };
 
   const onChangeNFTCollectionSymbol = (newValue: string) => {
-    console.log(newValue);
+    console.log("onChangeNFTCollectionSymbol: ", newValue);
     setNewNFTCollectionSymbol(newValue);
   };
 
@@ -119,34 +99,70 @@ const useCreateNFTController = () => {
   };
 
   const resetErrors = () => {
-    setErrorObject(structuredClone(ErrorObjectMain));
+    setErrorObject(null);
   };
 
   const validateAndGetAllDataForMintingNewNFT = () => {
-    const isAllFine = true;
+    let isAllFine = true;
+    let errorObject = structuredClone(ErrorObjectMain);
+
     if (!collectionSelected) {
-      errorObject.collection = "Please select a collection from list!";
+      isAllFine = false;
+      errorObject.collectionName = "Please select a collection from list!";
     }
     if (!nftName) {
+      isAllFine = false;
       errorObject.nftName = "Please enter a name for NFT!";
+    }
+    if (!nftURILink) {
+      isAllFine = false;
+      errorObject.nftName = "Please enter URI link!";
+    }
+    if (!isAllFine) {
+      setErrorObject(errorObject);
     }
     return isAllFine;
   };
 
-  const createAndGetURILinkFromIPFS = () => {
-    return "https://pinata/123";
+  const validateAndGetAllDataForCreatingNewCollection = () => {
+    let isAllFine = true;
+    let errorObject = structuredClone(ErrorObjectMain);
+
+    if (!newNFTCollection) {
+      isAllFine = false;
+      errorObject.collection = "Please enter a name for collection!";
+    }
+    if (!newNFTCollectionSymbol) {
+      isAllFine = false;
+      errorObject.nftName = "Please enter a symbol for collection!";
+    }
+    if (!isAllFine) {
+      setErrorObject(errorObject);
+    }
+
+    return isAllFine;
   };
 
-  const createNewNft = (collectionAddress: string, tokenURI: string) => {
+  const createNewNft = () => {
+    console.log("createNewNft");
+    const collectionAddress = collectionSelected;
     resetErrors();
-    if (validateAndGetAllDataForMintingNewNFT()) {
-      mintNewNFT(collectionAddress, tokenURI);
+    const status = validateAndGetAllDataForMintingNewNFT();
+    console.log("status: ", status);
+    if (status) {
+      const tokenURI = "";
+      mintNewNFT(collectionAddress!, tokenURI);
     }
   };
 
   const createCollection = () => {
+    console.log("createCollection");
     resetErrors();
-    createNewCollection(newNFTCollection, newNFTCollectionSymbol);
+    const status = validateAndGetAllDataForCreatingNewCollection();
+    console.log("status: ", status);
+    if (status) {
+      createNewCollection(newNFTCollection, newNFTCollectionSymbol);
+    }
   };
 
   const onChangeCollectionSelected = (currentCollectionSelected: string) => {
