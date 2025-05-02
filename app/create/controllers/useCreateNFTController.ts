@@ -34,12 +34,12 @@ const useCreateNFTController = () => {
   }, []);
 
   const onChangeNFTCollection = (newValue: string) => {
-    console.log(newValue);
+    console.log("onChangeNFTCollection: ", newValue);
     setNewNFTCollection(newValue);
   };
 
   const onChangeNFTCollectionSymbol = (newValue: string) => {
-    console.log(newValue);
+    console.log("onChangeNFTCollectionSymbol: ", newValue);
     setNewNFTCollectionSymbol(newValue);
   };
 
@@ -144,17 +144,23 @@ const useCreateNFTController = () => {
   };
 
   const createNewNft = () => {
+    console.log("createNewNft");
     const collectionAddress = collectionSelected;
     resetErrors();
-    if (validateAndGetAllDataForMintingNewNFT()) {
+    const status = validateAndGetAllDataForMintingNewNFT();
+    console.log("status: ", status);
+    if (status) {
       const tokenURI = "";
       mintNewNFT(collectionAddress!, tokenURI);
     }
   };
 
   const createCollection = () => {
+    console.log("createCollection");
     resetErrors();
-    if (validateAndGetAllDataForCreatingNewCollection()) {
+    const status = validateAndGetAllDataForCreatingNewCollection();
+    console.log("status: ", status);
+    if (status) {
       createNewCollection(newNFTCollection, newNFTCollectionSymbol);
     }
   };

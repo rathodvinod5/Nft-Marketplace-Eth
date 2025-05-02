@@ -21,57 +21,55 @@ const useMarketplaceContract = () => {
     functionName: "getAllListings",
   });
 
+  const { data: hash, writeContract } = useWriteContract();
   const listNewNFT = (
     collectionAddress: string,
     tokenId: number,
     price: string,
   ) => {
     // list new NFT to the market
-    const { data: hash, writeContract } = useWriteContract();
 
-    writeContract({
+    const hash = writeContract({
       address: marketplaceContractAddress,
       abi: MARKETPLACE_ABI.abi as Abi,
       functionName: "listNFT",
       args: [collectionAddress, tokenId, price],
     });
 
-    const { isLoading: isConfirming, isSuccess: isConfirmed } =
-      useWaitForTransactionReceipt({
-        hash,
-      });
+    // const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    //   useWaitForTransactionReceipt({
+    //     hash,
+    //   });
   };
 
   const buyNFT = (collectionAddress: string, tokenId: number) => {
     // buy NFT which are listed
-    const { data: hash, writeContract } = useWriteContract();
-
-    writeContract({
+    const hash = writeContract({
       address: marketplaceContractAddress,
       abi: MARKETPLACE_ABI.abi as Abi,
       functionName: "buyNFT",
       args: [collectionAddress, tokenId],
     });
 
-    const { isLoading: isConfirming, isSuccess: isConfirmed } =
-      useWaitForTransactionReceipt({
-        hash,
-      });
+    // const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    //   useWaitForTransactionReceipt({
+    //     hash,
+    //   });
   };
 
   const removeListing = (collectionAddress: string, tokenId: number) => {
     // remove the nft from listings
-    const { data: hash, writeContract } = useWriteContract();
+    // const { data: hash, writeContract } = useWriteContract();
 
-    writeContract({
+    const hash = writeContract({
       address: marketplaceContractAddress,
       abi: MARKETPLACE_ABI.abi as Abi,
       functionName: "removeListing",
       args: [collectionAddress, tokenId],
     });
 
-    const { isLoading: isConfirming, isSuccess: isConfirmed } =
-      useWaitForTransactionReceipt({ hash });
+    // const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    //   useWaitForTransactionReceipt({ hash });
   };
 
   const updateListingPrice = (
@@ -80,17 +78,17 @@ const useMarketplaceContract = () => {
     newPrice: string,
   ) => {
     // update the listing price
-    const { data: hash, writeContract } = useWriteContract();
+    // const { data: hash, writeContract } = useWriteContract();
 
-    writeContract({
+    const hash = writeContract({
       address: marketplaceContractAddress,
       abi: MARKETPLACE_ABI.abi as Abi,
       functionName: "updateListingPrice",
       args: [collectionAddress, tokenId, newPrice],
     });
 
-    const { isLoading: isConfirming, isSuccess: isConfirmed } =
-      useWaitForTransactionReceipt({ hash });
+    // const { isLoading: isConfirming, isSuccess: isConfirmed } =
+    //   useWaitForTransactionReceipt({ hash });
   };
 
   return {
