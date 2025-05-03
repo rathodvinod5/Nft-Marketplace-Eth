@@ -3,6 +3,7 @@ import { NFTCardType } from "../(dashboard)/Types";
 import { allNFTs } from "../(dashboard)/Data";
 import { ListDisplayTypeEnum } from "../collections/constants";
 import { list } from "postcss";
+import { useNFTContext } from "@/context/factorycontext";
 
 const useNftController = () => {
   const [allNfts, setAllNfts] = useState<NFTCardType[]>(allNFTs);
