@@ -2,9 +2,12 @@
 import React, { createContext, useContext, ReactNode } from "react";
 import { useAccount } from "wagmi";
 import useFactoryContract from "@/smart-contracts/hooks/useFactoryContract";
+import useMarketplaceContract from "@/smart-contracts/hooks/useMarketpaceContract";
 
 type NFTContextType = {
   wallet: `0x${string}` | undefined;
+
+  // factory contract
   allCollections: any[];
   // collectionsError: string,
   isPending: boolean;
@@ -15,6 +18,21 @@ type NFTContextType = {
   mintNewNFT: (collectionAddress: string, tokenURI: string) => void;
   getUserCollections: (userAddress: string) => void;
   getCollectionTokens: (collectionAddress: string) => void;
+
+  // marketplace contract
+  allListings: any | [];
+  listNewNFT: (
+    collectionAddress: string,
+    tokenId: number,
+    price: string,
+  ) => void;
+  buyNFT: (collectionAddress: string, tokenId: number) => void;
+  removeListing: (collectionAddress: string, tokenId: number) => void;
+  updateListingPrice: (
+    collectionAddress: string,
+    tokenId: number,
+    newPrice: string,
+  ) => void;
 };
 
 const NFTContext = createContext<NFTContextType | undefined>(undefined);
@@ -26,10 +44,11 @@ type NFTProviderProps = {
 export const NFTProvider = ({ children }: NFTProviderProps) => {
   const { address: wallet } = useAccount();
 
-  const dataObject = useFactoryContract();
+  const factory = useFactoryContract();
+  const marketplace = useMarketplaceContract();
 
   return (
-    <NFTContext.Provider value={{ wallet: wallet, ...dataObject }}>
+    <NFTContext.Provider value={{ wallet: wallet, ...factory, ...marketplace }}>
       {children}
     </NFTContext.Provider>
   );
