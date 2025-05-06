@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { useGetUserCollectionController } from "./helperhooks";
 
 const useFactoryContract = () => {
-  const [txHash, setTxHash] = useState<`0x${string}` | undefined>(undefined);
+  const [txHash, setTxHash] = useState<any | undefined>(undefined);
   const { address: wallet } = useAccount();
 
   const factoryContractAddress =
@@ -23,7 +23,7 @@ const useFactoryContract = () => {
     error: collectionsError,
     isPending: collectionsPending,
   } = useReadContract({
-    address: CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
+    address: factoryContractAddress,
     abi: FACTORY_ABI.abi as Abi,
     functionName: "getAllCollections",
   });
@@ -31,22 +31,23 @@ const useFactoryContract = () => {
   const { isLoading, isSuccess, isError } = useWaitForTransactionReceipt({
     hash: txHash,
   });
-
-  useEffect(() => {
-    console.log("write status: ", isLoading, isSuccess, isError, txHash);
-  }, [isLoading, isSuccess, isError, txHash]);
+  console.log("post status: ", isSuccess, isError);
+  // useEffect(() => {
+  //   console.log("write status: ", isLoading, isSuccess, isError, txHash);
+  // }, [isLoading, isSuccess, isError, txHash]);
 
   const { data: hash, writeContract } = useWriteContract();
-  const createNewCollection = (name: string, symbol: string) => {
+  const createNewCollection = async (name: string, symbol: string) => {
     console.log("createNewCollection: ", name, symbol);
 
-    const hash = writeContract({
+    const hash = await writeContract({
       address: factoryContractAddress,
       abi: FACTORY_ABI.abi as Abi,
       functionName: "createNewCollection",
       args: [name, symbol],
     });
     console.log("hash: ", hash);
+    setTxHash(hash);
 
     // const { isLoading: isConfirming, isSuccess: isConfirmed } =
     //   useWaitForTransactionReceipt({
@@ -96,7 +97,7 @@ const useFactoryContract = () => {
   };
 
   const createCollection = useWriteContract();
-
+  console.log("useFactoryContract: ", collections);
   return {
     allCollections: collections as any[],
     // collectionsError: collectionsError as string,

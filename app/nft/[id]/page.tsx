@@ -165,40 +165,37 @@ export default function NFTDetail({ params }: { params: { id: string } }) {
           </div> */}
           <div className="flex flex-row justify-center items-center gap-3">
             <button
-              className="px-8 py-3 border border-gray-400 relative shadow-lg before:absolute before:top-0 before:left-0 
-                before:w-0 before:h-0 before:border-l-[2px] before:border-t-[2px] 
-                before:border-transparent hover:before:w-full hover:before:h-full 
+              className="px-8 py-3 border border-gray-400 relative shadow-lg before:absolute 
+                before:top-0 before:left-0 before:w-0 before:h-0 before:border-l-[2px] 
+                before:border-t-[2px] before:border-transparent hover:before:w-full hover:before:h-full 
                 hover:before:border-primary hover:before:transition-all hover:before:duration-500 
-                after:border-r-[2px] after:border-b-[2px] after:border-transparent 
-                hover:after:border-primary after:absolute after:bottom-0 after:right-0 
-                after:w-0 after:h-0 hover:after:w-full hover:after:h-full hover:after:transition-all 
-                hover:after:duration-500"
+                after:border-r-[2px] after:border-b-[2px] after:border-transparent hover:after:border-primary 
+                after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0 hover:after:w-full 
+                hover:after:h-full hover:after:transition-all hover:after:duration-500"
               onClick={() => buyNFT("", 1)}
             >
               Buy NFT
             </button>
             <button
-              className="px-8 py-3 border border-gray-400 relative shadow-lg before:absolute before:top-0 before:left-0 
-              before:w-0 before:h-0 before:border-l-[2px] before:border-t-[2px] 
-              before:border-transparent hover:before:w-full hover:before:h-full 
-              hover:before:border-primary hover:before:transition-all hover:before:duration-500 
-              after:border-r-[2px] after:border-b-[2px] after:border-transparent 
-              hover:after:border-primary after:absolute after:bottom-0 after:right-0 
-              after:w-0 after:h-0 hover:after:w-full hover:after:h-full hover:after:transition-all 
-              hover:after:duration-500"
+              className="px-8 py-3 border border-gray-400 relative shadow-lg before:absolute 
+                before:top-0 before:left-0 before:w-0 before:h-0 before:border-l-[2px] 
+                before:border-t-[2px] before:border-transparent hover:before:w-full hover:before:h-full 
+                hover:before:border-primary hover:before:transition-all hover:before:duration-500 
+                after:border-r-[2px] after:border-b-[2px] after:border-transparent hover:after:border-primary 
+                after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0 hover:after:w-full 
+                hover:after:h-full hover:after:transition-all hover:after:duration-500"
               onClick={() => listNewNFT("", 1, "")}
             >
               List NFT
             </button>
             <button
-              className="px-8 py-3 border border-gray-400 relative shadow-lg before:absolute before:top-0 before:left-0 
-              before:w-0 before:h-0 before:border-l-[2px] before:border-t-[2px] 
-              before:border-transparent hover:before:w-full hover:before:h-full 
-              hover:before:border-primary hover:before:transition-all hover:before:duration-500 
-              after:border-r-[2px] after:border-b-[2px] after:border-transparent 
-              hover:after:border-primary after:absolute after:bottom-0 after:right-0 
-              after:w-0 after:h-0 hover:after:w-full hover:after:h-full hover:after:transition-all 
-              hover:after:duration-500"
+              className="px-8 py-3 border border-gray-400 relative shadow-lg before:absolute 
+                before:top-0 before:left-0 before:w-0 before:h-0 before:border-l-[2px] 
+                before:border-t-[2px] before:border-transparent hover:before:w-full hover:before:h-full 
+                hover:before:border-primary hover:before:transition-all hover:before:duration-500 
+                after:border-r-[2px] after:border-b-[2px] after:border-transparent hover:after:border-primary 
+                after:absolute after:bottom-0 after:right-0 after:w-0 after:h-0 hover:after:w-full 
+                hover:after:h-full hover:after:transition-all hover:after:duration-500"
               onClick={() => removeListing("", 1)}
             >
               List From Listing
