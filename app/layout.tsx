@@ -6,6 +6,7 @@ import ThemeProvider from "@/components/theme-provider";
 import Footer from "@/components/ui/Footer/Footer";
 import WalletProviderContext from "./wagmi/walletcontext";
 import { NFTProvider } from "@/context/factorycontext";
+// import { WagmiConfigProviders } from "@/context/wagmiConfigContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <WalletProviderContext>
+            {/* <WagmiConfigProviders> */}
             <NFTProvider>
               <div className="flex min-h-screen bg-background">
                 <Sidebar />
@@ -33,6 +35,7 @@ export default function RootLayout({
                 </main>
               </div>
             </NFTProvider>
+            {/* </WagmiConfigProviders> */}
           </WalletProviderContext>
         </ThemeProvider>
       </body>
