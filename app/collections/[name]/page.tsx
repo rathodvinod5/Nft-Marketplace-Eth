@@ -33,7 +33,7 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
 
   return (
     <div className="w-full h-full px-8 py-6 bg-custom-primaryBackground">
-      <div className="flex flex-row gap-2 w-full">
+      <div className="flex flex-row gap-2 w-full mt-12">
         <div className="w-1/3">
           {collection && (
             <Image
@@ -75,7 +75,7 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
         </div>
       </div>
 
-      <div className="mt-20">
+      <div className="mt-20 mb-16">
         <SearchAndFilterHeader
           onChangeText={onChangeText}
           itemLen={items.length}
@@ -95,8 +95,11 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
         />
       </div>
 
+      <p className="mb-8 text-xl font-semibold text-gray-200">
+        NFT's from {name}
+      </p>
       {listType === ListDisplayTypeEnum.LIST ? (
-        <div className="mt-14 flex flex-col gap-8">
+        <div className="flex flex-col gap-8">
           {items.map((nft) => (
             <NFTCard
               key={`all-nft-${nft.id}`}
@@ -107,7 +110,7 @@ const AllNftFromCollectionPage = ({ params }: { params: { name: string } }) => {
         </div>
       ) : listType !== ListDisplayTypeEnum.ALL ? (
         <div
-          className={`mt-14 grid ${listType === ListDisplayTypeEnum.TILE ? "grid-cols-3" : "grid-cols-4"}  gap-8`}
+          className={`grid ${listType === ListDisplayTypeEnum.TILE ? "grid-cols-3" : "grid-cols-4"}  gap-8`}
         >
           {items.map((nft) => (
             <NFTCard

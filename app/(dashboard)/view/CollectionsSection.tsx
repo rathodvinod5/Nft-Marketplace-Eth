@@ -14,7 +14,7 @@ const CollectionsSection = () => {
   return (
     <div className="w-full mt-16">
       <div className="flex flex-row justify-between items-center text-white">
-        <p className="text-section-title font-semibold text-white my-4">
+        <p className="text-section-title font-semibold text-white my-8">
           Popular Collections
         </p>
         <button
