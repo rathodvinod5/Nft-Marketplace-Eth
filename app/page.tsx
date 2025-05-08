@@ -159,7 +159,7 @@ export default function Home() {
             </button>
           </div>
           <div
-            className="bg-custom-secondaryBackground p-8 mt-4"
+            className="bg-custom-secondaryBackground p-8 mt-12"
             style={{ borderRadius: "12px" }}
           >
             <div
