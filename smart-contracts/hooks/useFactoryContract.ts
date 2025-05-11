@@ -1,8 +1,10 @@
 import {
+  type BaseError,
   useReadContract,
   useWriteContract,
   useWaitForTransactionReceipt,
   useAccount,
+  useSendTransaction,
 } from "wagmi";
 import { getPublicClient } from "wagmi/actions";
 import { Abi } from "viem";
@@ -20,23 +22,47 @@ const useFactoryContract = () => {
 
   const {
     data: collections,
-    error: collectionsError,
     isPending: collectionsPending,
+    error: collectionsError,
   } = useReadContract({
     address: factoryContractAddress,
     abi: FACTORY_ABI.abi as Abi,
     functionName: "getAllCollections",
   });
+  console.log(
+    "collections: ",
+    collections,
+    collectionsPending,
+    collectionsError,
+  );
 
-  const { isLoading, isSuccess, isError } = useWaitForTransactionReceipt({
-    hash: txHash,
+  const {
+    data: writeHash,
+    isPending: isWritePending,
+    isError: writeError,
+    writeContract,
+  } = useWriteContract();
+  console.log("write status: ", isWritePending, writeHash, writeError);
+
+  const {
+    isLoading: isConfirming,
+    isSuccess: isConfirmed,
+    // isError: receiptError,
+  } = useWaitForTransactionReceipt({
+    // hash: txHash,
+    hash: writeHash,
   });
-  console.log("post status: ", isSuccess, isError);
-  // useEffect(() => {
-  //   console.log("write status: ", isLoading, isSuccess, isError, txHash);
-  // }, [isLoading, isSuccess, isError, txHash]);
+  console.log("receipt status: ", isConfirming, isConfirmed);
 
-  const { data: hash, writeContract } = useWriteContract();
+  useEffect(() => {
+    console.log(
+      "useEffect: ",
+      collections,
+      collectionsPending,
+      collectionsError,
+    );
+  }, [collections, collectionsPending, collectionsError]);
+
   const createNewCollection = async (name: string, symbol: string) => {
     console.log("createNewCollection: ", name, symbol);
 
@@ -46,13 +72,8 @@ const useFactoryContract = () => {
       functionName: "createNewCollection",
       args: [name, symbol],
     });
-    console.log("hash: ", hash);
-    setTxHash(hash);
-
-    // const { isLoading: isConfirming, isSuccess: isConfirmed } =
-    //   useWaitForTransactionReceipt({
-    //     hash,
-    //   });
+    // console.log("hash: ", hash);
+    // setTxHash(hash);
   };
 
   const mintNewNFT = (collectionAddress: string, tokenURI: string) => {
@@ -75,25 +96,25 @@ const useFactoryContract = () => {
     return null;
   };
 
-  const useNFTReadController = (collectionAddress: string) => {
-    const {
-      data: collections,
-      isLoading,
-      isError,
-    } = useReadContract({
-      address: factoryContractAddress,
-      abi: FACTORY_ABI.abi as Abi,
-      functionName: "getCollectionTokens",
-      args: [collectionAddress],
-    });
+  // const useNFTReadController = (collectionAddress: string) => {
+  //   const {
+  //     data: collections,
+  //     isLoading,
+  //     isError,
+  //   } = useReadContract({
+  //     address: factoryContractAddress,
+  //     abi: FACTORY_ABI.abi as Abi,
+  //     functionName: "getCollectionTokens",
+  //     args: [collectionAddress],
+  //   });
 
-    return { collections, isLoading, isError };
-  };
+  //   return { collections, isLoading, isError };
+  // };
 
   const getCollectionTokens = (collectionAddress: string) => {
-    const { collections, isLoading, isError } =
-      useNFTReadController(collectionAddress);
-    console.log("collections: ", collections);
+    // const { collections, isLoading, isError } =
+    //   useNFTReadController(collectionAddress);
+    // console.log("collections: ", collections);
   };
 
   const createCollection = useWriteContract();
