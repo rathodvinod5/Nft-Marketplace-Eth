@@ -1,40 +1,46 @@
-// import { createConfig } from "wagmi";
-// import { foundry } from "viem/chains";
-// import { http } from "viem";
+// import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
+
+// import { http, createConfig } from "wagmi";
+// import { hardhat } from "wagmi/chains";
 // import { injected } from "wagmi/connectors";
 
-// // Create wagmi config for Anvil (Foundry)
 // export const wagmiConfig = createConfig({
-//   //   autoConnect: true,
 //   connectors: [
-//     injected(), // injected connector for MetaMask or other injected wallets
+//     injected(), // MetaMask or local wallet
 //   ],
-//   chains: [foundry],
+//   chains: [
+//     {
+//       ...hardhat,
+//       rpcUrls: {
+//         default: {
+//           http: ["http://127.0.0.1:8545"], // <- Anvil RPC
+//         },
+//       },
+//     },
+//   ],
 //   transports: {
-//     [foundry.id]: http(),
+//     [hardhat.id]: http("http://127.0.0.1:8545"),
 //   },
 // });
 
 // wagmiConfig.ts
-import { http, createConfig } from "wagmi";
-import { hardhat } from "wagmi/chains";
-import { injected } from "wagmi/connectors";
+import { sepolia } from "wagmi/chains";
+import { createConfig, http } from "wagmi";
+import { getDefaultWallets } from "@rainbow-me/rainbowkit";
+
+const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_ID!;
+const sepoliaRpcUrl = process.env.NEXT_PUBLIC_SEPOLIA_RPC_URL!;
+
+export const { wallets, connectors } = getDefaultWallets({
+  appName: "My NFT Marketplace",
+  projectId,
+});
 
 export const wagmiConfig = createConfig({
-  connectors: [
-    injected(), // MetaMask or local wallet
-  ],
-  chains: [
-    {
-      ...hardhat,
-      rpcUrls: {
-        default: {
-          http: ["http://127.0.0.1:8545"], // <- Anvil RPC
-        },
-      },
-    },
-  ],
+  connectors,
+  chains: [sepolia],
   transports: {
-    [hardhat.id]: http("http://127.0.0.1:8545"),
+    [sepolia.id]: http(sepoliaRpcUrl),
   },
+  ssr: true,
 });
