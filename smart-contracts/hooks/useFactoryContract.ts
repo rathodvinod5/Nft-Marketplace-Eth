@@ -22,6 +22,7 @@ const useFactoryContract = () => {
 
   const {
     data: collections,
+    isLoading: isCollectionsLoading,
     isPending: collectionsPending,
     error: collectionsError,
   } = useReadContract({
@@ -31,6 +32,7 @@ const useFactoryContract = () => {
   });
   console.log(
     "collections: ",
+    isCollectionsLoading,
     collections,
     collectionsPending,
     collectionsError,
@@ -120,6 +122,7 @@ const useFactoryContract = () => {
   const createCollection = useWriteContract();
   console.log("useFactoryContract: ", collections);
   return {
+    isCollectionsLoading: isCollectionsLoading as boolean,
     allCollections: collections as any[],
     // collectionsError: collectionsError as string,
     isPending: collectionsPending as boolean,
