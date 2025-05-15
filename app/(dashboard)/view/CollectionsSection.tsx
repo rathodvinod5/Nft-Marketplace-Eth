@@ -1,10 +1,13 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { collectionsList } from "../Data";
-import GradientBorderContainer from "@/components/ui/GradientBorder/gradient-border-cont";
+// import GradientBorderContainer from "@/components/ui/GradientBorder/gradient-border-cont";
 import NFTCollectionCard from "@/components/ui/NFTCollectionCard/NFTCollectionCard";
+import { FiLoader } from "react-icons/fi";
+import { useNFTContext } from "@/context/factorycontext";
 
 const CollectionsSection = () => {
+  const { isCollectionsLoading } = useNFTContext();
   const router = useRouter();
 
   const handleSeeDetail = () => {
@@ -12,8 +15,8 @@ const CollectionsSection = () => {
   };
 
   return (
-    <div className="w-full mt-16">
-      <div className="flex flex-row justify-between items-center text-white">
+    <div className="w-full mt-16 flex flex-col justify-center items-center">
+      <div className="w-full flex flex-row justify-between text-white">
         <p className="text-section-title font-semibold text-white my-8">
           Popular Collections
         </p>
@@ -24,16 +27,20 @@ const CollectionsSection = () => {
           See all
         </button>
       </div>
-      <div className="w-full flex flex-row gap-10 overflow-x-scroll">
-        {collectionsList.map((collection, index) => {
-          return (
-            <NFTCollectionCard
-              key={"collection-card-item" + index}
-              collection={collection}
-            />
-          );
-        })}
-      </div>
+      {isCollectionsLoading ? (
+        <FiLoader className="text-[2.8rem] animate-spin text-[#3B9DF8]" />
+      ) : (
+        <div className="w-full flex flex-row gap-10 overflow-x-scroll">
+          {collectionsList.map((collection, index) => {
+            return (
+              <NFTCollectionCard
+                key={"collection-card-item" + index}
+                collection={collection}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

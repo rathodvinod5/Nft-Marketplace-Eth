@@ -9,6 +9,7 @@ type NFTContextType = {
 
   // factory contract
   allCollections: any[];
+  isCollectionsLoading: boolean;
   // collectionsError: string,
   isPending: boolean;
   createNewCollection: (
