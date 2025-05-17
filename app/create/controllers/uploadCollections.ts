@@ -53,7 +53,14 @@ export async function uploadImageToIPFS(
   return `ipfs://${response.data.IpfsHash}`;
 }
 
-export async function uploadCollectionData(formData: FormData) {
+export async function uploadCollectionData(
+  formData: FormData,
+  {
+    name,
+    description,
+    external_url = "https://coolapes.xyz",
+  }: { name: string; description: string; external_url?: string },
+) {
   try {
     // Get the image file from FormData (Node.js form-data)
     const imageField = (formData as any)._streams?.find?.(
@@ -74,14 +81,15 @@ export async function uploadCollectionData(formData: FormData) {
     const imageCID = await uploadImageToIPFS(buffer, filename);
 
     const metadata: CollectionMetadata = {
-      name: "Cool Apes",
-      description: "A collection of cool apes",
+      name: name,
+      description: description,
       image: imageCID,
-      external_url: "https://coolapes.xyz",
+      external_url: external_url,
     };
 
     const metadataCID = await uploadMetadataToIPFS(metadata);
     console.log("✅ Metadata IPFS URI:", metadataCID);
+    return metadataCID;
   } catch (error) {
     console.error("❌ Upload failed:", error);
   }
