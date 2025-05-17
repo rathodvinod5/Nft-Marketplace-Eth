@@ -19,8 +19,17 @@ const CreateNewCollection = () => {
           Upload Image:
         </label>
         <div className="w-full h-full flex flex-col justify-center items-center border border-gray-600 rounded-xl">
-          <input type="file" id="imageUpload" name="imageUpload" />
+          <input
+            type="file"
+            accept="image/*"
+            id="imageUpload"
+            name="imageUpload"
+          />
         </div>
+        {/* <form onSubmit={handleSubmit}>
+          <input type="file" accept="image/*" onChange={handleChange} />
+          <button type="submit">Upload</button>
+        </form> */}
       </div>
       <div className="flex flex-col gap-4 w-2/3">
         <div className="w-full flex flex-col gap-4">
