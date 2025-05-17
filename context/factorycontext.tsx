@@ -15,6 +15,7 @@ type NFTContextType = {
   createNewCollection: (
     collectionName: string,
     collectionSymbol: string,
+    nftMetadata: string,
   ) => void;
   mintNewNFT: (collectionAddress: string, tokenURI: string) => void;
   getUserCollections: (userAddress: string) => void;

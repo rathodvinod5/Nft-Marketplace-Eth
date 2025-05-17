@@ -2,6 +2,8 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { TraitType } from "../view/NFTInfoTypes";
 import { useNFTContext } from "@/context/factorycontext";
 import { ErrorObjectMain, ErrorTypeObject } from "../types/Types";
+import { uploadCollectionData } from "./uploadCollections";
+import FormData from "form-data";
 
 const useCreateNFTController = () => {
   const [newNFTCollection, setNewNFTCollection] = useState("");
@@ -144,11 +146,20 @@ const useCreateNFTController = () => {
     return isAllFine;
   };
 
-  const createNewNft = () => {
+  const createNewNft = async () => {
     console.log("createNewNft");
     const collectionAddress = collectionSelected;
     resetErrors();
     const status = validateAndGetAllDataForMintingNewNFT();
+
+    const formData = new FormData();
+    formData.append("image", nftImage as any, (nftImage as File).name);
+    const nftMetadata = await uploadCollectionData(formData, {
+      name: nftName,
+      description: nftDescription,
+      external_url: "https://coolapes.xyz",
+    });
+
     console.log("status: ", status);
     if (status) {
       const tokenURI = "";
@@ -156,18 +167,26 @@ const useCreateNFTController = () => {
     }
   };
 
-  const createCollection = () => {
+  const createCollection = async () => {
     console.log("createCollection");
     resetErrors();
-
-    if (!nftImage) return;
-    const formData = new FormData();
-    formData.append("image", nftImage);
-
     const status = validateAndGetAllDataForCreatingNewCollection();
+
+    const formData = new FormData();
+    formData.append("image", nftImage as any, (nftImage as File).name);
+    const nftMetadata = await uploadCollectionData(formData, {
+      name: newNFTCollection,
+      description: nftDescription,
+      external_url: "https://coolapes.xyz",
+    });
+
     console.log("status: ", status);
-    if (status) {
-      createNewCollection(newNFTCollection, newNFTCollectionSymbol);
+    if (status && nftMetadata) {
+      createNewCollection(
+        newNFTCollection,
+        newNFTCollectionSymbol,
+        nftMetadata,
+      );
     }
   };
 

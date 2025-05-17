@@ -65,8 +65,12 @@ const useFactoryContract = () => {
     );
   }, [collections, collectionsPending, collectionsError]);
 
-  const createNewCollection = async (name: string, symbol: string) => {
-    console.log("createNewCollection: ", name, symbol);
+  const createNewCollection = async (
+    name: string,
+    symbol: string,
+    nftMetadata: string,
+  ) => {
+    console.log("createNewCollection: ", name, symbol, nftMetadata);
 
     const hash = await writeContract({
       address: factoryContractAddress,
