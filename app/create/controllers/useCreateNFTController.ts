@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { TraitType } from "../view/NFTInfoTypes";
 import { useNFTContext } from "@/context/factorycontext";
 import { ErrorObjectMain, ErrorTypeObject } from "../types/Types";
@@ -13,7 +13,8 @@ const useCreateNFTController = () => {
   const [nftDescription, setNFTDescription] = useState("");
   const [nftSupply, setNFTSupply] = useState("");
   const [nftPrice, setNFTPrice] = useState("");
-  const [nftImage, setNFTImage] = useState("");
+  const [nftImage, setNFTImage] = useState<File | null>(null);
+  // const [file, setFile] = useState<File | null>(null);
   const [nftURILink, setNFTURILink] = useState("");
   const [currentNFTCollection, setCurrentNFTCollection] = useState("");
   const [nftCategory, setNFTCategory] = useState("");
@@ -158,6 +159,11 @@ const useCreateNFTController = () => {
   const createCollection = () => {
     console.log("createCollection");
     resetErrors();
+
+    if (!nftImage) return;
+    const formData = new FormData();
+    formData.append("image", nftImage);
+
     const status = validateAndGetAllDataForCreatingNewCollection();
     console.log("status: ", status);
     if (status) {
@@ -167,6 +173,12 @@ const useCreateNFTController = () => {
 
   const onChangeCollectionSelected = (currentCollectionSelected: string) => {
     setCollectionSelected(currentCollectionSelected);
+  };
+
+  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setNFTImage(e.target.files[0]);
+    }
   };
 
   return {
@@ -195,6 +207,7 @@ const useCreateNFTController = () => {
     createCollection,
     onChangeCollectionSelected,
     errorObject,
+    handleChangeImage,
   };
 };
 
