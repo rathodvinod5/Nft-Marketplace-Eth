@@ -55,13 +55,14 @@ export async function uploadImageToIPFS(
   return `ipfs://${response.data.IpfsHash}`;
 }
 
-export async function uploadCollectionData() {
-// formData: FormData, //import("form-data"),
-// {
-//   name,
-//   description,
-//   external_url = "https://coolapes.xyz",
-// }: { name: string; description: string; external_url?: string },
+export async function uploadCollectionData(
+  formData: FormData, //import("form-data"),
+  {
+    name,
+    description,
+    external_url = "https://coolapes.xyz",
+  }: { name: string; description: string; external_url?: string },
+) {
   console.log("uploadCollectionData");
   try {
     console.log("uploadCollectionData");
@@ -78,23 +79,23 @@ export async function uploadCollectionData() {
     // const filePath = imageField.path;
     // const buffer = fs.readFileSync(filePath);
 
-    // const [filePath, buffer] = getBufferFromFormData(formData);
+    const [filePath, buffer] = getBufferFromFormData(formData);
 
     // Use the original filename or a fallback
-    // const filename = path.basename(filePath) || "image.png";
+    const filename = path.basename(filePath) || "image.png";
 
-    // const imageCID = await uploadImageToIPFS(buffer, filename);
+    const imageCID = await uploadImageToIPFS(buffer, filename);
 
-    // const metadata: CollectionMetadata = {
-    //   name: name,
-    //   description: description,
-    //   image: imageCID,
-    //   external_url: external_url,
-    // };
+    const metadata: CollectionMetadata = {
+      name: name,
+      description: description,
+      image: imageCID,
+      external_url: external_url,
+    };
 
-    // const metadataCID = await uploadMetadataToIPFS(metadata);
-    // console.log("✅ Metadata IPFS URI:", metadataCID);
-    return "";
+    const metadataCID = await uploadMetadataToIPFS(metadata);
+    console.log("✅ Metadata IPFS URI:", metadataCID);
+    return metadataCID;
   } catch (error) {
     console.error("❌ Upload failed:", error);
   }

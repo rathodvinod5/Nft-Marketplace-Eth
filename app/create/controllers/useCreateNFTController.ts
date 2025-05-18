@@ -181,13 +181,11 @@ const useCreateNFTController = () => {
       const formData = new FormData();
       formData.append("image", nftImage as any, (nftImage as File).name);
       console.log("calling uploadCollectionData");
-      const collectionMetadata =
-        await uploadCollectionData();
-        //   formData, {
-        //   name: newNFTCollection,
-        //   description: nftDescription,
-        //   external_url: "https://coolapes.xyz",
-        // }
+      const collectionMetadata = await uploadCollectionData(formData, {
+        name: newNFTCollection,
+        description: nftDescription,
+        external_url: "https://coolapes.xyz",
+      });
       console.log("collectionMetadata: ", collectionMetadata);
       if (!collectionMetadata) return;
       //   createNewCollection(
