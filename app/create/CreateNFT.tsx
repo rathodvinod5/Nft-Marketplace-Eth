@@ -28,7 +28,7 @@ const CreateNewNFT = ({
     userCollections,
     onChangeCollectionSelected,
   } = useCreateNFTController();
-  console.log("nftTraits: ", nftTraits);
+  // console.log("nftTraits: ", nftTraits);
 
   return (
     <div className="flex flex-row gap-5 p-5">

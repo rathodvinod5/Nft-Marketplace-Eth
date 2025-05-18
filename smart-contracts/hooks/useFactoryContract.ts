@@ -30,13 +30,13 @@ const useFactoryContract = () => {
     abi: FACTORY_ABI.abi as Abi,
     functionName: "getAllCollections",
   });
-  console.log(
-    "collections: ",
-    isCollectionsLoading,
-    collections,
-    collectionsPending,
-    collectionsError,
-  );
+  // console.log(
+  //   "collections: ",
+  //   isCollectionsLoading,
+  //   collections,
+  //   collectionsPending,
+  //   collectionsError,
+  // );
 
   const {
     data: writeHash,
@@ -44,7 +44,7 @@ const useFactoryContract = () => {
     isError: writeError,
     writeContract,
   } = useWriteContract();
-  console.log("write status: ", isWritePending, writeHash, writeError);
+  // console.log("write status: ", isWritePending, writeHash, writeError);
 
   const {
     isLoading: isConfirming,
@@ -54,16 +54,16 @@ const useFactoryContract = () => {
     // hash: txHash,
     hash: writeHash,
   });
-  console.log("receipt status: ", isConfirming, isConfirmed);
+  // console.log("receipt status: ", isConfirming, isConfirmed);
 
-  useEffect(() => {
-    console.log(
-      "useEffect: ",
-      collections,
-      collectionsPending,
-      collectionsError,
-    );
-  }, [collections, collectionsPending, collectionsError]);
+  // useEffect(() => {
+  //   console.log(
+  //     "useEffect: ",
+  //     collections,
+  //     collectionsPending,
+  //     collectionsError,
+  //   );
+  // }, [collections, collectionsPending, collectionsError]);
 
   const createNewCollection = async (
     name: string,
@@ -78,8 +78,6 @@ const useFactoryContract = () => {
       functionName: "createNewCollection",
       args: [name, symbol],
     });
-    // console.log("hash: ", hash);
-    // setTxHash(hash);
   };
 
   const mintNewNFT = (collectionAddress: string, tokenURI: string) => {
@@ -102,21 +100,6 @@ const useFactoryContract = () => {
     return null;
   };
 
-  // const useNFTReadController = (collectionAddress: string) => {
-  //   const {
-  //     data: collections,
-  //     isLoading,
-  //     isError,
-  //   } = useReadContract({
-  //     address: factoryContractAddress,
-  //     abi: FACTORY_ABI.abi as Abi,
-  //     functionName: "getCollectionTokens",
-  //     args: [collectionAddress],
-  //   });
-
-  //   return { collections, isLoading, isError };
-  // };
-
   const getCollectionTokens = (collectionAddress: string) => {
     // const { collections, isLoading, isError } =
     //   useNFTReadController(collectionAddress);
@@ -124,7 +107,7 @@ const useFactoryContract = () => {
   };
 
   const createCollection = useWriteContract();
-  console.log("useFactoryContract: ", collections);
+  // console.log("useFactoryContract: ", collections);
   return {
     isCollectionsLoading: isCollectionsLoading as boolean,
     allCollections: collections as any[],
