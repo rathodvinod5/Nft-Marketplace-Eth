@@ -10,6 +10,7 @@ const CreateNewCollection = () => {
     newNFTCollectionSymbol,
     onChangeNFTCollectionSymbol,
     createCollection,
+    handleChangeImage,
   } = useCreateNFTController();
 
   return (
@@ -24,6 +25,7 @@ const CreateNewCollection = () => {
             accept="image/*"
             id="imageUpload"
             name="imageUpload"
+            onChange={handleChangeImage}
           />
         </div>
         {/* <form onSubmit={handleSubmit}>

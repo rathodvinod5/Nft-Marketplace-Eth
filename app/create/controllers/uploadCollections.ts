@@ -1,7 +1,9 @@
+"use server";
 import axios from "axios";
 import FormData from "form-data";
 import fs from "fs";
 import path from "path";
+import { getBufferFromFormData } from "./handleBuffer";
 
 const PINATA_API_KEY = process.env.PINATA_API_KEY!;
 const PINATA_API_SECRET = process.env.PINATA_API_SECRET!;
@@ -53,43 +55,46 @@ export async function uploadImageToIPFS(
   return `ipfs://${response.data.IpfsHash}`;
 }
 
-export async function uploadCollectionData(
-  formData: FormData,
-  {
-    name,
-    description,
-    external_url = "https://coolapes.xyz",
-  }: { name: string; description: string; external_url?: string },
-) {
+export async function uploadCollectionData() {
+// formData: FormData, //import("form-data"),
+// {
+//   name,
+//   description,
+//   external_url = "https://coolapes.xyz",
+// }: { name: string; description: string; external_url?: string },
+  console.log("uploadCollectionData");
   try {
-    // Get the image file from FormData (Node.js form-data)
-    const imageField = (formData as any)._streams?.find?.(
-      (stream: any) =>
-        typeof stream === "object" && stream.hasOwnProperty("path"),
-    );
-    if (!imageField) {
-      throw new Error("Image file not found in form data");
-    }
+    console.log("uploadCollectionData");
+    // // Get the image file from FormData (Node.js form-data)
+    // const imageField = (formData as any)._streams?.find?.(
+    //   (stream: any) =>
+    //     typeof stream === "object" && stream.hasOwnProperty("path"),
+    // );
+    // if (!imageField) {
+    //   throw new Error("Image file not found in form data");
+    // }
 
-    // Read the file as Buffer
-    const filePath = imageField.path;
-    const buffer = fs.readFileSync(filePath);
+    // // Read the file as Buffer
+    // const filePath = imageField.path;
+    // const buffer = fs.readFileSync(filePath);
+
+    // const [filePath, buffer] = getBufferFromFormData(formData);
 
     // Use the original filename or a fallback
-    const filename = path.basename(filePath) || "image.png";
+    // const filename = path.basename(filePath) || "image.png";
 
-    const imageCID = await uploadImageToIPFS(buffer, filename);
+    // const imageCID = await uploadImageToIPFS(buffer, filename);
 
-    const metadata: CollectionMetadata = {
-      name: name,
-      description: description,
-      image: imageCID,
-      external_url: external_url,
-    };
+    // const metadata: CollectionMetadata = {
+    //   name: name,
+    //   description: description,
+    //   image: imageCID,
+    //   external_url: external_url,
+    // };
 
-    const metadataCID = await uploadMetadataToIPFS(metadata);
-    console.log("✅ Metadata IPFS URI:", metadataCID);
-    return metadataCID;
+    // const metadataCID = await uploadMetadataToIPFS(metadata);
+    // console.log("✅ Metadata IPFS URI:", metadataCID);
+    return "";
   } catch (error) {
     console.error("❌ Upload failed:", error);
   }

@@ -32,22 +32,22 @@ const useCreateNFTController = () => {
   // should run only one time to get the list collection user has created
   useEffect(() => {
     const collections = getUserCollections(`0x${wallet}`);
-    console.log("user collections: ", collections);
+    // console.log("user collections: ", collections);
     setUserCollections(userCollections);
   }, []);
 
   const onChangeNFTCollection = (newValue: string) => {
-    console.log("onChangeNFTCollection: ", newValue);
+    // console.log("onChangeNFTCollection: ", newValue);
     setNewNFTCollection(newValue);
   };
 
   const onChangeNFTCollectionSymbol = (newValue: string) => {
-    console.log("onChangeNFTCollectionSymbol: ", newValue);
+    // console.log("onChangeNFTCollectionSymbol: ", newValue);
     setNewNFTCollectionSymbol(newValue);
   };
 
   const onChangeNFTName = (newValue: string) => {
-    console.log("onChangeNFTName: ", newValue);
+    // console.log("onChangeNFTName: ", newValue);
     setNFTName(newValue);
   };
 
@@ -153,14 +153,16 @@ const useCreateNFTController = () => {
     const status = validateAndGetAllDataForMintingNewNFT();
 
     const formData = new FormData();
-    formData.append("image", nftImage as any, (nftImage as File).name);
+    if (nftImage) {
+      formData.append("image", nftImage, nftImage.name);
+    }
     const nftMetadata = await uploadCollectionData(formData, {
       name: nftName,
       description: nftDescription,
       external_url: "https://coolapes.xyz",
     });
 
-    console.log("status: ", status);
+    console.log("status: ", status, nftMetadata);
     if (status) {
       const tokenURI = "";
       mintNewNFT(collectionAddress!, tokenURI);
@@ -171,22 +173,30 @@ const useCreateNFTController = () => {
     console.log("createCollection");
     resetErrors();
     const status = validateAndGetAllDataForCreatingNewCollection();
+    console.log("nftImage: ", nftImage);
+    if (!status || !nftImage) return;
 
-    const formData = new FormData();
-    formData.append("image", nftImage as any, (nftImage as File).name);
-    const nftMetadata = await uploadCollectionData(formData, {
-      name: newNFTCollection,
-      description: nftDescription,
-      external_url: "https://coolapes.xyz",
-    });
-
-    console.log("status: ", status);
-    if (status && nftMetadata) {
-      createNewCollection(
-        newNFTCollection,
-        newNFTCollectionSymbol,
-        nftMetadata,
-      );
+    console.log("after if");
+    try {
+      const formData = new FormData();
+      formData.append("image", nftImage as any, (nftImage as File).name);
+      console.log("calling uploadCollectionData");
+      const collectionMetadata =
+        await uploadCollectionData();
+        //   formData, {
+        //   name: newNFTCollection,
+        //   description: nftDescription,
+        //   external_url: "https://coolapes.xyz",
+        // }
+      console.log("collectionMetadata: ", collectionMetadata);
+      if (!collectionMetadata) return;
+      //   createNewCollection(
+      //     newNFTCollection,
+      //     newNFTCollectionSymbol,
+      //     collectionMetadata,
+      //   );
+    } catch (error) {
+      console.error("Error calling uploadCollectionData: ", error);
     }
   };
 
