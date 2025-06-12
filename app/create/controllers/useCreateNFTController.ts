@@ -2,8 +2,16 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { TraitType } from "../view/NFTInfoTypes";
 import { useNFTContext } from "@/context/factorycontext";
 import { ErrorObjectMain, ErrorTypeObject } from "../types/Types";
-import { uploadCollectionData } from "./uploadCollections";
+import {
+  CollectionMetadata,
+  uploadCollectionData,
+  uploadImageToIPFS,
+  uploadMetadataToIPFS,
+} from "./uploadCollections";
 import FormData from "form-data";
+import { getBufferFromFormData } from "./handleBuffer";
+
+import path from "path";
 
 const useCreateNFTController = () => {
   const [newNFTCollection, setNewNFTCollection] = useState("");
@@ -176,23 +184,45 @@ const useCreateNFTController = () => {
     console.log("nftImage: ", nftImage);
     if (!status || !nftImage) return;
 
-    console.log("after if");
     try {
-      const formData = new FormData();
-      formData.append("image", nftImage as any, (nftImage as File).name);
-      console.log("calling uploadCollectionData");
-      const collectionMetadata = await uploadCollectionData(formData, {
-        name: newNFTCollection,
-        description: nftDescription,
-        external_url: "https://coolapes.xyz",
-      });
-      console.log("collectionMetadata: ", collectionMetadata);
-      if (!collectionMetadata) return;
+      console.log("after if");
+      // const formData = new FormData();
+      // formData.append("image", nftImage as any, (nftImage as File).name);
+      // console.log("calling uploadCollectionData");
+      // const collectionMetadata = await uploadCollectionData(formData, {
+      //   name: newNFTCollection,
+      //   description: nftDescription,
+      //   external_url: "https://coolapes.xyz",
+      // });
+      // console.log("collectionMetadata: ", collectionMetadata);
+      // if (!collectionMetadata) return;
       //   createNewCollection(
       //     newNFTCollection,
       //     newNFTCollectionSymbol,
       //     collectionMetadata,
       //   );
+
+      if (!nftImage) return;
+
+      const formData = new FormData();
+      formData.append("image", nftImage);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      console.log("IPFS hash:", data.IpfsHash);
+
+      const metadata: CollectionMetadata = {
+        name: newNFTCollection,
+        description: nftDescription,
+        image: data.IpfsHash,
+        external_url: "https://coolapes.xyz",
+      };
+      const metadataCID = await uploadMetadataToIPFS(metadata);
+      console.log("✅ Metadata IPFS URI:", metadataCID);
     } catch (error) {
       console.error("Error calling uploadCollectionData: ", error);
     }

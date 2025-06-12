@@ -63,9 +63,8 @@ export async function uploadCollectionData(
     external_url = "https://coolapes.xyz",
   }: { name: string; description: string; external_url?: string },
 ) {
-  console.log("uploadCollectionData");
+  console.log("in uploadCollectionData");
   try {
-    console.log("uploadCollectionData");
     // // Get the image file from FormData (Node.js form-data)
     // const imageField = (formData as any)._streams?.find?.(
     //   (stream: any) =>
@@ -96,7 +95,10 @@ export async function uploadCollectionData(
     const metadataCID = await uploadMetadataToIPFS(metadata);
     console.log("✅ Metadata IPFS URI:", metadataCID);
     return metadataCID;
+
+    // await uploadMetadataToIPFS(metadata);
   } catch (error) {
     console.error("❌ Upload failed:", error);
+    return null;
   }
 }
