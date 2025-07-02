@@ -48,7 +48,7 @@ export const NFTProvider = ({ children }: NFTProviderProps) => {
 
   const factory = useFactoryContract();
   const marketplace = useMarketplaceContract();
-  // console.log("factory: ", factory);
+  console.log("factory: ", factory.allCollections);
   return (
     <NFTContext.Provider value={{ wallet: wallet, ...factory, ...marketplace }}>
       {children}

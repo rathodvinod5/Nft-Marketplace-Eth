@@ -21,7 +21,10 @@ export default async function handler(
       const form = formidable({ multiples: false });
 
       form.parse(req, async (err, fields, files) => {
-        if (err) return reject(err);
+        if (err) {
+          console.log("Error parsing form: ", err);
+          return reject(err);
+        }
 
         const file = files.image;
         if (!file || Array.isArray(file)) return reject("No image file found");
