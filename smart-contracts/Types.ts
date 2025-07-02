@@ -6,3 +6,10 @@ export type ReturnObjectType = {
   functionName: string;
   args?: any[] | undefined;
 };
+
+export type CollectionMetadata = {
+  name: string;
+  description: string;
+  image: string; // IPFS URI
+  external_url?: string;
+};

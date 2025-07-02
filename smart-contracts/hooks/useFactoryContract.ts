@@ -30,13 +30,6 @@ const useFactoryContract = () => {
     abi: FACTORY_ABI.abi as Abi,
     functionName: "getAllCollections",
   });
-  // console.log(
-  //   "collections: ",
-  //   isCollectionsLoading,
-  //   collections,
-  //   collectionsPending,
-  //   collectionsError,
-  // );
 
   const {
     data: writeHash,
@@ -49,21 +42,12 @@ const useFactoryContract = () => {
   const {
     isLoading: isConfirming,
     isSuccess: isConfirmed,
-    // isError: receiptError,
+    isError: isReceiptError,
   } = useWaitForTransactionReceipt({
     // hash: txHash,
     hash: writeHash,
   });
   // console.log("receipt status: ", isConfirming, isConfirmed);
-
-  // useEffect(() => {
-  //   console.log(
-  //     "useEffect: ",
-  //     collections,
-  //     collectionsPending,
-  //     collectionsError,
-  //   );
-  // }, [collections, collectionsPending, collectionsError]);
 
   const createNewCollection = async (
     name: string,
@@ -72,7 +56,7 @@ const useFactoryContract = () => {
   ) => {
     console.log("createNewCollection: ", name, symbol, nftMetadata);
 
-    const hash = await writeContract({
+    writeContract({
       address: factoryContractAddress,
       abi: FACTORY_ABI.abi as Abi,
       functionName: "createNewCollection",

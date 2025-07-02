@@ -1,25 +1,15 @@
 "use server";
 import axios from "axios";
 import FormData from "form-data";
-import fs from "fs";
 import path from "path";
 import { getBufferFromFormData } from "./handleBuffer";
+import { CollectionMetadata } from "@/smart-contracts/Types";
 
 const PINATA_API_KEY = process.env.PINATA_API_KEY!;
 const PINATA_API_SECRET = process.env.PINATA_API_SECRET!;
 
-// import { uploadMetadataToIPFS, CollectionMetadata } from "./pinata";
-
-export interface CollectionMetadata {
-  name: string;
-  description: string;
-  image: string; // IPFS URI
-  external_url?: string;
-}
-
-export async function uploadMetadataToIPFS(
-  metadata: CollectionMetadata,
-): Promise<string> {
+export async function uploadMetadataToIPFS<T>(metadata: T): Promise<string> {
+  console.log("uploadMetadataToIPFS: ", metadata);
   const url = `https://api.pinata.cloud/pinning/pinJSONToIPFS`;
 
   const response = await axios.post(url, metadata, {
@@ -38,6 +28,7 @@ export async function uploadImageToIPFS(
   buffer: Buffer,
   filename: string,
 ): Promise<string> {
+  console.log("uploadImageToIPFS: ");
   const url = `https://api.pinata.cloud/pinning/pinFileToIPFS`;
 
   const data = new FormData();
