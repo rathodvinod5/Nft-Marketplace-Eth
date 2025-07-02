@@ -3,6 +3,7 @@ import React, { createContext, useContext, ReactNode } from "react";
 import { useAccount } from "wagmi";
 import useFactoryContract from "@/smart-contracts/hooks/useFactoryContract";
 import useMarketplaceContract from "@/smart-contracts/hooks/useMarketpaceContract";
+import { ReadContractErrorType } from "viem";
 
 type NFTContextType = {
   wallet: `0x${string}` | undefined;
@@ -10,8 +11,15 @@ type NFTContextType = {
   // factory contract
   allCollections: any[];
   isCollectionsLoading: boolean;
-  // collectionsError: string,
+  collectionsError: ReadContractErrorType | null;
   isPending: boolean;
+
+  isWritePending: boolean;
+  writeError: boolean;
+  isConfirming: boolean;
+  isConfirmed: boolean;
+  isReceiptError: boolean;
+
   createNewCollection: (
     collectionName: string,
     collectionSymbol: string,

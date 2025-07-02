@@ -1,3 +1,8 @@
+import {
+  CollectionMetadataType,
+  NftMetadataType,
+} from "@/smart-contracts/Types";
+
 export type ChainTypes =
   | "ethereum"
   | "solana"
@@ -29,4 +34,11 @@ export const ErrorObjectMain: ErrorTypeObject = {
 
 export type ErrorType = {
   errorFor: keyof typeof ErrorObjectMain;
+};
+
+export type PinataMetaDataType<T> = {
+  pinataMetadata: {
+    name: string;
+  };
+  pinataContent: T;
 };

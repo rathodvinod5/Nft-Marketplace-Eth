@@ -95,8 +95,15 @@ const useFactoryContract = () => {
   return {
     isCollectionsLoading: isCollectionsLoading as boolean,
     allCollections: collections as any[],
-    // collectionsError: collectionsError as string,
+    collectionsError: collectionsError,
     isPending: collectionsPending as boolean,
+
+    isWritePending,
+    writeError,
+    isConfirming,
+    isConfirmed,
+    isReceiptError,
+
     createNewCollection: createNewCollection,
     mintNewNFT: mintNewNFT,
     getUserCollections: getUserCollections,
