@@ -8,10 +8,10 @@ import {
   uploadImageToIPFS,
   uploadMetadataToIPFS,
 } from "./uploadCollections";
-import FormData from "form-data";
-import { getBufferFromFormData } from "./handleBuffer";
+// import FormData from "form-data";
+// import { getBufferFromFormData } from "./handleBuffer";
 
-import path from "path";
+// import path from "path";
 
 const useCreateNFTController = () => {
   const [newNFTCollection, setNewNFTCollection] = useState("");
@@ -160,7 +160,9 @@ const useCreateNFTController = () => {
     resetErrors();
     const status = validateAndGetAllDataForMintingNewNFT();
 
-    const formData = new FormData();
+    // Use Node.js form-data package for uploadCollectionData
+    const FormDataNode = (await import("form-data")).default;
+    const formData = new FormDataNode();
     if (nftImage) {
       formData.append("image", nftImage, nftImage.name);
     }
@@ -185,7 +187,7 @@ const useCreateNFTController = () => {
     if (!status || !nftImage) return;
 
     try {
-      console.log("after if");
+      console.log("before if: ", !nftImage);
       // const formData = new FormData();
       // formData.append("image", nftImage as any, (nftImage as File).name);
       // console.log("calling uploadCollectionData");
@@ -203,15 +205,16 @@ const useCreateNFTController = () => {
       //   );
 
       if (!nftImage) return;
+      console.log("after if: ");
 
-      const formData = new FormData();
-      formData.append("image", nftImage);
+      const formData = new window.FormData();
+      formData.append("file", nftImage);
 
       const res = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
-
+      console.log("res: ", res);
       const data = await res.json();
       console.log("IPFS hash:", data.IpfsHash);
 
