@@ -1,17 +1,17 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { TraitType } from "../view/NFTInfoTypes";
 import { useNFTContext } from "@/context/factorycontext";
-import { ErrorObjectMain, ErrorTypeObject } from "../types/Types";
 import {
-  CollectionMetadata,
-  uploadCollectionData,
-  uploadImageToIPFS,
-  uploadMetadataToIPFS,
-} from "./uploadCollections";
-// import FormData from "form-data";
-// import { getBufferFromFormData } from "./handleBuffer";
-
-// import path from "path";
+  ErrorObjectMain,
+  ErrorTypeObject,
+  PinataMetaDataType,
+} from "../types/Types";
+import { uploadMetadataToIPFS } from "./uploadCollections";
+import {
+  CollectionMetadataType,
+  NftMetadataType,
+} from "@/smart-contracts/Types";
+import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
 
 const useCreateNFTController = () => {
   const [newNFTCollection, setNewNFTCollection] = useState("");
@@ -26,6 +26,7 @@ const useCreateNFTController = () => {
   const [nftImage, setNFTImage] = useState<File | null>(null);
   // const [file, setFile] = useState<File | null>(null);
   const [nftURILink, setNFTURILink] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
   const [currentNFTCollection, setCurrentNFTCollection] = useState("");
   const [nftCategory, setNFTCategory] = useState("");
   const [trait, setTrait] = useState("");
@@ -37,25 +38,56 @@ const useCreateNFTController = () => {
   const { createNewCollection, mintNewNFT, getUserCollections, wallet } =
     useNFTContext();
 
+  const {
+    data: writeHash,
+    isPending: isWritePending,
+    isError: writeError,
+    writeContract,
+  } = useWriteContract();
+
+  const {
+    isLoading: isConfirming,
+    isSuccess: isConfirmed,
+    isError: isReceiptError,
+  } = useWaitForTransactionReceipt({
+    // hash: txHash,
+    hash: writeHash,
+  });
+
+  useEffect(() => {
+    console.log(
+      "write status: ",
+      writeHash,
+      isWritePending,
+      writeError,
+      isConfirming,
+      isConfirmed,
+      isReceiptError,
+    );
+  }, [
+    writeHash,
+    isWritePending,
+    writeError,
+    isConfirming,
+    isConfirmed,
+    isReceiptError,
+  ]);
+
   // should run only one time to get the list collection user has created
   useEffect(() => {
     const collections = getUserCollections(`0x${wallet}`);
-    // console.log("user collections: ", collections);
     setUserCollections(userCollections);
   }, []);
 
   const onChangeNFTCollection = (newValue: string) => {
-    // console.log("onChangeNFTCollection: ", newValue);
     setNewNFTCollection(newValue);
   };
 
   const onChangeNFTCollectionSymbol = (newValue: string) => {
-    // console.log("onChangeNFTCollectionSymbol: ", newValue);
     setNewNFTCollectionSymbol(newValue);
   };
 
   const onChangeNFTName = (newValue: string) => {
-    // console.log("onChangeNFTName: ", newValue);
     setNFTName(newValue);
   };
 
@@ -154,80 +186,82 @@ const useCreateNFTController = () => {
     return isAllFine;
   };
 
-  const createNewNft = async () => {
+  const createNewNft = () => {
+    setIsProcessing(true);
     console.log("createNewNft");
     const collectionAddress = collectionSelected;
     resetErrors();
     const status = validateAndGetAllDataForMintingNewNFT();
-
-    // Use Node.js form-data package for uploadCollectionData
-    const FormDataNode = (await import("form-data")).default;
-    const formData = new FormDataNode();
-    if (nftImage) {
-      formData.append("image", nftImage, nftImage.name);
+    if (!status || !nftImage) {
+      setIsProcessing(false);
+      return;
     }
-    const nftMetadata = await uploadCollectionData(formData, {
-      name: nftName,
-      description: nftDescription,
-      external_url: "https://coolapes.xyz",
-    });
 
-    console.log("status: ", status, nftMetadata);
-    if (status) {
-      const tokenURI = "";
-      mintNewNFT(collectionAddress!, tokenURI);
-    }
+    return uploadFileAndJSONToIPFS("nft");
   };
 
-  const createCollection = async () => {
+  const createCollection = () => {
+    setIsProcessing(true);
     console.log("createCollection");
     resetErrors();
     const status = validateAndGetAllDataForCreatingNewCollection();
-    console.log("nftImage: ", nftImage);
-    if (!status || !nftImage) return;
+    if (!status || !nftImage) {
+      setIsProcessing(false);
+      return;
+    }
 
+    return uploadFileAndJSONToIPFS("collection");
+  };
+
+  const uploadFileAndJSONToIPFS = async (
+    isCollectionOrNft: "collection" | "nft",
+  ) => {
     try {
-      console.log("before if: ", !nftImage);
-      // const formData = new FormData();
-      // formData.append("image", nftImage as any, (nftImage as File).name);
-      // console.log("calling uploadCollectionData");
-      // const collectionMetadata = await uploadCollectionData(formData, {
-      //   name: newNFTCollection,
-      //   description: nftDescription,
-      //   external_url: "https://coolapes.xyz",
-      // });
-      // console.log("collectionMetadata: ", collectionMetadata);
-      // if (!collectionMetadata) return;
-      //   createNewCollection(
-      //     newNFTCollection,
-      //     newNFTCollectionSymbol,
-      //     collectionMetadata,
-      //   );
-
-      if (!nftImage) return;
-      console.log("after if: ");
-
-      const formData = new window.FormData();
-      formData.append("file", nftImage);
+      const formData = new FormData();
+      formData.append("file", nftImage!);
 
       const res = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
-      console.log("res: ", res);
       const data = await res.json();
-      console.log("IPFS hash:", data.IpfsHash);
+      console.log("IPFS hash:", data, data.IpfsHash);
 
-      const metadata: CollectionMetadata = {
-        name: newNFTCollection,
-        description: nftDescription,
-        image: data.IpfsHash,
-        external_url: "https://coolapes.xyz",
+      const metadata: PinataMetaDataType<
+        CollectionMetadataType | NftMetadataType
+      > = {
+        pinataMetadata: {
+          name: `${newNFTCollection}.json`,
+        },
+        pinataContent:
+          isCollectionOrNft === "collection"
+            ? {
+                name: newNFTCollection,
+                description: nftDescription,
+                image: `ipfs://${data.IpfsHash}`,
+                external_url: "https://coolapes.xyz",
+              }
+            : {
+                name: nftName,
+                description: nftDescription,
+                image: `ipfs://${data.IpfsHash}`,
+                external_url: "https://coolapes.xyz",
+                attributes: nftTraits.map((traitItem) => ({
+                  trait_type: traitItem.trait,
+                  value: traitItem.value,
+                })),
+              },
       };
-      const metadataCID = await uploadMetadataToIPFS(metadata);
+      const metadataCID =
+        await uploadMetadataToIPFS<PinataMetaDataType<CollectionMetadataType>>(
+          metadata,
+        );
       console.log("✅ Metadata IPFS URI:", metadataCID);
     } catch (error) {
       console.error("Error calling uploadCollectionData: ", error);
+    } finally {
+      console.log("in finally");
+      setIsProcessing(false);
     }
   };
 
@@ -242,6 +276,7 @@ const useCreateNFTController = () => {
   };
 
   return {
+    isProcessing,
     userCollections,
     newNFTCollection,
     onChangeNFTCollection,

@@ -2,9 +2,12 @@ import SingleSelect from "@/components/ui/Select/SingleSelect";
 import useCreateNFTController from "./controllers/useCreateNFTController";
 import { AllChains } from "./Utility";
 import InputWithDebounce from "@/components/ui/Input/InputWithDebounce";
+import { useNFTContext } from "@/context/factorycontext";
+import { FiLoader } from "react-icons/fi";
 
 const CreateNewCollection = () => {
   const {
+    isProcessing,
     newNFTCollection,
     onChangeNFTCollection,
     newNFTCollectionSymbol,
@@ -12,6 +15,14 @@ const CreateNewCollection = () => {
     createCollection,
     handleChangeImage,
   } = useCreateNFTController();
+
+  const {
+    isWritePending,
+    writeError,
+    isConfirming,
+    isConfirmed,
+    isReceiptError,
+  } = useNFTContext();
 
   return (
     <div className="flex flex-row gap-5 p-5">
@@ -28,10 +39,6 @@ const CreateNewCollection = () => {
             onChange={handleChangeImage}
           />
         </div>
-        {/* <form onSubmit={handleSubmit}>
-          <input type="file" accept="image/*" onChange={handleChange} />
-          <button type="submit">Upload</button>
-        </form> */}
       </div>
       <div className="flex flex-col gap-4 w-2/3">
         <div className="w-full flex flex-col gap-4">
@@ -82,32 +89,40 @@ const CreateNewCollection = () => {
             hover:bg-custom-purple"
             onClick={createCollection}
           >
-            <span
-              className="absolute left-0 block w-full h-0 transition-all bg-primary opacity-100 
-                                group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"
-            ></span>
-            <span
-              className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 
-                transform translate-x-full group-hover:translate-x-0 ease"
-            >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                ></path>
-              </svg>
-            </span>
-            <span className="w-full relative text-[1rem] group-hover:pr-4 transition-all duration-400 text-center">
-              Create Collection
-            </span>
+            {!isConfirmed && isProcessing ? (
+              <div className="flex items-center justify-center w-full h-full">
+                <FiLoader className="text-[2.8rem] animate-spin text-white" />
+              </div>
+            ) : (
+              <>
+                <span
+                  className="absolute left-0 block w-full h-0 transition-all bg-primary opacity-100 
+                    group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"
+                />
+                <span
+                  className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 
+                    transform translate-x-full group-hover:translate-x-0 ease"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M14 5l7 7m0 0l-7 7m7-7H3"
+                    ></path>
+                  </svg>
+                </span>
+                <span className="w-full relative text-[1rem] group-hover:pr-4 transition-all duration-400 text-center">
+                  Create Collection
+                </span>
+              </>
+            )}
           </button>
         </div>
       </div>
