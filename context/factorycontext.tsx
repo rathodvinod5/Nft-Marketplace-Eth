@@ -14,8 +14,9 @@ type NFTContextType = {
   collectionsError: ReadContractErrorType | null;
   isPending: boolean;
 
+  writeHash: `0x${string}` | undefined;
   isWritePending: boolean;
-  writeError: boolean;
+  isWriteError: boolean;
   isConfirming: boolean;
   isConfirmed: boolean;
   isReceiptError: boolean;

@@ -6,7 +6,7 @@ import {
   ErrorTypeObject,
   PinataMetaDataType,
 } from "../types/Types";
-import { uploadMetadataToIPFS } from "./uploadCollections";
+import { uploadMetadataJSONFileToIPFS } from "./uploadCollections";
 import {
   CollectionMetadataType,
   NftMetadataType,
@@ -39,35 +39,33 @@ const useCreateNFTController = () => {
     useNFTContext();
 
   const {
-    data: writeHash,
-    isPending: isWritePending,
-    isError: writeError,
-    writeContract,
-  } = useWriteContract();
-
-  const {
-    isLoading: isConfirming,
-    isSuccess: isConfirmed,
-    isError: isReceiptError,
-  } = useWaitForTransactionReceipt({
-    // hash: txHash,
-    hash: writeHash,
-  });
+    isWritePending,
+    writeHash,
+    isWriteError,
+    isConfirming,
+    isConfirmed,
+    isReceiptError,
+  } = useNFTContext();
 
   useEffect(() => {
     console.log(
       "write status: ",
       writeHash,
       isWritePending,
-      writeError,
+      isWriteError,
       isConfirming,
       isConfirmed,
       isReceiptError,
     );
+    if ((isConfirmed && isProcessing) || isWriteError) {
+      setIsProcessing(false);
+    }
+
+    if (isConfirmed) resetState();
   }, [
     writeHash,
     isWritePending,
-    writeError,
+    isWriteError,
     isConfirming,
     isConfirmed,
     isReceiptError,
@@ -78,6 +76,12 @@ const useCreateNFTController = () => {
     const collections = getUserCollections(`0x${wallet}`);
     setUserCollections(userCollections);
   }, []);
+
+  const resetState = () => {
+    setNewNFTCollection("");
+    setNewNFTCollectionSymbol("");
+    setNFTImage(null);
+  };
 
   const onChangeNFTCollection = (newValue: string) => {
     setNewNFTCollection(newValue);
@@ -253,16 +257,29 @@ const useCreateNFTController = () => {
               },
       };
       const metadataCID =
-        await uploadMetadataToIPFS<PinataMetaDataType<CollectionMetadataType>>(
-          metadata,
-        );
-      console.log("✅ Metadata IPFS URI:", metadataCID);
+        await uploadMetadataJSONFileToIPFS<
+          PinataMetaDataType<CollectionMetadataType>
+        >(metadata);
+
+      console.log(
+        "✅ Metadata IPFS URI:",
+        metadataCID,
+        `ipfs://${data.metadataCID}`,
+      );
+
+      createNewCollection(
+        newNFTCollection,
+        newNFTCollectionSymbol,
+        `ipfs://${data.metadataCID}`,
+      );
     } catch (error) {
       console.error("Error calling uploadCollectionData: ", error);
-    } finally {
-      console.log("in finally");
       setIsProcessing(false);
     }
+    // finally {
+    //   console.log("in finally");
+    //   setIsProcessing(false);
+    // }
   };
 
   const onChangeCollectionSelected = (currentCollectionSelected: string) => {

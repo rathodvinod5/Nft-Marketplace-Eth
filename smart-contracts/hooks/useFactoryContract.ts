@@ -10,8 +10,7 @@ import { getPublicClient } from "wagmi/actions";
 import { Abi } from "viem";
 import CONTRACT_ADDRESS from "../contract-address";
 import FACTORY_ABI from "../abi/factory-contract-abi.json";
-import { useEffect, useState } from "react";
-import { useGetUserCollectionController } from "./helperhooks";
+import { useState } from "react";
 
 const useFactoryContract = () => {
   const [txHash, setTxHash] = useState<any | undefined>(undefined);
@@ -34,20 +33,17 @@ const useFactoryContract = () => {
   const {
     data: writeHash,
     isPending: isWritePending,
-    isError: writeError,
+    isError: isWriteError,
     writeContract,
   } = useWriteContract();
-  // console.log("write status: ", isWritePending, writeHash, writeError);
 
   const {
     isLoading: isConfirming,
     isSuccess: isConfirmed,
     isError: isReceiptError,
   } = useWaitForTransactionReceipt({
-    // hash: txHash,
     hash: writeHash,
   });
-  // console.log("receipt status: ", isConfirming, isConfirmed);
 
   const createNewCollection = async (
     name: string,
@@ -91,15 +87,16 @@ const useFactoryContract = () => {
   };
 
   const createCollection = useWriteContract();
-  // console.log("useFactoryContract: ", collections);
+  console.log("useFactoryContract: ", collections);
   return {
     isCollectionsLoading: isCollectionsLoading as boolean,
     allCollections: collections as any[],
     collectionsError: collectionsError,
     isPending: collectionsPending as boolean,
 
+    writeHash,
     isWritePending,
-    writeError,
+    isWriteError,
     isConfirming,
     isConfirmed,
     isReceiptError,

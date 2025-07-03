@@ -18,7 +18,7 @@ const CreateNewCollection = () => {
 
   const {
     isWritePending,
-    writeError,
+    isWriteError,
     isConfirming,
     isConfirmed,
     isReceiptError,
@@ -82,7 +82,37 @@ const CreateNewCollection = () => {
           </label>
           <SingleSelect optionArray={AllChains} />
         </div>
-        <div className="w-2/3 mt-8">
+        <div className="w-2/3 mt-8 relative">
+          {isProcessing ? (
+            <div
+              className="absolute w-full left-0 bottom-14 transition-all duration-300 ease-out 
+                flex flex-col justify-center gap-2 border border-teal-100 rounded-xl
+                bg-custom-secondaryBackground px-6 py-4 text-white text-left"
+            >
+              {/* {true && <p>🕐 Sending transaction to the network...</p>}
+              {true && <p>⏳ Waiting for confirmation...</p>}
+              {true && <p>✅ Collection created successfully!</p>}
+              {true && <p>❌ Error while submitting transaction</p>}
+              {true && <p>❌ Error while confirming transaction</p>} */}
+
+              {isWritePending && (
+                <p>🕐 Sending transaction to the network...</p>
+              )}
+              {isConfirming && <p>⏳ Waiting for confirmation...</p>}
+              {isConfirmed && <p>✅ Collection created successfully!</p>}
+              {isWriteError && <p>❌ Error while submitting transaction</p>}
+              {isReceiptError && <p>❌ Error while confirming transaction</p>}
+            </div>
+          ) : isConfirmed && !isProcessing ? (
+            <div
+              className="absolute w-full left-0 bottom-14 transition-all duration-300 ease-out 
+                flex flex-col justify-center gap-2 border border-teal-100 rounded-xl
+                bg-custom-secondaryBackground px-6 py-4 text-white text-left"
+            >
+              <p>✅ Collection created successfully!</p>
+            </div>
+          ) : null}
+
           <button
             className="w-full relative inline-flex items-center px-8 py-2.5 overflow-hidden text-lg font-medium 
               text-primary border border-solid border-gray-600 rounded-full hover:text-white group
