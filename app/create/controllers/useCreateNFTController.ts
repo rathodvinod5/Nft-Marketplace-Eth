@@ -292,6 +292,10 @@ const useCreateNFTController = () => {
     }
   };
 
+  const setIsProcessingToFalse = () => {
+    setIsProcessing(false);
+  };
+
   return {
     isProcessing,
     userCollections,
@@ -320,6 +324,7 @@ const useCreateNFTController = () => {
     onChangeCollectionSelected,
     errorObject,
     handleChangeImage,
+    setIsProcessingToFalse,
   };
 };
 
