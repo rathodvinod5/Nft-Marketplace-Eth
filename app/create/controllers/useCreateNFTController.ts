@@ -114,9 +114,11 @@ const useCreateNFTController = () => {
   };
 
   const addNewTrait = () => {
-    setTrait("");
-    setTraitValue("");
-    setNFTtraits([...nftTraits, { trait: "", value: "" }]);
+    if (nftTraits.at(-1)?.trait !== "" && nftTraits.at(-1)?.value !== "") {
+      setTrait("");
+      setTraitValue("");
+      setNFTtraits([...nftTraits, { trait: "", value: "" }]);
+    }
   };
 
   const onEditTraitValue = (
