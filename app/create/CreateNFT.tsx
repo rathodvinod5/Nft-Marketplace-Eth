@@ -1,4 +1,4 @@
-import { use, useId } from "react";
+import { useId } from "react";
 import SingleSelect from "@/components/ui/Select/SingleSelect";
 import { Plus, CircleX } from "lucide-react";
 import useCreateNFTController from "./controllers/useCreateNFTController";
@@ -30,8 +30,6 @@ const CreateNewNFT = ({
     onChangeCollectionSelected,
   } = useCreateNFTController();
   // console.log("nftTraits: ", nftTraits);
-
-  const idForTrait = useId();
 
   return (
     <div className="flex flex-row gap-5 p-5">
@@ -135,7 +133,7 @@ const CreateNewNFT = ({
             {nftTraits.map((item, index) => {
               return (
                 <div
-                  key={"trait-item-" + idForTrait + index}
+                  key={"trait-item-" + item.id}
                   className="flex flex-row items-center gap-4"
                 >
                   <InputWithDebounce
@@ -166,7 +164,7 @@ const CreateNewNFT = ({
                     className={
                       "text-[30px] cursor-pointer text-gray-600 w-[40px] h-[40px]"
                     }
-                    onClick={() => onRemoveTraitItem(index)}
+                    onClick={() => onRemoveTraitItem(item.id)}
                   />
                 </div>
               );
