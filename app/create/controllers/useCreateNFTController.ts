@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useId, useState } from "react";
 import { TraitType } from "../view/NFTInfoTypes";
 import { useNFTContext } from "@/context/factorycontext";
 import {
@@ -113,10 +113,31 @@ const useCreateNFTController = () => {
     setNFTURILink(newValue);
   };
 
+  const generatedNumbers = new Set<number>();
+  function getUniqueRandom(): number | null {
+    if (generatedNumbers.size >= 1001) {
+      // All numbers exhausted
+      return null;
+    }
+
+    let num: number;
+    do {
+      num = Math.floor(Math.random() * 1001); // 0 to 1000 inclusive
+    } while (generatedNumbers.has(num));
+
+    generatedNumbers.add(num);
+    return num;
+  }
+
   const addNewTrait = () => {
-    setTrait("");
-    setTraitValue("");
-    setNFTtraits([...nftTraits, { trait: "", value: "" }]);
+    if (nftTraits.at(-1)?.trait !== "" && nftTraits.at(-1)?.value !== "") {
+      const newId = getUniqueRandom();
+      if (newId !== null) {
+        setTrait("");
+        setTraitValue("");
+        setNFTtraits([...nftTraits, { id: newId, trait: "", value: "" }]);
+      }
+    }
   };
 
   const onEditTraitValue = (
@@ -124,11 +145,8 @@ const useCreateNFTController = () => {
     type: "trait" | "value",
     index: number,
   ) => {
-    console.log("onEditTraitValue: ", index, type, newValue);
     if (newValue && type) {
-      console.log("inside");
       const existingTraits = [...nftTraits];
-      const traitItem = existingTraits[index];
       if (type === "trait") {
         existingTraits[index] = { ...existingTraits[index], trait: newValue };
       } else {
@@ -139,10 +157,7 @@ const useCreateNFTController = () => {
   };
 
   const onRemoveTraitItem = (index: number) => {
-    const newNFTTraits = nftTraits.filter((item, idx) => idx !== index);
-    console.log("index: ", index, nftTraits.length, newNFTTraits.length);
-    // const newNFTTraits = nftTraits.splice(index, 1);
-    setNFTtraits(newNFTTraits);
+    setNFTtraits((prevItems) => prevItems.filter((item) => item.id !== index));
   };
 
   const resetErrors = () => {
@@ -292,6 +307,10 @@ const useCreateNFTController = () => {
     }
   };
 
+  const setIsProcessingToFalse = () => {
+    setIsProcessing(false);
+  };
+
   return {
     isProcessing,
     userCollections,
@@ -320,6 +339,7 @@ const useCreateNFTController = () => {
     onChangeCollectionSelected,
     errorObject,
     handleChangeImage,
+    setIsProcessingToFalse,
   };
 };
 

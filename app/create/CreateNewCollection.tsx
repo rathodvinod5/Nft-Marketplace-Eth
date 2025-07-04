@@ -1,9 +1,11 @@
+import { FiLoader } from "react-icons/fi";
+import { X } from "lucide-react";
 import SingleSelect from "@/components/ui/Select/SingleSelect";
 import useCreateNFTController from "./controllers/useCreateNFTController";
 import { AllChains } from "./Utility";
 import InputWithDebounce from "@/components/ui/Input/InputWithDebounce";
 import { useNFTContext } from "@/context/factorycontext";
-import { FiLoader } from "react-icons/fi";
+import { Button } from "@/components/ui/button";
 
 const CreateNewCollection = () => {
   const {
@@ -14,6 +16,7 @@ const CreateNewCollection = () => {
     onChangeNFTCollectionSymbol,
     createCollection,
     handleChangeImage,
+    setIsProcessingToFalse,
   } = useCreateNFTController();
 
   const {
@@ -89,6 +92,15 @@ const CreateNewCollection = () => {
                 flex flex-col justify-center gap-2 border border-teal-100 rounded-xl
                 bg-custom-secondaryBackground px-6 py-4 text-white text-left"
             >
+              {isConfirmed || isWriteError || isReceiptError ? (
+                <Button
+                  className="absolute top-2 right-3 p-1"
+                  onClick={setIsProcessingToFalse}
+                >
+                  <X />
+                </Button>
+              ) : null}
+
               {/* {true && <p>🕐 Sending transaction to the network...</p>}
               {true && <p>⏳ Waiting for confirmation...</p>}
               {true && <p>✅ Collection created successfully!</p>}
@@ -118,10 +130,11 @@ const CreateNewCollection = () => {
               text-primary border border-solid border-gray-600 rounded-full hover:text-white group
             hover:bg-custom-purple"
             onClick={createCollection}
+            disabled={!isConfirmed && isProcessing}
           >
             {!isConfirmed && isProcessing ? (
               <div className="flex items-center justify-center w-full h-full">
-                <FiLoader className="text-[2.8rem] animate-spin text-white" />
+                <FiLoader className="text-[1.8rem] animate-spin text-white" />
               </div>
             ) : (
               <>

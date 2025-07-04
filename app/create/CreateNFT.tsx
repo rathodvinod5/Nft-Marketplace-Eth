@@ -1,3 +1,4 @@
+import { useId } from "react";
 import SingleSelect from "@/components/ui/Select/SingleSelect";
 import { Plus, CircleX } from "lucide-react";
 import useCreateNFTController from "./controllers/useCreateNFTController";
@@ -52,7 +53,7 @@ const CreateNewNFT = ({
             />
             <div
               className="flex flex-row justify-center items-center cursor-pointer border 
-                            border-solid border-gray-600 px-2"
+                border-solid border-gray-600 px-2"
               style={{ borderRadius: "12px" }}
               onClick={onClickAddCollection}
             >
@@ -75,7 +76,7 @@ const CreateNewNFT = ({
             }}
           />
         </div>
-        <div>
+        {/* <div>
           <label htmlFor="nftName" className="block mb-2">
             Number of supply *
           </label>
@@ -89,7 +90,7 @@ const CreateNewNFT = ({
               required: true,
             }}
           />
-        </div>
+        </div> */}
         <div>
           <label htmlFor="nftName" className="block mb-2">
             Description
@@ -100,7 +101,7 @@ const CreateNewNFT = ({
             id="description"
             placeholder="Description of the token"
             className="w-2/3 block bg-transparent border border-gray-600 rounded-xl px-4 py-3 min-h-[200px] 
-                            focus:border-[#3B9DF8] transition-colors duration-300"
+              focus:border-[#3B9DF8] transition-colors duration-300"
             onChange={onChangeNFTDescription}
           />
         </div>
@@ -132,7 +133,7 @@ const CreateNewNFT = ({
             {nftTraits.map((item, index) => {
               return (
                 <div
-                  key={"trait-item-" + item}
+                  key={"trait-item-" + item.id}
                   className="flex flex-row items-center gap-4"
                 >
                   <InputWithDebounce
@@ -163,7 +164,7 @@ const CreateNewNFT = ({
                     className={
                       "text-[30px] cursor-pointer text-gray-600 w-[40px] h-[40px]"
                     }
-                    onClick={() => onRemoveTraitItem(index)}
+                    onClick={() => onRemoveTraitItem(item.id)}
                   />
                 </div>
               );
@@ -172,7 +173,7 @@ const CreateNewNFT = ({
 
           <div
             className="flex flex-row justify-center items-center cursor-pointer border 
-                        border-solid border-gray-600 mt-4 pl-3 pr-4 py-2 w-fit text-gray-400 font-semibold"
+              border-solid border-gray-600 mt-4 pl-3 pr-4 py-2 w-fit text-gray-400 font-semibold"
             style={{ borderRadius: "12px" }}
             onClick={addNewTrait}
           >
@@ -190,7 +191,7 @@ const CreateNewNFT = ({
           >
             <span
               className="absolute left-0 block w-full h-0 transition-all bg-primary opacity-100 
-                                group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"
+                group-hover:h-full top-1/2 group-hover:top-0 duration-400 ease"
             ></span>
             <span
               className="absolute right-0 flex items-center justify-start w-10 h-10 duration-300 
