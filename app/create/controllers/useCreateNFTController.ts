@@ -281,30 +281,22 @@ const useCreateNFTController = () => {
                 })),
               },
       };
-      const metadataCID =
+      const metadataURI =
         await uploadMetadataJSONFileToIPFS<
           PinataMetaDataType<CollectionMetadataType>
         >(metadata);
 
-      console.log(
-        "✅ Metadata IPFS URI:",
-        metadataCID,
-        `ipfs://${data.metadataCID}`,
-      );
+      console.log("✅ Metadata IPFS URI:", metadataURI);
 
       createNewCollection(
         newNFTCollection,
         newNFTCollectionSymbol,
-        `ipfs://${data.metadataCID}`,
+        metadataURI,
       );
     } catch (error) {
       console.error("Error calling uploadCollectionData: ", error);
       setIsProcessing(false);
     }
-    // finally {
-    //   console.log("in finally");
-    //   setIsProcessing(false);
-    // }
   };
 
   const onChangeCollectionSelected = (currentCollectionSelected: string) => {

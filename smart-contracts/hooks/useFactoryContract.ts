@@ -56,7 +56,7 @@ const useFactoryContract = () => {
       address: factoryContractAddress,
       abi: FACTORY_ABI.abi as Abi,
       functionName: "createNewCollection",
-      args: [name, symbol],
+      args: [name, symbol, nftMetadata],
     });
   };
 
