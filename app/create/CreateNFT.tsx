@@ -1,9 +1,13 @@
-import { useId } from "react";
-import SingleSelect from "@/components/ui/Select/SingleSelect";
 import { Plus, CircleX } from "lucide-react";
+import { X } from "lucide-react";
+import SingleSelect from "@/components/ui/Select/SingleSelect";
 import useCreateNFTController from "./controllers/useCreateNFTController";
 import { AllCollections } from "./Utility";
 import InputWithDebounce from "@/components/ui/Input/InputWithDebounce";
+import { useNFTContext } from "@/context/factorycontext";
+import Modal from "@/components/ui/Modal/Modal";
+import { Button } from "@/components/ui/button";
+import CustomAlert from "@/components/ui/CustomAlert/CustomAlert";
 
 const CreateNewNFT = ({
   onClickAddCollection,
@@ -11,6 +15,7 @@ const CreateNewNFT = ({
   onClickAddCollection: () => void;
 }) => {
   const {
+    isProcessing,
     nftName,
     onChangeNFTName,
     nftDescription,
@@ -28,10 +33,39 @@ const CreateNewNFT = ({
     createNewNft,
     userCollections,
     onChangeCollectionSelected,
+    setIsProcessingToFalse,
   } = useCreateNFTController();
+
+  const {
+    wallet,
+    isWritePending,
+    isWriteError,
+    isConfirming,
+    isConfirmed,
+    isReceiptError,
+  } = useNFTContext();
 
   return (
     <div className="flex flex-row gap-5 p-5">
+      <CustomAlert title="Please connect Wallet" initialValue={!wallet} />
+
+      {(isConfirmed && !isProcessing) || isWriteError || isReceiptError ? (
+        <Modal
+          title={`${isConfirmed && !isProcessing ? "✅ Success" : "❌ Error"}`}
+          isOpen={true}
+          onClose={() => {}}
+        >
+          {isConfirmed && !isProcessing ? (
+            <p>NFT created successfully!</p>
+          ) : isWriteError || isReceiptError ? (
+            <div>
+              {isWriteError && <p>Error while submitting transaction</p>}
+              {isReceiptError && <p>Error while confirming transaction</p>}
+            </div>
+          ) : null}
+        </Modal>
+      ) : null}
+
       <div className="w-1/3 h-[220px]">
         <label htmlFor="imageUpload" className="block mb-2">
           Upload Image:
@@ -181,7 +215,30 @@ const CreateNewNFT = ({
           </div>
         </div>
 
-        <div className="w-2/3 mt-8">
+        <div className="w-2/3 mt-8 relative">
+          {isProcessing ? (
+            <div
+              className="absolute w-full left-0 bottom-14 transition-all duration-300 ease-out 
+                flex flex-col justify-center gap-2 border border-teal-100 rounded-xl
+                bg-custom-secondaryBackground px-6 py-4 text-white text-left"
+            >
+              {isConfirmed || isWriteError || isReceiptError ? (
+                <Button
+                  className="absolute top-2 right-3 p-1"
+                  onClick={setIsProcessingToFalse}
+                >
+                  <X />
+                </Button>
+              ) : null}
+
+              {isWritePending && (
+                <p>🕐 Sending transaction to the network...</p>
+              )}
+              {isConfirming && <p>⏳ Waiting for confirmation...</p>}
+              {isConfirmed && <p>✅ Collection created successfully!</p>}
+            </div>
+          ) : null}
+
           <button
             className="w-full relative inline-flex items-center px-8 py-2.5 overflow-hidden text-lg font-medium 
               text-primary border border-solid border-gray-600 rounded-full hover:text-white group

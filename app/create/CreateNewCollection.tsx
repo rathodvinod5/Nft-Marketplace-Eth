@@ -1,13 +1,13 @@
 import { FiLoader } from "react-icons/fi";
-import { X } from "lucide-react";
+import { X, Ban } from "lucide-react";
 import SingleSelect from "@/components/ui/Select/SingleSelect";
 import useCreateNFTController from "./controllers/useCreateNFTController";
 import { AllChains } from "./Utility";
 import InputWithDebounce from "@/components/ui/Input/InputWithDebounce";
 import { useNFTContext } from "@/context/factorycontext";
 import { Button } from "@/components/ui/button";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import Modal from "@/components/ui/Modal/Modal";
+import CustomAlert from "@/components/ui/CustomAlert/CustomAlert";
 
 const CreateNewCollection = () => {
   const {
@@ -22,6 +22,7 @@ const CreateNewCollection = () => {
   } = useCreateNFTController();
 
   const {
+    wallet,
     isWritePending,
     isWriteError,
     isConfirming,
@@ -31,6 +32,8 @@ const CreateNewCollection = () => {
 
   return (
     <div className="flex flex-row gap-5 p-5">
+      <CustomAlert title="Please connect Wallet" initialValue={!wallet} />
+
       {(isConfirmed && !isProcessing) || isWriteError || isReceiptError ? (
         <Modal
           title={`${isConfirmed && !isProcessing ? "✅ Success" : "❌ Error"}`}

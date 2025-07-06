@@ -168,6 +168,11 @@ const useCreateNFTController = () => {
     let isAllFine = true;
     let errorObject = structuredClone(ErrorObjectMain);
 
+    if (!wallet) {
+      isAllFine = false;
+      errorObject.wallet = "Please connect your wallet!";
+    }
+
     if (!collectionSelected) {
       isAllFine = false;
       errorObject.collectionName = "Please select a collection from list!";
@@ -189,6 +194,11 @@ const useCreateNFTController = () => {
   const validateAndGetAllDataForCreatingNewCollection = () => {
     let isAllFine = true;
     let errorObject = structuredClone(ErrorObjectMain);
+
+    if (!wallet) {
+      isAllFine = false;
+      errorObject.wallet = "Please connect your wallet!";
+    }
 
     if (!newNFTCollection) {
       isAllFine = false;
