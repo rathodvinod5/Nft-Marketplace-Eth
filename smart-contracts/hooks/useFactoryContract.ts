@@ -6,16 +6,11 @@ import {
   useAccount,
   useSendTransaction,
 } from "wagmi";
-import { getPublicClient } from "wagmi/actions";
 import { Abi } from "viem";
 import CONTRACT_ADDRESS from "../contract-address";
 import FACTORY_ABI from "../abi/factory-contract-abi.json";
-import { useState } from "react";
 
 const useFactoryContract = () => {
-  const [txHash, setTxHash] = useState<any | undefined>(undefined);
-  const { address: wallet } = useAccount();
-
   const factoryContractAddress =
     CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`;
 

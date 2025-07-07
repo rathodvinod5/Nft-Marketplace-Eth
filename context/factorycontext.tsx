@@ -4,8 +4,10 @@ import { useAccount } from "wagmi";
 import useFactoryContract from "@/smart-contracts/hooks/useFactoryContract";
 import useMarketplaceContract from "@/smart-contracts/hooks/useMarketpaceContract";
 import { ReadContractErrorType } from "viem";
+import CONTRACT_ADDRESS from "../smart-contracts/contract-address";
 
 type NFTContextType = {
+  factoryContractAddress: `0x${string}` | undefined;
   wallet: `0x${string}` | undefined;
 
   // factory contract
@@ -59,7 +61,15 @@ export const NFTProvider = ({ children }: NFTProviderProps) => {
   const marketplace = useMarketplaceContract();
   console.log("factory: ", factory.allCollections);
   return (
-    <NFTContext.Provider value={{ wallet: wallet, ...factory, ...marketplace }}>
+    <NFTContext.Provider
+      value={{
+        factoryContractAddress:
+          CONTRACT_ADDRESS.factoryContractAddress as `0x${string}`,
+        wallet: wallet,
+        ...factory,
+        ...marketplace,
+      }}
+    >
       {children}
     </NFTContext.Provider>
   );

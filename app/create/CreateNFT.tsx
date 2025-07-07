@@ -8,6 +8,7 @@ import { useNFTContext } from "@/context/factorycontext";
 import Modal from "@/components/ui/Modal/Modal";
 import { Button } from "@/components/ui/button";
 import CustomAlert from "@/components/ui/CustomAlert/CustomAlert";
+import { CollectionObjectType } from "@/smart-contracts/Types";
 
 const CreateNewNFT = ({
   onClickAddCollection,
@@ -31,7 +32,7 @@ const CreateNewNFT = ({
     onEditTraitValue,
     onRemoveTraitItem,
     createNewNft,
-    userCollections,
+    userCollections = [],
     onChangeCollectionSelected,
     setIsProcessingToFalse,
   } = useCreateNFTController();
@@ -45,6 +46,16 @@ const CreateNewNFT = ({
     isReceiptError,
   } = useNFTContext();
 
+  // console.log("userCollectionsArray: ", userCollections);
+  // const userCollectionArray = Array.isArray(userCollections) ? userCollections : [];
+  let userCollectionMap: string[] | null = [];
+  if (userCollections && userCollections.length > 0) {
+    userCollectionMap = userCollections.map(
+      (collection: any) => collection.contractAddress,
+    );
+  }
+  console.log("userCollectionsArray: ", userCollectionMap);
+
   return (
     <div className="flex flex-row gap-5 p-5">
       <CustomAlert title="Please connect Wallet" initialValue={!wallet} />
@@ -53,7 +64,7 @@ const CreateNewNFT = ({
         <Modal
           title={`${isConfirmed && !isProcessing ? "✅ Success" : "❌ Error"}`}
           isOpen={true}
-          onClose={() => {}}
+          onClose={setIsProcessingToFalse}
         >
           {isConfirmed && !isProcessing ? (
             <p>NFT created successfully!</p>
@@ -66,7 +77,7 @@ const CreateNewNFT = ({
         </Modal>
       ) : null}
 
-      <div className="w-1/3 h-[220px]">
+      <div className="w-4/12 h-[220px]">
         <label htmlFor="imageUpload" className="block mb-2">
           Upload Image:
         </label>
@@ -74,14 +85,14 @@ const CreateNewNFT = ({
           <input type="file" id="imageUpload" name="imageUpload" />
         </div>
       </div>
-      <div className="flex flex-col gap-4 w-2/3">
-        <div className="w-2/3">
+      <div className="flex flex-col gap-4 w-8/12">
+        <div className="">
           <label htmlFor="tokenSymbol" className="block mb-2">
             Select a Collection *
           </label>
-          <div className="flex flex-row gap-2 w-full">
-            <SingleSelect
-              optionArray={AllCollections}
+          <div className="flex flex-row gap-2 w-8/12">
+            <SingleSelect<string>
+              optionArray={userCollectionMap}
               onChangeOption={onChangeCollectionSelected}
             />
             <div

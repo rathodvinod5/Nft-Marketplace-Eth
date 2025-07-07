@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useId, useState } from "react";
+import { useReadContract } from "wagmi";
 import { TraitType } from "../view/NFTInfoTypes";
 import { useNFTContext } from "@/context/factorycontext";
 import {
@@ -9,9 +10,11 @@ import {
 import { uploadMetadataJSONFileToIPFS } from "./uploadCollections";
 import {
   CollectionMetadataType,
+  CollectionObjectType,
   NftMetadataType,
 } from "@/smart-contracts/Types";
-import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import FACTORY_ABI from "../../../smart-contracts/abi/factory-contract-abi.json";
+import { Abi } from "viem";
 
 const useCreateNFTController = () => {
   const [newNFTCollection, setNewNFTCollection] = useState("");
@@ -32,7 +35,7 @@ const useCreateNFTController = () => {
   const [trait, setTrait] = useState("");
   const [traitValue, setTraitValue] = useState("");
   const [nftTraits, setNFTtraits] = useState<TraitType[]>([]);
-  const [userCollections, setUserCollections] = useState<any | null>(null);
+  // const [userCollections, setUserCollections] = useState<any | null>(null);
   const [errorObject, setErrorObject] = useState<ErrorTypeObject | null>(null);
 
   const { createNewCollection, mintNewNFT, getUserCollections, wallet } =
@@ -45,6 +48,7 @@ const useCreateNFTController = () => {
     isConfirming,
     isConfirmed,
     isReceiptError,
+    factoryContractAddress,
   } = useNFTContext();
 
   useEffect(() => {
@@ -71,11 +75,23 @@ const useCreateNFTController = () => {
     isReceiptError,
   ]);
 
+  const {
+    data: userCollections,
+    isLoading: isUserCollectionsLoading,
+    isPending: isUserCollectionsPending,
+    error: isUserCollectionsError,
+  } = useReadContract({
+    address: factoryContractAddress,
+    abi: FACTORY_ABI.abi as Abi,
+    functionName: "getUserCollections",
+    args: [wallet],
+  });
+
   // should run only one time to get the list collection user has created
-  useEffect(() => {
-    const collections = getUserCollections(`0x${wallet}`);
-    setUserCollections(userCollections);
-  }, []);
+  // useEffect(() => {
+  //   const collections = getUserCollections(`0x${wallet}`);
+  //   setUserCollections(userCollections);
+  // }, []);
 
   const resetState = () => {
     setNewNFTCollection("");
@@ -315,7 +331,7 @@ const useCreateNFTController = () => {
 
   return {
     isProcessing,
-    userCollections,
+    userCollections: userCollections as CollectionObjectType[] | null,
     newNFTCollection,
     onChangeNFTCollection,
     newNFTCollectionSymbol,

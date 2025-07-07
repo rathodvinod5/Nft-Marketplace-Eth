@@ -1,16 +1,18 @@
 // icons
 import { ArrowDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const SingleSelect = ({
+export type SingleSelectProps<T> = {
+  onChangeOption?: (option: T) => void;
+  optionArray?: T[];
+};
+
+function SingleSelect<T>({
   onChangeOption,
   optionArray,
-}: {
-  onChangeOption?: (option: string) => void;
-  optionArray?: string[];
-}) => {
+}: SingleSelectProps<T>) {
   const [isActive, setIsActive] = useState(false);
-  const [content, setContent] = useState("Select Option");
+  const [content, setContent] = useState<T | String>("Select Option");
 
   // Function to handle clicks outside the dropdown
   const handleClickOutside = (event: MouseEvent) => {
@@ -30,19 +32,19 @@ const SingleSelect = ({
 
   useEffect(() => {
     if (onChangeOption) {
-      onChangeOption(content);
+      onChangeOption(content as T);
     }
   }, [content]);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full text-[16px]">
       <button
         className="w-full border bg-transparent border-gray-600 rounded-md px-3 py-2 cursor-pointer dropdown 
           flex flex-row justify-between items-center text-gray-400"
         style={{ borderRadius: "12px" }}
         onClick={() => setIsActive(!isActive)}
       >
-        {content}
+        {content as React.ReactNode}
         <ArrowDown
           className={`${
             isActive ? "rotate-[180deg]" : "rotate-0"
@@ -66,12 +68,12 @@ const SingleSelect = ({
               setContent((e.target as HTMLElement).textContent || "")
             }
           >
-            {option}
+            {option as React.ReactNode}
           </p>
         ))}
       </div>
     </div>
   );
-};
+}
 
 export default SingleSelect;

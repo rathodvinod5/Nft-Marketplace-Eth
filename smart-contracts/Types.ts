@@ -7,6 +7,13 @@ export type ReturnObjectType = {
   args?: any[] | undefined;
 };
 
+export type CollectionObjectType = {
+  contractAddress: `0x${string}`; // Ethereum address
+  creator: `0x${string}`; // Ethereum address
+  metadataURI: `ipfs://${string}`;
+  name: string;
+};
+
 export type CollectionMetadataType = {
   name: string;
   description: string;
