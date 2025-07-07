@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useId, useState } from "react";
+import { useReadContract } from "wagmi";
 import { TraitType } from "../view/NFTInfoTypes";
 import { useNFTContext } from "@/context/factorycontext";
 import {
@@ -8,10 +9,13 @@ import {
 } from "../types/Types";
 import { uploadMetadataJSONFileToIPFS } from "./uploadCollections";
 import {
+  AddressType,
   CollectionMetadataType,
+  CollectionObjectType,
   NftMetadataType,
 } from "@/smart-contracts/Types";
-import { useWaitForTransactionReceipt, useWriteContract } from "wagmi";
+import FACTORY_ABI from "../../../smart-contracts/abi/factory-contract-abi.json";
+import { Abi } from "viem";
 
 const useCreateNFTController = () => {
   const [newNFTCollection, setNewNFTCollection] = useState("");
@@ -32,7 +36,7 @@ const useCreateNFTController = () => {
   const [trait, setTrait] = useState("");
   const [traitValue, setTraitValue] = useState("");
   const [nftTraits, setNFTtraits] = useState<TraitType[]>([]);
-  const [userCollections, setUserCollections] = useState<any | null>(null);
+  // const [userCollections, setUserCollections] = useState<any | null>(null);
   const [errorObject, setErrorObject] = useState<ErrorTypeObject | null>(null);
 
   const { createNewCollection, mintNewNFT, getUserCollections, wallet } =
@@ -45,6 +49,7 @@ const useCreateNFTController = () => {
     isConfirming,
     isConfirmed,
     isReceiptError,
+    factoryContractAddress,
   } = useNFTContext();
 
   useEffect(() => {
@@ -71,11 +76,23 @@ const useCreateNFTController = () => {
     isReceiptError,
   ]);
 
+  const {
+    data: userCollections,
+    isLoading: isUserCollectionsLoading,
+    isPending: isUserCollectionsPending,
+    error: isUserCollectionsError,
+  } = useReadContract({
+    address: factoryContractAddress,
+    abi: FACTORY_ABI.abi as Abi,
+    functionName: "getUserCollections",
+    args: [wallet],
+  });
+
   // should run only one time to get the list collection user has created
-  useEffect(() => {
-    const collections = getUserCollections(`0x${wallet}`);
-    setUserCollections(userCollections);
-  }, []);
+  // useEffect(() => {
+  //   const collections = getUserCollections(`0x${wallet}`);
+  //   setUserCollections(userCollections);
+  // }, []);
 
   const resetState = () => {
     setNewNFTCollection("");
@@ -181,10 +198,10 @@ const useCreateNFTController = () => {
       isAllFine = false;
       errorObject.nftName = "Please enter a name for NFT!";
     }
-    if (!nftURILink) {
-      isAllFine = false;
-      errorObject.nftName = "Please enter URI link!";
-    }
+    // if (!nftURILink) {
+    //   isAllFine = false;
+    //   errorObject.nftName = "Please enter URI link!";
+    // }
     if (!isAllFine) {
       setErrorObject(errorObject);
     }
@@ -217,10 +234,10 @@ const useCreateNFTController = () => {
 
   const createNewNft = () => {
     setIsProcessing(true);
-    console.log("createNewNft");
     const collectionAddress = collectionSelected;
     resetErrors();
     const status = validateAndGetAllDataForMintingNewNFT();
+    console.log("createNewNft: ", status, !status, !nftImage);
     if (!status || !nftImage) {
       setIsProcessing(false);
       return;
@@ -245,6 +262,7 @@ const useCreateNFTController = () => {
   const uploadFileAndJSONToIPFS = async (
     isCollectionOrNft: "collection" | "nft",
   ) => {
+    console.log("uploadFileAndJSONToIPFS: ", isCollectionOrNft);
     try {
       const formData = new FormData();
       formData.append("file", nftImage!);
@@ -260,7 +278,7 @@ const useCreateNFTController = () => {
         CollectionMetadataType | NftMetadataType
       > = {
         pinataMetadata: {
-          name: `${newNFTCollection}.json`,
+          name: `${isCollectionOrNft === "collection" ? newNFTCollection : nftName}.json`,
         },
         pinataContent:
           isCollectionOrNft === "collection"
@@ -272,6 +290,7 @@ const useCreateNFTController = () => {
               }
             : {
                 name: nftName,
+                collectionAddress: collectionSelected as AddressType,
                 description: nftDescription,
                 image: `ipfs://${data.IpfsHash}`,
                 external_url: "https://coolapes.xyz",
@@ -288,7 +307,14 @@ const useCreateNFTController = () => {
 
       console.log("✅ Metadata IPFS URI:", metadataURI);
 
-      createNewCollection(
+      if (isCollectionOrNft === "nft") {
+        return mintNewNFT(
+          collectionSelected as AddressType,
+          metadataURI as `ipfs://${string}`,
+        );
+      }
+
+      return createNewCollection(
         newNFTCollection,
         newNFTCollectionSymbol,
         metadataURI,
@@ -315,7 +341,7 @@ const useCreateNFTController = () => {
 
   return {
     isProcessing,
-    userCollections,
+    userCollections: userCollections as CollectionObjectType[] | null,
     newNFTCollection,
     onChangeNFTCollection,
     newNFTCollectionSymbol,

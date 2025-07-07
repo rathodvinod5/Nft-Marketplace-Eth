@@ -1,14 +1,12 @@
 "use client";
 import GradientBorderContainer from "@/components/ui/GradientBorder/gradient-border-cont";
 import BottomBorderTab from "@/components/ui/NewTab/BottomBorderTab";
-import useCreatePageController from "./useCreatePageController";
 import { useState } from "react";
 import CreateNewCollection from "./CreateNewCollection";
 import CreateNewNFT from "./CreateNFT";
 
 const CreatePage = () => {
   const [currentTab, setCurrentTab] = useState(1);
-  //   const { currentTab, selectTab } = useCreatePageController();
 
   const onClickAddCollection = () => {
     console.log("onClickAddCollection");
@@ -26,6 +24,7 @@ const CreatePage = () => {
         text-white"
         >
           <BottomBorderTab
+            currentTab={currentTab}
             onChangeIndex={(newIndex) => setCurrentTab(newIndex)}
           />
           {currentTab === 1 ? (
