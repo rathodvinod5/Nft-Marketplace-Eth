@@ -9,6 +9,7 @@ import {
 } from "../types/Types";
 import { uploadMetadataJSONFileToIPFS } from "./uploadCollections";
 import {
+  AddressType,
   CollectionMetadataType,
   CollectionObjectType,
   NftMetadataType,
@@ -197,10 +198,10 @@ const useCreateNFTController = () => {
       isAllFine = false;
       errorObject.nftName = "Please enter a name for NFT!";
     }
-    if (!nftURILink) {
-      isAllFine = false;
-      errorObject.nftName = "Please enter URI link!";
-    }
+    // if (!nftURILink) {
+    //   isAllFine = false;
+    //   errorObject.nftName = "Please enter URI link!";
+    // }
     if (!isAllFine) {
       setErrorObject(errorObject);
     }
@@ -233,10 +234,10 @@ const useCreateNFTController = () => {
 
   const createNewNft = () => {
     setIsProcessing(true);
-    console.log("createNewNft");
     const collectionAddress = collectionSelected;
     resetErrors();
     const status = validateAndGetAllDataForMintingNewNFT();
+    console.log("createNewNft: ", status, !status, !nftImage);
     if (!status || !nftImage) {
       setIsProcessing(false);
       return;
@@ -261,6 +262,7 @@ const useCreateNFTController = () => {
   const uploadFileAndJSONToIPFS = async (
     isCollectionOrNft: "collection" | "nft",
   ) => {
+    console.log("uploadFileAndJSONToIPFS: ", isCollectionOrNft);
     try {
       const formData = new FormData();
       formData.append("file", nftImage!);
@@ -276,7 +278,7 @@ const useCreateNFTController = () => {
         CollectionMetadataType | NftMetadataType
       > = {
         pinataMetadata: {
-          name: `${newNFTCollection}.json`,
+          name: `${isCollectionOrNft === "collection" ? newNFTCollection : nftName}.json`,
         },
         pinataContent:
           isCollectionOrNft === "collection"
@@ -288,6 +290,7 @@ const useCreateNFTController = () => {
               }
             : {
                 name: nftName,
+                collectionAddress: collectionSelected as AddressType,
                 description: nftDescription,
                 image: `ipfs://${data.IpfsHash}`,
                 external_url: "https://coolapes.xyz",
@@ -304,7 +307,14 @@ const useCreateNFTController = () => {
 
       console.log("✅ Metadata IPFS URI:", metadataURI);
 
-      createNewCollection(
+      if (isCollectionOrNft === "nft") {
+        return mintNewNFT(
+          collectionSelected as AddressType,
+          metadataURI as `ipfs://${string}`,
+        );
+      }
+
+      return createNewCollection(
         newNFTCollection,
         newNFTCollectionSymbol,
         metadataURI,

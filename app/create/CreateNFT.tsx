@@ -21,6 +21,7 @@ const CreateNewNFT = ({
     onChangeNFTName,
     nftDescription,
     onChangeNFTDescription,
+    handleChangeImage,
     nftSupply,
     onChangeNFTSupply,
     nftPrice,
@@ -46,8 +47,6 @@ const CreateNewNFT = ({
     isReceiptError,
   } = useNFTContext();
 
-  // console.log("userCollectionsArray: ", userCollections);
-  // const userCollectionArray = Array.isArray(userCollections) ? userCollections : [];
   let userCollectionMap: string[] | null = [];
   if (userCollections && userCollections.length > 0) {
     userCollectionMap = userCollections.map(
@@ -82,7 +81,13 @@ const CreateNewNFT = ({
           Upload Image:
         </label>
         <div className="w-full h-full flex flex-col justify-center items-center border border-gray-600 rounded-xl">
-          <input type="file" id="imageUpload" name="imageUpload" />
+          <input
+            type="file"
+            id="imageUpload"
+            name="imageUpload"
+            accept="image/*"
+            onChange={handleChangeImage}
+          />
         </div>
       </div>
       <div className="flex flex-col gap-4 w-8/12">

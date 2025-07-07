@@ -1,5 +1,8 @@
 import { Abi } from "viem";
 
+export type AddressType = `0x${string}`; // Ethereum address
+export type IpfsUriType = `ipfs://${string}`; // IPFS URI
+
 export type ReturnObjectType = {
   address: string;
   abi: Abi;
@@ -8,9 +11,9 @@ export type ReturnObjectType = {
 };
 
 export type CollectionObjectType = {
-  contractAddress: `0x${string}`; // Ethereum address
-  creator: `0x${string}`; // Ethereum address
-  metadataURI: `ipfs://${string}`;
+  contractAddress: AddressType; // Ethereum address
+  creator: AddressType; // Ethereum address
+  metadataURI: IpfsUriType;
   name: string;
 };
 
@@ -28,6 +31,7 @@ export type AttributeTypes = {
 
 export type NftMetadataType = {
   name: string;
+  collectionAddress: AddressType; // Ethereum address
   description: string;
   image: `ipfs://${string}`;
   attributes?: AttributeTypes[];
