@@ -13,7 +13,7 @@ export type ReturnObjectType = {
 export type CollectionObjectType = {
   contractAddress: AddressType; // Ethereum address
   creator: AddressType; // Ethereum address
-  metadataURI: IpfsUriType;
+  metadataURI: IpfsUriType; // ifsc url
   name: string;
 };
 
