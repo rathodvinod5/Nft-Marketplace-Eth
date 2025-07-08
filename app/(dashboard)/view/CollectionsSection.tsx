@@ -2,9 +2,10 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { collectionsList } from "../Data";
 // import GradientBorderContainer from "@/components/ui/GradientBorder/gradient-border-cont";
-import NFTCollectionCard from "@/components/ui/NFTCollectionCard/NFTCollectionCard";
 import { FiLoader } from "react-icons/fi";
 import { useNFTContext } from "@/context/factorycontext";
+import { CollectionsObjectType } from "../Types";
+import NFTCollectionCard from "@/components/ui/NFTCollectionCard/NFTCollectionCard";
 
 const CollectionsSection = () => {
   const { isCollectionsLoading } = useNFTContext();
@@ -33,7 +34,7 @@ const CollectionsSection = () => {
         <div className="w-full flex flex-row gap-10 overflow-x-scroll">
           {collectionsList.map((collection, index) => {
             return (
-              <NFTCollectionCard
+              <NFTCollectionCard<CollectionsObjectType>
                 key={"collection-card-item" + index}
                 collection={collection}
               />

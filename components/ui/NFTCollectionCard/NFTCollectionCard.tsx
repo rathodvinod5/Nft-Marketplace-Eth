@@ -3,11 +3,11 @@ import { useRouter } from "next/navigation";
 import { CollectionsObjectType } from "@/app/(dashboard)/Types";
 import GradientBorderContainer from "../GradientBorder/gradient-border-cont";
 
-const NFTCollectionCard = ({
-  collection,
-}: {
-  collection: CollectionsObjectType;
-}) => {
+type NFTCollectionCardProps<T> = {
+  collection: T extends CollectionsObjectType ? T : never;
+};
+
+function NFTCollectionCard<T>({ collection }: NFTCollectionCardProps<T>) {
   const router = useRouter();
 
   const handleSeeDetail = (CollectionTitle: string) => {
@@ -86,6 +86,6 @@ const NFTCollectionCard = ({
       </div>
     </GradientBorderContainer>
   );
-};
+}
 
 export default NFTCollectionCard;
