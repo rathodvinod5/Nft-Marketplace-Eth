@@ -50,14 +50,15 @@ const AllNftFromCollectionPage = () =>
       collectionTokensError,
     } = useCollectionTokens(collectionAddress);
 
-    console.log(
-      "collectionTokens",
-      isCollectionTokensLoading,
-      collectionTokensPending,
-      collectionTokensError,
-      Array(collectionTokens) &&
-        collectionTokens.map((item: any) => String(item)),
-    );
+    // console.log(
+    //   "collectionTokens",
+    //   isCollectionTokensLoading,
+    //   collectionTokensPending,
+    //   collectionTokensError,
+    //   Array(collectionTokens) &&
+    //     collectionTokens &&
+    //     collectionTokens.map((item: any) => String(item)),
+    // );
 
     return (
       <div className="w-full h-full px-8 py-6 bg-custom-primaryBackground">
