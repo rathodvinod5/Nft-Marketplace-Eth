@@ -1,5 +1,5 @@
 const CONTRACT_ADDRESS = {
-  factoryContractAddress: "0x3DcdDeD87a3Ed1ea9392a5D0da904D49348B73f5",
+  factoryContractAddress: "", //"0x3DcdDeD87a3Ed1ea9392a5D0da904D49348B73f5",
   collectionContractAddress: "",
   marketplaceContractAddress: "",
 };
